@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './nav/navbar';
-import {HashRouter, Route, Routes, Navigate } from 'react-router-dom';
+import {HashRouter as Route, Routes, Navigate } from 'react-router-dom';
 import Dash from './dash/Dash';
 import Acc from './account/Acc';
 import { useEffect, useState } from 'react';
@@ -22,7 +22,7 @@ function App() {
   return (
    
     <div className="App">
-       <HashRouter>
+       
       <Navbar />
       <Routes basename={ process.env.Account-App }>
         <Route  path={'/'} element={user ? <Navigate to='/dash/' /> : <Navigate to='/account' />} />
@@ -32,7 +32,7 @@ function App() {
         <Route path='/setting/*' element={<Console />} />
 
       </Routes>
-       </HashRouter>
+       
     </div>
 
   );
