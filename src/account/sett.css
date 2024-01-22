@@ -1,0 +1,180 @@
+.usersett {
+
+    width: 100%;
+    text-align: center;
+    color: #FFA500;
+    overflow-y: auto;
+
+}
+
+.usersett hr {
+    border: 1px solid #FFA500;
+}
+
+.canvans {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.canvans canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 300px;
+}
+
+.total {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+
+}
+
+.total-can {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+#select {
+    outline: none;
+    border: none;
+    font-size: 18px;
+    color: #FFA500;
+    border-bottom: 2px solid #FFA500;
+}
+
+.ac {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid hsl(0, 0%, 70%);
+}
+
+.total p {
+    color: hsl(0, 0%, 70%);
+
+}
+
+.all-price {
+    padding: 10px 0;
+    border-bottom: 1px solid hsl(0, 0%, 70%);
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.account-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    transition: all 0.5s;
+    animation: appear 0.8s;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.account-btn button {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 5px;
+    width: 50%;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    color: #FFA500;
+    border-bottom: 1px solid hsl(0, 0%, 70%);
+}
+
+.account-table {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.data {
+    width: 100%;
+}
+
+.data-inout {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+
+}
+
+.data h5 {
+
+    font-size: 18px;
+}
+
+.data h3 {
+    text-align: start;
+}
+
+.top {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.top button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 5px;
+    width: 30px;
+    height: 30px;
+
+    background-color: transparent;
+    border: none;
+    color: #FFA500;
+    border-radius: 50px;
+    transition: all 0.5s;
+}
+
+.top button:hover {
+    background-color: #FFA500;
+    color: white;
+}
+
+.account-tip p {
+    font-size: 1.2em;
+
+}
+
+#account-type {
+    display: none;
+}
+
+#account-type button {
+    padding: 5px 0;
+}
+
+#account-type h4 {
+    width: 50%;
+}

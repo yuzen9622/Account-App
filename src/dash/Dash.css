@@ -1,0 +1,42 @@
+.dash {
+    width: 100%;
+    text-align: center;
+    color: #FFA500;
+    overflow-y: auto;
+    transition: all 0.5s;
+    animation: appear 0.8s;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.dash-in {
+    width: 100%;
+    text-align: center;
+    color: #FFA500;
+    transition: all 0.5s;
+    animation: appear 0.8s;
+}
+
+.circle-content {
+    display: flex;
+    justify-content: center;
+
+}
+
+.circle-1 {
+    width: 50%;
+}
+
+
+
+.dash hr {
+    border: 1px solid #FFA500;
+}

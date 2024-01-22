@@ -1,0 +1,265 @@
+.table {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    max-height: 180px;
+    overflow-y: auto;
+
+}
+
+table {
+    width: 75%;
+}
+
+thead {
+    position: sticky;
+    background-color: white;
+    z-index: 1;
+    top: 0;
+}
+
+tr {
+
+    color: #FFA500;
+    border: 1px solid #FFA500;
+
+}
+
+td {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+th {
+    border-bottom: 1px solid #FFA500;
+}
+
+tbody tr:hover {
+    background-color: hsl(39, 100%, 70%);
+    color: white;
+
+}
+
+tbody tr:hover button {
+    background-color: hsl(39, 100%, 70%);
+    color: white;
+
+}
+
+h1,
+tbody {
+    width: 100%;
+    text-align: center;
+}
+
+.Idtotal {
+    display: flex;
+    margin: 10px;
+}
+
+.Idtotal h3 {
+    margin: 5px;
+}
+
+.plus {
+    width: 40px;
+    height: 40px;
+    color: white;
+    border: 2px solid #FFA500;
+    background-color: #FFA500;
+    border-radius: 50%;
+    transition: all 0.5s;
+    font-size: 20px;
+
+}
+
+.plus:hover {
+    border: 2px solid #FFA500;
+    background-color: white;
+    color: #FFA500;
+}
+
+td button {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: transparent;
+    color: #FFA500;
+    font-size: 18px;
+}
+
+td button:hover {
+
+    background-color: white;
+    border-radius: 50px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+
+
+}
+
+.title p {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+/*popup*/
+
+.popbox {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    max-width: 400px;
+    position: absolute;
+    top: 40%;
+    right: auto;
+    left: 40%;
+    background-color: white;
+    border-radius: 15px;
+    border: 2px solid #FFA500;
+    padding: 10px;
+    transition: all 0.5s;
+    z-index: 2;
+    animation: getadd 0.25s;
+}
+
+@keyframes getadd {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 40%;
+    }
+}
+
+.put {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+
+    border-bottom: 2px solid #FFA500;
+    max-width: 300px;
+
+}
+
+.put :is(input, option, select) {
+    border: none;
+    outline: none;
+    color: #FFA500;
+    width: 50%;
+    font-size: 16px;
+    font-weight: 600;
+
+}
+
+::placeholder {
+    color: hsl(39, 100%, 70%);
+}
+
+.put label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.pop-btn {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.pop-btn button:nth-child(1) {
+    border: 2px solid #FFA500;
+    background-color: white;
+    color: #FFA500;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    transition: all 0.5s;
+}
+
+.pop-btn button:nth-child(2) {
+    border: 2px solid #FFA500;
+    background-color: #FFA500;
+    color: white;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    transition: all 0.5s;
+}
+
+.pop-btn button:nth-child(2):hover {
+    color: #FFA500;
+    background-color: white;
+    border: 2px solid #FFA500;
+}
+
+.pop-btn button:nth-child(1):hover {
+    color: white;
+    background-color: #FFA500;
+
+}
+
+#time {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    text-align: center;
+    font-size: 18px;
+}
+
+.put:nth-child(1) {
+    justify-content: center;
+}
+
+.sett {
+
+    position: static;
+    right: 5%;
+    display: none;
+    flex-direction: column;
+
+
+}
+
+td button:active .sett {
+    display: block;
+}
+
+.sett button {
+
+    border: none;
+    background-color: transparent;
+    color: #FFA500;
+}
+
+/*圓形圖*/
+
+canvas {
+    width: 300px !important;
+    height: 300px !important;
+}
+
+.circle {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
