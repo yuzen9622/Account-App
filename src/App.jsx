@@ -23,7 +23,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path={'/'} element={user ? <Navigate to='/dash/' /> : <Navigate to='/account' />} />
+        <Route exact path={'/'} element={user ? <Navigate to='/dash/' /> : <Navigate to='/account' />} />
         <Route path='/dash/*' element={<Dash />} />
         <Route path='/account' element={<Account />} />
         <Route path='/chart' element={<Chart />} />
