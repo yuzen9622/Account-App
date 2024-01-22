@@ -15,7 +15,7 @@ function Console() {
                     <h1>設定</h1>
                     <hr />
                 </div>
-                <Routes>
+                <Routes basename={process.env.Account-App}>
                     <Route path='/' element={<Navsett />} />
                     <Route path='fin' element={<Finances />} />
                     <Route path='account' element={<Accounttype />} />
