@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './nav/navbar';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import {HashRouter as Route, Routes, Navigate } from 'react-router-dom';
 import Dash from './dash/Dash';
 import Acc from './account/Acc';
 import { useEffect, useState } from 'react';
