@@ -38,8 +38,8 @@ function Add({ onClick, firsource }) {
 
     }
     useEffect(() => {
-        var cateURl = `http://localhost/account_api/categories.php?user=${user}&source=${source}`
-        var accountURl = `http://localhost/account_api/accountType.php?user=${user}`;
+        var cateURl = `http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`
+        var accountURl = `http://oscar689.atwebpages.com/account_api/accountType.php?user=${user}`;
         fetch(cateURl)
             .then((res) => res.json())
             .then((data) => {
