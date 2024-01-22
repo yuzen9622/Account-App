@@ -22,8 +22,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Routes>
-        <Route exact path={'/'} element={user ? <Navigate to='/dash/' /> : <Navigate to='/account' />} />
+      <Routes basename={ process.env.Account-App }>
+        <Route  path={'/'} element={user ? <Navigate to='/dash/' /> : <Navigate to='/account' />} />
         <Route path='/dash/*' element={<Dash />} />
         <Route path='/account' element={<Account />} />
         <Route path='/chart' element={<Chart />} />
