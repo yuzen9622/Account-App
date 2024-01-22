@@ -1,15 +1,16 @@
 import React, { useEffect, useState, } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Acc.css';
 
 function Acc() {
-
+    const navigate = useNavigate()
     const [islogin, setlogin] = useState(false)
     const [user, setuser] = useState(sessionStorage.getItem("user"))
     const [logmoment, setlog] = useState("登入來使用記帳")
 
     useEffect(() => {
         if (user) {
-            window.location.replace('/')
+            navigate('/')
         }
 
         console.log(user)
