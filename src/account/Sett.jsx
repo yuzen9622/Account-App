@@ -21,7 +21,7 @@ function Sett() {
         let acctip = document.getElementById('account-tip');
         let acctable = document.getElementById('account-table');
         let acctype = document.getElementById('account-type')
-        fetch(`http://localhost/account_api/getType.php?name=${user}&selects=${select}`)
+        fetch(`http://oscar689.atwebpages.com/account_api/getType.php?name=${user}&selects=${select}`)
             .then((res) => res.json())
             .then((data) => {
                 var in_datas = [];
@@ -56,7 +56,7 @@ function Sett() {
         let acctip = document.getElementById('account-tip');
         let acctable = document.getElementById('account-table');
         let acctype = document.getElementById('account-type')
-        fetch(`http://localhost/account_api/getIDtype.php?name=${user}&selects=${select}&mtype=${type}`)
+        fetch(`http://oscar689.atwebpages.com/account_api/getIDtype.php?name=${user}&selects=${select}&mtype=${type}`)
             .then((res) => res.json())
             .then((data) => {
                 var datas = [];
@@ -108,9 +108,9 @@ function Sett() {
     }
 
     useEffect(() => {
-        var inid = `http://localhost/account_api/getId.php?name=${user}&selects=mtype`
-        var inURL = `http://localhost/account_api/getaccData.php`;
-        var outURL = `http://localhost/account_api/getId_out.php?name=${user}`
+        var inid = `http://oscar689.atwebpages.com/account_api/getId.php?name=${user}&selects=mtype`
+        var inURL = `http://oscar689.atwebpages.com/account_api/getaccData.php`;
+        var outURL = `http://oscar689.atwebpages.com/account_api/getId_out.php?name=${user}`
 
         fetch(inid)
             .then((res) => res.json())
