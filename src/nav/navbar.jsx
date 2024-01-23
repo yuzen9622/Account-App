@@ -24,7 +24,7 @@ const Navbar = () => {
 
                 {islogin ? <><li>
                     <NavLink to='/dash/'><i class="fa-solid fa-book"></i><p>記事本</p></NavLink>
-                </li> <li><NavLink to='/account'><i class="fa-solid fa-landmark"></i><p>帳戶</p></NavLink></li><li><NavLink to='/chart'><i class="fa-solid fa-chart-simple"></i><p>圖表</p></NavLink></li><li><NavLink to='/setting'><i class="fa-solid fa-gear"></i><p>設定</p></NavLink></li></> : <li><NavLink to='/account'>帳戶</NavLink></li>}
+                </li> <li><NavLink to='/account'><i class="fa-solid fa-landmark"></i><p>帳戶</p></NavLink></li><li><NavLink to='/chart'><i class="fa-solid fa-chart-simple"></i><p>圖表</p></NavLink></li><li><NavLink to='/setting'><i class="fa-solid fa-gear"></i><p>設定</p></NavLink></li></> : <li><NavLink to='/account'><i class="fa-solid fa-landmark"></i><p>帳戶</p></NavLink></li>}
 
             </nav>
         </div>

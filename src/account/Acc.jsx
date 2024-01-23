@@ -11,11 +11,12 @@ function Acc() {
     useEffect(() => {
         if (user) {
             navigate('/')
+            window.location.reload()
         }
 
         console.log(user)
     }, [user])
-    let moments = "login"
+
     var loginURL = 'http://oscar689.atwebpages.com/account_api/login.php';
     var signURl = 'http://oscar689.atwebpages.com/account_api/sign.php'
     var cheakURl = 'http://oscar689.atwebpages.com/account_api/cheak.php'
