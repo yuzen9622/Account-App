@@ -4,13 +4,10 @@ import { useState, useEffect } from 'react';
 
 function Sett() {
     const [user, setuser] = useState(sessionStorage.getItem("user"))
-    const [inData, setinData] = useState([]);
     const [inId, setinId] = useState([]);
     const [intype, setIntype] = useState([])
     const [Outtype, setOuttype] = useState([])
-    const [Datatype, setDatatype] = useState([])
     const [source, setsource] = useState("")
-
     const [intotal, setinTotal] = useState(0);
     const [outtotal, outsetTotal] = useState(0);
     const [type, settype] = useState()
@@ -18,6 +15,8 @@ function Sett() {
     const [error, seterror] = useState("")
 
     const gettype = (select) => {
+        setIntype([])
+        setOuttype([])
         let acctip = document.getElementById('account-tip');
         let acctable = document.getElementById('account-table');
         let acctype = document.getElementById('account-type')
@@ -53,6 +52,8 @@ function Sett() {
     }
 
     const getidtype = (select) => {
+        setmtype([])
+        setIntype([])
         let acctip = document.getElementById('account-tip');
         let acctable = document.getElementById('account-table');
         let acctype = document.getElementById('account-type')
@@ -63,12 +64,12 @@ function Sett() {
                 for (let i = 0; i < data.response.length; i++) {
                     var inputDateStr = data.response[i].time;
 
-                    // 使用Date物件解析日期
+
                     var inputDate = new Date(inputDateStr);
 
-                    // 取得年、月、日
+
                     var year = inputDate.getFullYear();
-                    var month = inputDate.getMonth() + 1; // 月份是從0開始的，所以要加1
+                    var month = inputDate.getMonth() + 1;
                     var day = inputDate.getDate();
                     var formattedDateStr = year + "年" + month + "月" + day + "號";
 
@@ -103,15 +104,10 @@ function Sett() {
             acctable.style.display = 'none'
         }
 
-
-
     }
 
     useEffect(() => {
         var inid = `http://oscar689.atwebpages.com/account_api/getId.php?name=${user}&selects=mtype`
-        var inURL = `http://oscar689.atwebpages.com/account_api/getaccData.php`;
-        var outURL = `http://oscar689.atwebpages.com/account_api/getId_out.php?name=${user}`
-
         fetch(inid)
             .then((res) => res.json())
             .then((data) => {
@@ -193,15 +189,16 @@ function Sett() {
                                 </div>
                             </div>
                         ))}
-                    </> : ""}
+                    </> : <h1>Loading...</h1>}
                 </div>
 
                 <div id="account-type" className='account-table'>
+
                     {source == "in" ? <><div className="top">
                         <button onClick={closetype}><i class="fa-solid fa-chevron-left"></i></button>
                         <h3>{mtype}收入類</h3>
                     </div>
-                        {intype.map((data, key) => (
+                        {intype.length == 0 ? <h1>Loading...</h1> : intype.map((data, key) => (
                             <div className="data">
                                 <h4>{data.time}</h4>
                                 <div className="data-inout account-btn" key={key}>
@@ -212,7 +209,7 @@ function Sett() {
                             <button onClick={closetype}><i class="fa-solid fa-chevron-left"></i></button>
                             <h3>{mtype}收入類</h3>
                         </div>
-                        {intype.map((data, key) => (
+                        {intype == 0 ? <h1>Loading...</h1> : intype.map((data, key) => (
                             <div className="data">
                                 <h4>{data.time}</h4>
                                 <div className="data-inout account-btn" key={key}>
@@ -223,6 +220,7 @@ function Sett() {
 
 
                 </div>
+
             </div> : <h1>{error}</h1>}
 
 

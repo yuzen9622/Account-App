@@ -4,9 +4,9 @@ import './change.css'
 import './add.css'
 function Finances() {
     const [user, setUser] = useState(sessionStorage.getItem("user"))
-    const [outcategories, setOutcategories] = useState([]);
+
     const [source, setSource] = useState("in")
-    const [incategories, setincategories] = useState([])
+    const [categories, setcategories] = useState([])
     const [isactive, setActive] = useState(true)
 
     const navigete = useNavigate()
@@ -22,9 +22,9 @@ function Finances() {
 
         var input_1 = document.getElementById('add-acc').value;
         if (input_1 !== "") {
-            let newData = [...incategories, { type: input_1 }];
+            let newData = [...categories, { type: input_1 }];
 
-            setincategories(newData)
+            setcategories(newData)
 
 
             fetch(`http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`, {
@@ -64,9 +64,9 @@ function Finances() {
                 console.error(err);
             })
 
-        const data = [...incategories]
+        const data = [...categories]
         data.splice(nub, 1)
-        setincategories(data)
+        setcategories(data)
 
 
     }
@@ -82,7 +82,7 @@ function Finances() {
     }
     useEffect(() => {
         var cateURl = `http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`
-        var incateURL = `http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=in`;
+
         fetch(cateURl)
             .then((res) => res.json())
             .then((data) => {
@@ -93,26 +93,12 @@ function Finances() {
                         type: data[i].type
                     })
                 }
-                setincategories(datas)
+                setcategories(datas)
             })
             .catch((err) => {
                 console.error(err)
             })
-        fetch(incateURL)
-            .then((res) => res.json())
-            .then((data) => {
-                var datas = [];
-                for (let i = 0; i < data.length; i++) {
-                    datas.push({
-                        id: data[i].id,
-                        type: data[i].type
-                    })
-                }
-                setOutcategories(datas)
-            })
-            .catch((err) => {
-                console.error(err)
-            })
+
     }, [source])
 
     return (
@@ -127,19 +113,22 @@ function Finances() {
                 <div className="popbox-btn">
                     <button className={isactive ? 'pop-active' : "in"} onClick={() => { getCategories("in") }}>收入</button><button className={isactive ? "out" : 'pop-active'} onClick={() => { getCategories("out") }}>支出</button>
                 </div>
-                <div className="caregories">
+                {categories.length == 0 ? <h1>Loading...</h1> :
+                    <>< div className="caregories">
 
-                    {incategories.map((datas, key) => (
+                        {categories.map((datas, key) => (
+                            <div className="care-type">
+                                <h3>{datas.type}</h3>
+                                <button onClick={() => { del(key, datas.id) }}>刪除</button>
+                            </div>
+                        ))}
                         <div className="care-type">
-                            <h3>{datas.type}</h3>
-                            <button onClick={() => { del(key, datas.id) }}>刪除</button>
+                            <h3>新增</h3>
+                            <button onClick={open}><i class="fa-solid fa-plus"></i></button>
                         </div>
-                    ))}
-                    <div className="care-type">
-                        <h3>新增</h3>
-                        <button onClick={open}><i class="fa-solid fa-plus"></i></button>
+
                     </div>
-                </div>
+                    </>}
                 <div className="add-Acc">
                     <p>新增帳戶</p>
                     <input type="text" name="" id="add-acc" placeholder='輸入帳戶名' />

@@ -13,22 +13,23 @@ const Navbar = () => {
     })
 
     return (<>
-        <div className='nav'>
+        {islogin ?
+            <div className='nav'>
 
-            <div className="name">
+                <div className="name">
 
-                <h1>{user}</h1>
+                    <h1>{user}</h1>
+
+                </div>
+
+
+                <><nav><li>
+                    <NavLink to='/dash/'><i class="fa-solid fa-book"></i><p>記事本</p></NavLink>
+                </li> <li><NavLink to='/account'><i class="fa-solid fa-landmark"></i><p>帳戶</p></NavLink></li><li><NavLink to='/chart'><i class="fa-solid fa-chart-simple"></i><p>圖表</p></NavLink></li><li><NavLink to='/setting'><i class="fa-solid fa-gear"></i><p>設定</p></NavLink></li></nav></>
+
 
             </div>
-            <nav>
-
-                {islogin ? <><li>
-                    <NavLink to='/dash/'><i class="fa-solid fa-book"></i><p>記事本</p></NavLink>
-                </li> <li><NavLink to='/account'><i class="fa-solid fa-landmark"></i><p>帳戶</p></NavLink></li><li><NavLink to='/chart'><i class="fa-solid fa-chart-simple"></i><p>圖表</p></NavLink></li><li><NavLink to='/setting'><i class="fa-solid fa-gear"></i><p>設定</p></NavLink></li></> : <li><NavLink to='/account'><i class="fa-solid fa-landmark"></i><p>帳戶</p></NavLink></li>}
-
-            </nav>
-        </div>
-
+            : ""}
     </>
     )
 }

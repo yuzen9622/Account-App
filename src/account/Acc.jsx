@@ -46,32 +46,6 @@ function Acc() {
         return /\s/.test(input);
     }
 
-    const cheak = () => {
-        let user = document.getElementById('sig-name').value
-        let pass = document.getElementById('sig-pass').value
-        fetch(cheakURl, {
-            method: "POST",
-            body: JSON.stringify({
-                'user': user
-            })
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.ok == "true") {
-
-                    return false
-                } else {
-                    return true
-                }
-            })
-        if (pass.length < 8) {
-            setError("設置至少8位數密碼");
-            return false
-        } else {
-            return true
-        }
-    }
-
     const sign = () => {
         let user = document.getElementById('sig-name').value
         let pass = document.getElementById('sig-pass').value
@@ -159,7 +133,7 @@ function Acc() {
                     <input type="password" id='sig-pass' placeholder='創建密碼' />
                 </div>
                 <p>{error}</p>
-                <button onClick={() => { sign(); }}>註冊</button>
+                <button onClick={() => { sign() }}>註冊</button>
             </div>
         </div>
     </>)

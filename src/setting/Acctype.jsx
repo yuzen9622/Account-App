@@ -98,19 +98,20 @@ function Accounttype() {
             </div>
 
             <div className="Finances">
-                <div className="caregories">
-                    {counter1.map((datas, key) => (
-                        <div className='care-type'>
-                            <h3>{datas.type}</h3>
-                            <button onClick={() => { del(key, datas.id) }}>刪除</button>
+                {counter1.length == 0 ? <h1>Loading...</h1> : <>
+                    <div className="caregories">
+                        {counter1.map((datas, key) => (
+                            <div className='care-type'>
+                                <h3>{datas.type}</h3>
+                                <button onClick={() => { del(key, datas.id) }}>刪除</button>
+                            </div>
+                        ))}
+                        <div className="care-type">
+                            <h3>新增</h3>
+                            <button onClick={open}><i class="fa-solid fa-plus"></i></button>
                         </div>
-                    ))}
-                    <div className="care-type">
-                        <h3>新增</h3>
-                        <button onClick={open}><i class="fa-solid fa-plus"></i></button>
                     </div>
-                </div>
-
+                </>}
                 <div className="add-Acc">
                     <p>新增帳戶</p>
                     <input type="text" name="" id="add-acc" placeholder='輸入帳戶名' />
