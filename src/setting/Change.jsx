@@ -27,7 +27,7 @@ function Finances() {
             setincategories(newData)
 
 
-            fetch(`http://localhost/account_api/categories.php?user=${user}&source=${source}`, {
+            fetch(`http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`, {
                 method: "POST", body: JSON.stringify({
                     type: input_1
                 })
@@ -52,7 +52,7 @@ function Finances() {
 
     const del = (nub, id) => {
 
-        fetch(`http://localhost/account_api/categories.php?user=${user}&source=${source}`, {
+        fetch(`http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`, {
             method: "POST", body: JSON.stringify({ id: id })
         })
             .then((res) => res.json()).then((response) => {
@@ -81,8 +81,8 @@ function Finances() {
         popbox.style.display = 'none'
     }
     useEffect(() => {
-        var cateURl = `http://localhost/account_api/categories.php?user=${user}&source=${source}`
-        var incateURL = `http://localhost/account_api/categories.php?user=${user}&source=in`;
+        var cateURl = `http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`
+        var incateURL = `http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=in`;
         fetch(cateURl)
             .then((res) => res.json())
             .then((data) => {

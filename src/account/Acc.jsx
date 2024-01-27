@@ -9,7 +9,7 @@ function Acc() {
 
     useEffect(() => {
         if (user) {
-            window.location.replace('/dash/out')
+            window.location.replace('/')
         }
 
         console.log(user)

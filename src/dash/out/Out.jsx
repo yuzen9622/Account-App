@@ -51,7 +51,7 @@ function DashOut() {
         fetch(getID, {
             method: 'POST',
             body: JSON.stringify({
-                name: `${user}`
+                name: 'oscar'
             }),
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' }
         })
@@ -128,7 +128,7 @@ function DashOut() {
 
         var id = Userdate[nub].id;
         var delURl = `http://oscar689.atwebpages.com/account_api/delData_out.php?id=${id}`
-        var all;
+
         fetch(delURl)
             .then((res) => res.json())
             .then((data) => {

@@ -53,7 +53,7 @@ function Dashin() {
         fetch(getID, {
             method: 'POST',
             body: JSON.stringify({
-                name: `${user}`
+                name: user
             }),
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' }
         })
