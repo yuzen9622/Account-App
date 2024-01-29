@@ -17,7 +17,7 @@ function Acc() {
         console.log(user)
     }, [user])
 
-    var loginURL = 'http://oscar689.atwebpages.com/account_api/login.php';
+    var loginURL = 'https://yuzen.serveirc.com/account_api/login.php';
     var signURl = 'http://oscar689.atwebpages.com/account_api/sign.php'
     var cheakURl = 'http://oscar689.atwebpages.com/account_api/cheak.php'
     const [error, setError] = useState("");

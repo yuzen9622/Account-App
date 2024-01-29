@@ -27,7 +27,7 @@ function Finances() {
             setcategories(newData)
 
 
-            fetch(`http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`, {
+            fetch(`https://yuzen.serveirc.com/account_api/categories.php?user=${user}&source=${source}`, {
                 method: "POST", body: JSON.stringify({
                     type: input_1
                 })
@@ -52,7 +52,7 @@ function Finances() {
 
     const del = (nub, id) => {
 
-        fetch(`http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`, {
+        fetch(`https://yuzen.serveirc.com/account_api/categories.php?user=${user}&source=${source}`, {
             method: "POST", body: JSON.stringify({ id: id })
         })
             .then((res) => res.json()).then((response) => {
@@ -81,7 +81,7 @@ function Finances() {
         popbox.style.display = 'none'
     }
     useEffect(() => {
-        var cateURl = `http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`
+        var cateURl = `https://yuzen.serveirc.com/account_api/categories.php?user=${user}&source=${source}`
 
         fetch(cateURl)
             .then((res) => res.json())

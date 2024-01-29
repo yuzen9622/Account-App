@@ -7,7 +7,7 @@ function Accounttype() {
     const [user, setUser] = useState(sessionStorage.getItem("user"))
 
     const [counter1, setCounter1] = useState([]);
-    var cateURl = `http://oscar689.atwebpages.com/account_api/accountType.php?user=${user}`
+    var cateURl = `https://yuzen.serveirc.com/account_api/accountType.php?user=${user}`
 
     const navigete = useNavigate()
 

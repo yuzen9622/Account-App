@@ -8,9 +8,9 @@ import Add from '../../setting/add';
 function Dashin() {
 
     const [user, setuser] = useState(sessionStorage.getItem("user"))
-    var postURl = `http://oscar689.atwebpages.com/account_api/postData.php?name=${user}`
-    var geturl = `http://oscar689.atwebpages.com/account_api/getDate.php?name=${user}`
-    var getID = `http://oscar689.atwebpages.com/account_api/getId.php?name=${user}&selects=mtype`
+    var postURl = `https://yuzen.serveirc.com/account_api/postData.php?name=${user}`
+    var geturl = `https://yuzen.serveirc.com/account_api/getDate.php?name=${user}`
+    var getID = `https://yuzen.serveirc.com/account_api/getId.php?name=${user}&selects=mtype`
 
 
     const [date, setdate] = useState([]);

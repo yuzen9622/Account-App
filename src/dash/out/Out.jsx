@@ -4,9 +4,9 @@ import Add from '../../setting/add'
 function DashOut() {
 
     const [user, setuser] = useState(sessionStorage.getItem("user"))
-    var postURl = `http://oscar689.atwebpages.com/account_api/postData_out.php?name=${user}`
-    var geturl = `http://oscar689.atwebpages.com/account_api/getDate_out.php?name=${user}`
-    var getID = `http://oscar689.atwebpages.com/account_api/getId.php?name=${user}&selects=mtype`
+    var postURl = `https://yuzen.serveirc.com/account_api/postData_out.php?name=${user}`
+    var geturl = `https://yuzen.serveirc.com/account_api/getDate_out.php?name=${user}`
+    var getID = `https://yuzen.serveirc.com/account_api/getId.php?name=${user}&selects=mtype`
 
     const [date, setdate] = useState([]);
     const [IdDate, setIdDate] = useState([])
@@ -127,7 +127,7 @@ function DashOut() {
         var price = Userdate[nub].userget
 
         var id = Userdate[nub].id;
-        var delURl = `http://oscar689.atwebpages.com/account_api/delData_out.php?id=${id}`
+        var delURl = `https://yuzen.serveirc.com/account_api/delData_out.php?id=${id}`
 
         fetch(delURl)
             .then((res) => res.json())
