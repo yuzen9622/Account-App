@@ -132,7 +132,7 @@ function Dashin() {
         var price = Userdate[nub].userget
 
         var id = Userdate[nub].id;
-        var delURl = `http://oscar689.atwebpages.com/account_api/delData.php?id=${id}`
+        var delURl = `https://yuzen.serveirc.com/account_api/delData.php?id=${id}`
 
         fetch(delURl)
             .then((res) => res.json())

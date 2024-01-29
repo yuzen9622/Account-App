@@ -105,7 +105,7 @@ function Finances() {
         <div className="Fixed-Finances">
             <div className="top">
                 <button onClick={() => navigete('/setting')}><i class="fa-solid fa-angle-left"></i></button>
-                <h3>類別</h3>
+                <h3>項目</h3>
                 <button onClick={open}><i class="fa-solid fa-plus"></i></button>
             </div>
 
@@ -130,8 +130,8 @@ function Finances() {
                     </div>
                     </>}
                 <div className="add-Acc">
-                    <p>新增帳戶</p>
-                    <input type="text" name="" id="add-acc" placeholder='輸入帳戶名' />
+                    <p>新增項目</p>
+                    <input type="text" name="" id="add-acc" placeholder='輸入項目' />
                     <div className="add-btn">
                         <button onClick={close}>取消</button>
                         <button onClick={addAcc}>新增</button>

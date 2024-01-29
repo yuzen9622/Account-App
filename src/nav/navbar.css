@@ -146,4 +146,7 @@ nav .active {
         height: 250px !important;
     }
 
+    .care-type h3 {
+        font-size: 0.8rem;
+    }
 }

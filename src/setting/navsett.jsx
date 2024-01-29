@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 function Navsett() {
     const navgate = useNavigate()
@@ -16,8 +16,8 @@ function Navsett() {
                 <div className="btn-p"><p>基本設定</p></div>
                 <div className="btn">
 
-                    <Link to="/setting/fin">類別</Link>
-                    <Link to="/setting/account">帳戶</Link>
+                    <Link to="/setting/fin">項目</Link>
+                    <Link to="/setting/account">類別</Link>
                     <Link to="">貨幣</Link>
 
                 </div>
