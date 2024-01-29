@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import './add.css'
-import { useNavigate } from 'react-router-dom';
+
 function Add({ onClick, firsource }) {
     const [categories, setCategories] = useState([]);
     const [source, setSource] = useState(firsource)
@@ -38,8 +38,8 @@ function Add({ onClick, firsource }) {
 
     }
     useEffect(() => {
-        var cateURl = `http://oscar689.atwebpages.com/account_api/categories.php?user=${user}&source=${source}`
-        var accountURl = `http://oscar689.atwebpages.com/account_api/accountType.php?user=${user}`;
+        var cateURl = `https://yuzen.serveirc.com/account_api/categories.php?user=${user}&source=${source}`
+        var accountURl = `https://yuzen.serveirc.com/account_api/accountType.php?user=${user}`;
         fetch(cateURl)
             .then((res) => res.json())
             .then((data) => {

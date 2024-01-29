@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import Acc from "./Acc";
 import Sett from "./Sett";
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 export default function Account() {
 
