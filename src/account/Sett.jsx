@@ -179,7 +179,7 @@ function Sett() {
                             </div>
                         ))}
                     </> : <div className="top"><button onClick={closetype}><i class="fa-solid fa-chevron-left"></i></button></div>}
-                    {Outtype.length > 0 ? <><div className="top">
+                    {Outtype.length > 0 || intype.length > 0 ? <><div className="top">
                         <h3>1月份支出類別</h3>
                     </div>
                         {Outtype.map((data, key) => (

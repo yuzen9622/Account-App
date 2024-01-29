@@ -18,8 +18,8 @@ function Acc() {
     }, [user])
 
     var loginURL = 'https://yuzen.serveirc.com/account_api/login.php';
-    var signURl = 'http://oscar689.atwebpages.com/account_api/sign.php'
-  
+    var signURl = 'https://yuzen.serveirc.com/account_api/sign.php'
+
     const [error, setError] = useState("");
     const change = (moment) => {
 
