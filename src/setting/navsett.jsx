@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 function Navsett() {
     const navgate = useNavigate()
     const logout = () => {
-        sessionStorage.removeItem("user")
+        localStorage.removeItem("user")
         navgate('/')
         window.location.reload()
     }

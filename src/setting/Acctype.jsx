@@ -4,7 +4,7 @@ import './change.css'
 import './add.css'
 
 function Accounttype() {
-    const [user, setUser] = useState(sessionStorage.getItem("user"))
+    const [user, setUser] = useState(localStorage.getItem("user"))
 
     const [counter1, setCounter1] = useState([]);
     var cateURl = `https://yuzen.serveirc.com/account_api/accountType.php?user=${user}`

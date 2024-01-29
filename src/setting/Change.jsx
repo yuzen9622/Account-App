@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './change.css'
 import './add.css'
 function Finances() {
-    const [user, setUser] = useState(sessionStorage.getItem("user"))
+    const [user, setUser] = useState(localStorage.getItem("user"))
 
     const [source, setSource] = useState("in")
     const [categories, setcategories] = useState([])

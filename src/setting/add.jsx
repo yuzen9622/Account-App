@@ -7,7 +7,7 @@ function Add({ onClick, firsource }) {
     const [source, setSource] = useState(firsource)
     const [acccount, setAccount] = useState([])
     const [isactive, setActive] = useState(true)
-    const [user, setUser] = useState(sessionStorage.getItem("user"));
+    const [user, setUser] = useState(localStorage.getItem("user"));
 
     const getCategories = (source) => {
         setSource(source)

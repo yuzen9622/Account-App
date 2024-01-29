@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 
 export default function Account() {
 
-    const [user, setuser] = useState(sessionStorage.getItem("user"));
+    const [user, setuser] = useState(localStorage.getItem("user"));
 
 
     return (<>

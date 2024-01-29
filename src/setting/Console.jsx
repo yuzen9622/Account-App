@@ -5,7 +5,7 @@ import Navsett from './navsett';
 import Accounttype from './Acctype';
 import { NavLink, Route, Routes } from 'react-router-dom';
 function Console() {
-    const [user, setuser] = useState(sessionStorage.getItem("user"));
+    const [user, setuser] = useState(localStorage.getItem("user"));
 
     return (
         <>

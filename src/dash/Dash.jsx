@@ -7,7 +7,7 @@ import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import DashOut from './out/Out';
 
 function Dash() {
-    const [user, setuser] = useState(sessionStorage.getItem("user"));
+    const [user, setuser] = useState(localStorage.getItem("user"));
     const navagate = useNavigate()
     useEffect(() => {
         if (!user) {

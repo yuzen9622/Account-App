@@ -3,7 +3,7 @@ import './sett.css'
 import { useState, useEffect } from 'react';
 
 function Sett() {
-    const [user, setuser] = useState(sessionStorage.getItem("user"))
+    const [user, setuser] = useState(localStorage.getItem("user"))
     const [inId, setinId] = useState([]);
     const [intype, setIntype] = useState([])
     const [Outtype, setOuttype] = useState([])

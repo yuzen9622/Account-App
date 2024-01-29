@@ -3,7 +3,7 @@ import PieChart from '../pie'
 import Add from '../../setting/add'
 function DashOut() {
 
-    const [user, setuser] = useState(sessionStorage.getItem("user"))
+    const [user, setuser] = useState(localStorage.getItem("user"))
     var postURl = `https://yuzen.serveirc.com/account_api/postData_out.php?name=${user}`
     var geturl = `https://yuzen.serveirc.com/account_api/getDate_out.php?name=${user}`
     var getID = `https://yuzen.serveirc.com/account_api/getId.php?name=${user}&selects=mtype`
