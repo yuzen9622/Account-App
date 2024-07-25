@@ -24,7 +24,7 @@ function Acc() {
   const change = (moment) => {
     let log = document.getElementById("login");
     let sig = document.getElementById("sign");
-    if (moment == "login") {
+    if (moment === "login") {
       log.classList.add("active");
       sig.classList.remove("active");
       document.getElementsByClassName("login")[0].style.display = "flex";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import "./add.css";
 import { url } from "../service";
@@ -8,10 +8,10 @@ function Add({ onClick, firsource }) {
   const [acccount, setAccount] = useState([]);
   const [isactive, setActive] = useState(true);
   const [user, setUser] = useState(localStorage.getItem("user"));
-
+  const dateInputRef = useRef(null);
   const getCategories = (source) => {
     setSource(source);
-    if (source == "in") {
+    if (source === "in") {
       setActive(true);
     } else {
       setActive(false);
@@ -20,6 +20,16 @@ function Add({ onClick, firsource }) {
   useEffect(() => {
     getCategories(source);
   });
+  useEffect(() => {
+    let date = new Date();
+    var day = date.getDate() < 10 ? `0${date.getDate() + 1}` : date.getDate();
+    var month =
+      date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+
+    let datew = date.getFullYear() + "-" + month + "-" + day;
+    console.log(datew);
+    dateInputRef.current.value = datew;
+  }, []);
   const getadd = () => {
     let price = document.getElementById("money").value;
     let type = document.getElementById("categories-type").value;
@@ -90,7 +100,12 @@ function Add({ onClick, firsource }) {
       </div>
 
       <div className="Finances-put">
-        <input type="date" id="time" />
+        <input
+          type="date"
+          id="time"
+          placeholder="mm/dd/yyyy"
+          ref={dateInputRef}
+        />
       </div>
       <div className="Finances-put">
         <p>金額</p>
