@@ -75,6 +75,7 @@ function Acc() {
     let pass = document.getElementById("log-pass").value;
     fetch(loginURL, {
       method: "POST",
+
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         user: user,

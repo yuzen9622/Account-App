@@ -1,1 +1,1 @@
-export let url = "https://yuzen.lovestoblog.com";
+export const url = "https://yuzen.serveirc.com/";
