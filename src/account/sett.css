@@ -99,7 +99,8 @@
     display: flex;
     justify-content: space-between;
     padding: 15px 5px;
-    width: 50%;
+    width: 80%;
+    max-width: 658px;
     font-size: 1rem;
     background-color: transparent;
     border: none;
@@ -136,7 +137,8 @@
 
 .top {
     display: flex;
-    width: 50%;
+    width: 80%;
+    max-width: 658px;
     justify-content: space-between;
     align-items: center;
 
@@ -156,7 +158,14 @@
     border-radius: 50px;
     transition: all 0.5s;
 }
+.account-table input{
+    border: none;
+    outline: none;
+    color: #FFA500;
 
+    font-size: 16px;
+    font-weight: 600;
+}
 .top button:hover {
     background-color: #FFA500;
     color: white;
