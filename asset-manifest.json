@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Account-App/static/css/main.cdce4163.css",
-    "main.js": "/Account-App/static/js/main.7810081f.js",
+    "main.js": "/Account-App/static/js/main.cb8bf556.js",
     "index.html": "/Account-App/index.html",
     "main.cdce4163.css.map": "/Account-App/static/css/main.cdce4163.css.map",
-    "main.7810081f.js.map": "/Account-App/static/js/main.7810081f.js.map"
+    "main.cb8bf556.js.map": "/Account-App/static/js/main.cb8bf556.js.map"
   },
   "entrypoints": [
     "static/css/main.cdce4163.css",
-    "static/js/main.7810081f.js"
+    "static/js/main.cb8bf556.js"
   ]
 }
