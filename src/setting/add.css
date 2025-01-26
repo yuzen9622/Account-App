@@ -1,20 +1,42 @@
 .Finances-popbox {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 50%;
+    min-width: max-content;
+    box-sizing: border-box;
     max-width: 400px;
     position: absolute;
-    top: 40%;
-    right: auto;
-    left: 40%;
+    top: 50%;
+    left: 50%;
     background-color: white;
+    transform: translate(-50%, -50%);
     border-radius: 15px;
     border: 2px solid #FFA500;
     padding: 10px;
     transition: all 0.5s;
-    z-index: 2;
+    z-index: 10;
     animation: getadd 0.25s;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+@keyframes getadd {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 50%;
+    }
 }
 
 .popbox-btn {
@@ -31,7 +53,8 @@
 .Finances-put {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 80%;
+    align-items: center;
     height: 30px;
     padding: 5px;
 
@@ -40,7 +63,18 @@
 
 }
 
+
+.Finances-put :is(input, option, select)::placeholder {
+    color: #FFA500;
+}
+
+.form-control {
+    width: 100% !important;
+}
+
 .Finances-put :is(input, option, select) {
+
+    text-align: center;
     border: none;
     outline: none;
     color: #FFA500;
@@ -61,10 +95,56 @@
 .popbox-btn:nth-child(1) button {
     border-radius: 5px;
     padding: 5px 10px;
-    transition: all 0.5s;
+    transition: all 0.3s;
 }
 
 .pop-active {
     background-color: #FFA500 !important;
     color: white !important;
+}
+
+.pop-btn {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.pop-btn button:nth-child(1) {
+    border: 2px solid #FFA500;
+    background-color: white;
+    color: #FFA500;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    transition: all 0.5s;
+}
+
+.pop-btn button:nth-child(2) {
+    border: 2px solid #FFA500;
+    background-color: #FFA500;
+    color: white;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    transition: all 0.5s;
+}
+
+.pop-btn button:nth-child(2):hover {
+    color: #FFA500;
+    background-color: white;
+    border: 2px solid #FFA500;
+}
+
+.pop-btn button:nth-child(1):hover {
+    color: white;
+    background-color: #FFA500;
+
 }

@@ -1,0 +1,119 @@
+import React, { useContext } from "react";
+import { AccountContext } from "../context/accountContext";
+import moment from "moment";
+import { url } from "../service";
+import "moment/locale/zh-tw";
+import { UserContext } from "../context/userContext";
+moment.locale("zh-tw");
+export default function Record({ record, edit = true, _id }) {
+  const {
+    setMessage,
+    accounts,
+    categories,
+    setRecords,
+    setUpdateRecord,
+    setPopOpen,
+  } = useContext(AccountContext);
+  const { token } = useContext(UserContext);
+  const account = accounts?.find((item) => item._id === record.accountId);
+  const toAccount = accounts?.find((item) => item._id === record.toAccountId);
+  const category = categories?.find((item) => item._id === record.categoryId);
+  const handleDelete = async (_id) => {
+    try {
+      if (!_id) return;
+      let iscancel = window.confirm("確定刪除?");
+      if (!iscancel) return;
+      const res = await fetch(`${url}/records/delete/${_id}`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.ok) {
+        setRecords((prev) => {
+          let newPrev = prev?.filter((item) => item._id !== _id);
+          return newPrev;
+        });
+        setMessage({
+          status: "success",
+          text: "刪除成功",
+          open: true,
+        });
+      } else {
+        setMessage({
+          status: "warning",
+          text: "刪除失敗",
+          open: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <div className="record-list">
+      {account && category && (
+        <>
+          <div className="category">
+            <p>{category.categoriesType}</p>
+            <div className="description">
+              {record.description && <p>{record.description}</p>}
+              {record.toAccountId && (
+                <p>
+                  {record.toAccountId && record.toAccountId !== _id && "轉入"}
+                  {record.toAccountId && record.toAccountId === _id && "轉出"}
+                  {record.toAccountId &&
+                    record.toAccountId !== _id &&
+                    toAccount?.accountsType}
+                  {record.toAccountId &&
+                    record.toAccountId === _id &&
+                    account?.accountsType}
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="amount-display">
+            <div className="amount">
+              <p
+                style={
+                  record.source === "income"
+                    ? { backgroundColor: "#388E3C", color: "#fff" }
+                    : record.source === "expense"
+                    ? { color: "#D32F2F" }
+                    : { backgroundColor: "#1976D2", color: "#fff" }
+                }
+              >
+                {record.source === "expense" && "-"}
+
+                {record.amount}
+              </p>
+              <p className="description">
+                {record.toAccountId && record.toAccountId === _id && "轉入"}
+                {record.toAccountId && record.toAccountId !== _id && "轉出"}
+                {!record.toAccountId && account?.accountsType}
+              </p>
+            </div>
+            {edit && (
+              <div className="record-setting">
+                <button
+                  onClick={() => {
+                    setUpdateRecord(record);
+                    setPopOpen(true);
+                  }}
+                >
+                  <i className="fa-solid fa-pen-nib"></i>
+                </button>
+                <button onClick={() => handleDelete(record._id)}>
+                  <i className="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}

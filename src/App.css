@@ -1,3 +1,8 @@
+:root {
+  --dark-theme: #121212;
+  --light-theme: #fff;
+}
+
 .App {
   display: flex;
   height: 100%;
@@ -5,10 +10,34 @@
 }
 
 body {
-  height: 100vh;
+  height: 100dvh;
+  /* background-color: var(--dark-theme); */
 }
+
+/* .active {
+
+  background-color: var(--dark-theme) !important;
+} */
+
+/* a:not(.active) {
+  color: var(--dark-theme) !important;
+} */
 
 #root {
   height: 100%;
 }
 
+::-webkit-scrollbar {
+  height: 2px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #FFA500;
+  width: 4px;
+}

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./console.css";
-import Finances from "./Change";
+import Finances from "./categoryType";
 import Navsett from "./navsett";
-import Accounttype from "./Acctype";
-import { NavLink, Route, Routes } from "react-router-dom";
+import AccountType from "./accountType";
+import { Route, Routes } from "react-router-dom";
+import UserSetting from "./UserSetting";
+import { UserContext } from "../context/userContext";
 function Console() {
-  const [user, setuser] = useState(localStorage.getItem("user"));
+  const { user } = useContext(UserContext);
 
   return (
     <>
@@ -13,13 +15,12 @@ function Console() {
         <div className="header">
           <h1>設定</h1>
           <hr />
-
-          <h1>歡迎{user}</h1>
         </div>
         <Routes>
           <Route path="/" element={<Navsett />} />
-          <Route path="fin" element={<Finances />} />
-          <Route path="account" element={<Accounttype />} />
+          <Route path="/category" element={<Finances />} />
+          <Route path="/auth" element={<UserSetting />} />
+          <Route path="/account" element={<AccountType />} />
         </Routes>
       </div>
     </>

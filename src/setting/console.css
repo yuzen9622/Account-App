@@ -4,6 +4,10 @@
     overflow-y: scroll;
 }
 
+.header {
+    text-align: center;
+}
+
 .console hr {
     border: 1px solid #FFA500;
 }
@@ -17,12 +21,11 @@
 }
 
 .btn-p {
-    width: 50%;
-
+    min-width: 50%;
 }
 
 .btn-p p {
-    width: 30%;
+    width: fit-content;
     border-bottom: 1px solid #FFA500;
     font-size: 1.2rem;
 }

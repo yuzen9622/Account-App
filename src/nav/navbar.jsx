@@ -1,37 +1,74 @@
-import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom';
-import './navbar.css';
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { Snackbar, Alert } from "@mui/material";
+import "./navbar.css";
+import { UserContext } from "../context/userContext";
+import { AccountContext } from "../context/accountContext";
 
 const Navbar = () => {
-    const [islogin, setlogin] = useState(false)
+  const { user } = useContext(UserContext);
+  const { message, setMessage } = useContext(AccountContext);
 
-    const [user, setuser] = useState(localStorage.getItem("user"))
-    useEffect(() => {
-        if (user) {
-            setlogin(true)
-        }
-    })
+  return (
+    <>
+      {user ? (
+        <div className="nav">
+          <div className="name">
+            <h1>{user?.name}</h1>
+          </div>
+          <Snackbar
+            open={message?.open}
+            autoHideDuration={3000}
+            onClose={(e, reson) => {
+              if (reson === "timeout") {
+                setMessage((prev) => ({ ...prev, open: false }));
+              }
+            }}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          >
+            <Alert
+              style={{ fontWeight: "600" }}
+              variant="filled"
+              severity={message?.status}
+            >
+              {message?.text}
+            </Alert>
+          </Snackbar>
 
-    return (<>
-        {islogin ?
-            <div className='nav'>
-
-                <div className="name">
-
-                    <h1>{user}</h1>
-
-                </div>
-
-
-                <><nav><li>
-                    <NavLink to='/dash/'><i class="fa-solid fa-book"></i><p>記事本</p></NavLink>
-                </li> <li><NavLink to='/account'><i class="fa-solid fa-landmark"></i><p>帳戶</p></NavLink></li><li><NavLink to='/chart'><i class="fa-solid fa-chart-simple"></i><p>圖表</p></NavLink></li><li><NavLink to='/setting'><i class="fa-solid fa-gear"></i><p>設定</p></NavLink></li></nav></>
-
-
-            </div>
-            : ""}
+          <>
+            <nav>
+              <li>
+                <NavLink to="/dash/">
+                  <i className="fa-solid fa-book"></i>
+                  <p>記事本</p>
+                </NavLink>
+              </li>{" "}
+              <li>
+                <NavLink to="/account">
+                  <i className="fa-solid fa-landmark"></i>
+                  <p>帳戶</p>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/chart">
+                  <i className="fa-solid fa-chart-simple"></i>
+                  <p>圖表</p>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/setting">
+                  <i className="fa-solid fa-gear"></i>
+                  <p>設定</p>
+                </NavLink>
+              </li>
+            </nav>
+          </>
+        </div>
+      ) : (
+        ""
+      )}
     </>
-    )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

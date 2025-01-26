@@ -38,6 +38,7 @@ nav li {
     display: flex;
     border-bottom: 1px solid white;
     align-items: center;
+    justify-content: center;
 }
 
 .name i {
@@ -98,25 +99,27 @@ nav .active {
         display: none;
 
     }
-.App{
-    flex-direction: column-reverse;
-    justify-content: space-between;
-}
-  
-.nav{
-    width: 100%;
-    height: auto;
-}
-nav{
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 5px;
-}
+
+    .App {
+        flex-direction: column-reverse;
+        justify-content: space-between;
+    }
+
+    .nav {
+        width: 100%;
+        height: auto;
+    }
+
+    nav {
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 5px;
+    }
 
     nav a {
         width: auto;
         margin: 0;
-     
+
     }
 
     .name {
@@ -132,9 +135,6 @@ nav{
         display: none;
     }
 
-    .Finances-popbox {
-        left: 30% !important;
-    }
 }
 
 @media screen and (min-width:426px) {

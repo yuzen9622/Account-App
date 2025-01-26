@@ -4,25 +4,65 @@
     text-align: center;
     color: #FFA500;
     overflow-y: auto;
+    height: 100%;
 
 }
+
+
 
 .usersett hr {
     border: 1px solid #FFA500;
 }
 
-.canvans {
+.date-select {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
 }
 
-.canvans canvas {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 300px;
+.account-record {
+    width: 80%;
+    max-width: 400px;
+    display: flex;
 }
+
+.record-list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.account-record {
+
+    padding: 5px;
+    border: none;
+    color: #FFA500;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: transparent;
+    border-bottom: 2px solid #FFA500;
+}
+
+.account-record i {
+    margin-left: 10px;
+    opacity: 1;
+
+    transition: all .3s;
+}
+
+.account-record:hover i {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.active:is(button) {
+    background-color: #FFA500 !important;
+    color: white !important;
+}
+
+
+
 
 .total {
     display: flex;
@@ -75,12 +115,12 @@
     width: 100%;
 }
 
-.account-btn {
+.account-table button {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+
     transition: all 0.5s;
     animation: appear 0.8s;
 }
@@ -109,10 +149,12 @@
 }
 
 .account-table {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 
 .data {
@@ -144,11 +186,18 @@
 
 }
 
-.top button {
+.account-tip {
+    display: flex;
+    justify-content: center;
+    min-height: 30px;
+    box-sizing: border-box;
+}
+
+.account-tip button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 5px;
+
     width: 30px;
     height: 30px;
 
@@ -158,27 +207,29 @@
     border-radius: 50px;
     transition: all 0.5s;
 }
-.account-table input{
+
+.date-select input {
     border: none;
     outline: none;
     color: #FFA500;
-
+    text-align: center;
     font-size: 16px;
     font-weight: 600;
 }
-.top button:hover {
+
+.account-tip button:hover {
     background-color: #FFA500;
     color: white;
 }
 
 .account-tip p {
+    width: 50%;
+    max-width: 400px;
     font-size: 1.2em;
 
+
 }
 
-#account-type {
-    display: none;
-}
 
 #account-type button {
     padding: 5px 0;
@@ -186,4 +237,58 @@
 
 #account-type h4 {
     width: 50%;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.date ul {
+    display: flex;
+    border: 2px solid #FFA500;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.date ul li:not(:nth-child(4)) {
+    border-right: 2px solid #FFA500;
+}
+
+.date button {
+    padding: 10px;
+    border: none;
+    color: #FFA500;
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.date-record {
+
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 5px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    animation: appear .8s linear;
+    max-width: 600px;
+
+}
+
+.date-record .record-date {
+    display: flex;
+    justify-content: space-between;
+    color: #333;
+    font-weight: 600;
+    width: 90%;
+    text-align: start;
+    font-size: 20px;
+    border-bottom: 2px solid #FFA500;
 }

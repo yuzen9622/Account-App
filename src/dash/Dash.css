@@ -1,10 +1,44 @@
 .dash {
+    box-sizing: border-box;
     width: 100%;
+
     text-align: center;
     color: #FFA500;
-    overflow-y: auto;
+    overflow-y: hidden;
+    height: 100%;
     transition: all 0.5s;
     animation: appear 0.8s;
+    padding: 10px;
+}
+
+.calendar {
+    height: 50%;
+}
+
+.fc-day-today {
+    background-color: transparent !important;
+
+}
+
+.fc-highlight {
+    display: none !important;
+
+
+}
+
+/* .fc .fc-col-header-cell {
+    background-color: var(--dark-theme) !important;
+} */
+
+
+.custom-selected-day {
+    background-color: #ffa600 !important;
+    color: white !important;
+
+}
+
+.tr {
+    background-color: transparent !important;
 }
 
 @keyframes appear {
@@ -39,4 +73,134 @@
 
 .dash hr {
     border: 1px solid #FFA500;
+}
+
+.records {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-y: auto;
+    max-height: 50%;
+    box-sizing: border-box;
+
+}
+
+.record-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+
+}
+
+.record-container .record-list {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 0.5px solid #4a4a4a6f;
+}
+
+.category,
+.amount {
+    display: flex;
+    flex-direction: column;
+
+    color: #4A4A4A;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: start;
+}
+
+.category {
+    align-items: start;
+}
+
+.amount {
+    align-items: flex-end;
+}
+
+.amount p {
+    padding: 2px;
+    border-radius: 5px;
+    width: fit-content;
+
+}
+
+.amount-display {
+    display: flex;
+    align-items: center;
+}
+
+.amount-display .record-setting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+
+}
+
+.record-setting button {
+    padding: 5px;
+    color: #4A4A4A;
+    border: none;
+    background-color: transparent;
+    border-radius: 15px;
+    aspect-ratio: 1/1;
+    transition: all .3s;
+}
+
+.record-setting button:hover {
+    color: #FFA500;
+    background-color: #4A4A4A;
+}
+
+.amount .description,
+.description p {
+    padding: 0px;
+    font-size: 0.9em;
+    color: #808080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-total {
+    display: flex;
+    font-weight: 600;
+}
+
+.current-total p {
+    padding: 0 5px;
+}
+
+.current-total p:nth-child(1) {
+    color: #388E3C;
+}
+
+.current-total p:nth-child(2) {
+    color: #D32F2F;
+}
+
+.plus {
+    width: 40px;
+    height: 40px;
+    color: white;
+    border: 2px solid #FFA500;
+    background-color: #FFA500;
+    border-radius: 50%;
+    transition: all 0.5s;
+    font-size: 20px;
+    margin-top: 20px;
+
+}
+
+.plus:hover {
+    border: 2px solid #FFA500;
+    background-color: white;
+    color: #FFA500;
 }
