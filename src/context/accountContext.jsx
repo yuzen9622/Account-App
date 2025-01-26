@@ -185,7 +185,15 @@ export const AccountContextProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [token, user, getRecords, setToken, recordInfo, getAccounts]);
+  }, [
+    token,
+    user,
+    getRecords,
+    setToken,
+    recordInfo,
+    getAccounts,
+    renderRecord,
+  ]);
 
   useEffect(() => {
     if (!user || !token) return;

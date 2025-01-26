@@ -128,15 +128,27 @@ function Sett() {
     });
     const groupedByAccount = records.reduce((result, item) => {
       const { accountId, amount, source, toAccountId } = item;
-      if (!result.find((record) => record._id === item.accountId)) {
+      if (!result.find((record) => record._id === accountId)) {
         result.push({ _id: accountId, amount: 0 });
+      } else if (
+        toAccountId &&
+        !result.find((record) => record._id === toAccountId)
+      ) {
+        result.push({ _id: toAccountId, amount: 0 });
       }
       const record = result.find((item) => item._id === accountId);
-      if (source === "income" || toAccountId === record._id) {
+      if (source === "income") {
         record.amount += parseFloat(amount);
-      } else if (source === "expense" || record._id === accountId) {
+      }
+      if (source === "expense") {
         record.amount -= parseFloat(amount);
       }
+      if (source === "change") {
+        const account = result.find((item) => item._id === toAccountId);
+        account.amount += parseFloat(amount);
+        record.amount -= parseFloat(amount);
+      }
+
       return result;
     }, []);
     accounts?.forEach((account) => {
