@@ -32,6 +32,7 @@ export default function AccountType() {
       if (data.ok) {
         setAccounts((prev) => [...prev, data.account]);
         setMessage({ status: "success", text: "新增成功", open: true });
+
         close();
       }
       setNewAccount({ userId: user._id, amount: 0, type: "" });
@@ -61,12 +62,13 @@ export default function AccountType() {
           console.log(newPrev);
           return newPrev;
         });
-        setMessage({ status: "success", text: "編輯成功" });
+        setMessage({ status: "success", text: "編輯成功", open: true });
+        close();
       } else {
-        setMessage({ status: "warning", text: data.error });
+        setMessage({ status: "warning", text: data.error, open: true });
       }
     } catch (error) {
-      setMessage({ status: "error", text: "編輯失敗" });
+      setMessage({ status: "error", text: "編輯失敗", open: true });
       console.log(error);
     }
   };

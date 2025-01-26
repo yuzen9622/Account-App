@@ -101,7 +101,10 @@ function Sett() {
 
   useEffect(() => {
     if (!records) return;
-    if (dateReocrd) return;
+
+    if (dateReocrd) {
+      return;
+    }
 
     setTotalInfo({
       expense: 0,
@@ -159,12 +162,18 @@ function Sett() {
         (item) => item._id === account._id
       );
       findAccount.amount += parseFloat(account.initalAmount);
+      setTotalInfo((prev) => ({
+        ...prev,
+        total: prev.total + parseFloat(account.initalAmount),
+        income: prev.income + parseFloat(account.initalAmount),
+      }));
     });
     console.log(groupedByAccount);
     setAccountRecord(groupedByAccount);
   }, [records, accounts, dateReocrd]);
 
   useEffect(() => {
+    setDateRecord(null);
     switch (selectedType) {
       case "all":
         clearQuery();
