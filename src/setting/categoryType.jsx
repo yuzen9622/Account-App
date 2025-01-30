@@ -5,6 +5,7 @@ import "./add.css";
 import { url } from "../service";
 import { AccountContext } from "../context/accountContext";
 import { UserContext } from "../context/userContext";
+import { dark } from "@mui/material/styles/createPalette";
 function Finances() {
   const { categories, setCategories, setMessage } = useContext(AccountContext);
   const { token, user } = useContext(UserContext);
@@ -32,14 +33,17 @@ function Finances() {
         },
         body: JSON.stringify({ userId: user._id, type: category, source }),
       });
-      if (res.ok) {
-        const data = await res.json();
+      const data = await res.json();
+      if (data.ok) {
         setCategories((prev) => [...prev, data.category]);
         setMessage({ status: "success", text: "新增成功", open: true });
         close();
+      } else {
+        setMessage({ status: "success", text: data.error, open: true });
       }
     } catch (error) {
       console.log(error);
+      setMessage({ status: "error", text: "伺服器錯誤", open: true });
     }
   }
 
@@ -60,9 +64,12 @@ function Finances() {
           return newPrev;
         });
         setMessage({ status: "success", text: "刪除成功", open: true });
+      } else {
+        setMessage({ status: "error", text: "刪除失敗", open: true });
       }
     } catch (error) {
       console.log(error);
+      setMessage({ status: "error", text: "伺服器錯誤", open: true });
     }
   };
 
@@ -98,7 +105,7 @@ function Finances() {
       }
     } catch (error) {
       console.log(error);
-      setMessage({ status: "error", text: "伺服器問題", open: true });
+      setMessage({ status: "error", text: "伺服器錯誤", open: true });
     }
   };
 

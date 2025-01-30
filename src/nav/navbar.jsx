@@ -50,9 +50,9 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li>
-                <button className="plus" onClick={() => setPopOpen(true)}>
-                  {" "}
+                <button onClick={() => setPopOpen(true)}>
                   <i className="fa-solid fa-plus"></i>
+                  <p>記一筆</p>
                 </button>
               </li>
               <li>

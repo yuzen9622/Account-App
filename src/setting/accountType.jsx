@@ -34,10 +34,13 @@ export default function AccountType() {
         setMessage({ status: "success", text: "新增成功", open: true });
 
         close();
+      } else {
+        setMessage({ status: "warning", text: data.error, open: true });
       }
       setNewAccount({ userId: user._id, amount: 0, type: "" });
     } catch (error) {
       console.log(error);
+      setMessage({ status: "error", text: "伺服器錯誤", open: true });
     }
   };
   const update = async () => {
@@ -86,9 +89,12 @@ export default function AccountType() {
         });
 
         setMessage({ status: "success", text: "刪除成功", open: true });
+      } else {
+        setMessage({ status: "warning", text: "刪除失敗", open: true });
       }
     } catch (error) {
       console.log(error);
+      setMessage({ status: "error", text: "伺服器錯誤", open: true });
     }
   };
   const edit = (info) => {
