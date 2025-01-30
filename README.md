@@ -1,9 +1,9 @@
-# Account-App
+# 微財
 
 
 一款簡單直覺的記帳應用，幫助你輕鬆管理收支，掌握財務狀況。
 
-🔗 **線上體驗**：[Account-App](https://yuzen9622.github.io/Account-App/)
+🔗 **線上體驗**：[微財](https://yuzen9622.github.io/Account-App/)
 
 ## 功能特色
 - 📊 **記錄收支**：快速新增支出與收入，分類清晰。
