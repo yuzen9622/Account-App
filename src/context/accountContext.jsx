@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { UserContext } from "./userContext";
@@ -12,17 +13,20 @@ export const AccountContext = createContext();
 
 export const AccountContextProvider = ({ children }) => {
   const { token, user, setToken } = useContext(UserContext);
-  const renderRecord = {
-    _id: null,
-    userId: user?._id,
-    accountId: "",
-    categoryId: "",
-    source: "expense",
-    amount: "",
-    date: new Date(),
-    description: "",
-    toAccountId: null,
-  };
+  const renderRecord = useMemo(
+    () => ({
+      _id: null,
+      userId: user?._id,
+      accountId: "",
+      categoryId: "",
+      source: "expense",
+      amount: "",
+      date: new Date(),
+      description: "",
+      toAccountId: "",
+    }),
+    [user]
+  );
   const [categories, setCategories] = useState(null);
   const [accounts, setAccounts] = useState(null);
   const [currentRecords, setCurrentRecords] = useState(null);
@@ -45,6 +49,10 @@ export const AccountContextProvider = ({ children }) => {
   const clearQuery = useCallback(() => {
     setQueryParams({});
   }, []);
+
+  useEffect(() => {
+    setRecordInfo(renderRecord);
+  }, [renderRecord]);
 
   const getCategory = useCallback(async () => {
     try {

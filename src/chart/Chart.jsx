@@ -4,6 +4,7 @@ import { AccountContext } from "../context/accountContext";
 import Datetime from "react-datetime";
 import DateRecord from "../account/dateRecord";
 import moment from "moment";
+import { Helmet } from "react-helmet-async";
 import "./chart.css";
 import "../account/sett.css";
 function Chart() {
@@ -104,7 +105,7 @@ function Chart() {
 
     setChartData(grouped);
   };
-  console.log(chartData);
+
   useEffect(() => {
     if (!records || !accounts || !categories) return;
     setChartData([]);
@@ -143,6 +144,9 @@ function Chart() {
   ]);
   return (
     <div className="chart">
+      <Helmet>
+        <title>圖表分析</title>
+      </Helmet>
       <h1>圖表分析</h1>
       <div className="chart-container">
         <div className="date">

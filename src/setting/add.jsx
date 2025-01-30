@@ -124,8 +124,11 @@ function Add() {
           onChange={(e) =>
             setRecordInfo((prev) => ({ ...prev, accountId: e.target.value }))
           }
+          value={recordInfo.accountId}
         >
-          <option hidden>--帳戶類--</option>
+          <option hidden value={""}>
+            --帳戶類--
+          </option>
           {accounts &&
             accounts.map((item, key) => (
               <option
@@ -150,8 +153,11 @@ function Add() {
                 toAccountId: e.target.value,
               }))
             }
+            value={recordInfo?.toAccountId}
           >
-            <option hidden>--帳戶類--</option>
+            <option hidden value={""}>
+              --帳戶類--
+            </option>
             {accounts &&
               accounts.map((item, key) => {
                 if (item._id === recordInfo.accountId) return null;

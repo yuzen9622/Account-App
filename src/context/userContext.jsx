@@ -79,6 +79,7 @@ export const UserContextProvider = ({ children }) => {
       } else {
         setUser(null);
         localStorage.removeItem("account-user");
+        sessionStorage.removeItem("account-token");
       }
     } catch (error) {
       console.log(error);
@@ -127,11 +128,12 @@ export const UserContextProvider = ({ children }) => {
 
   const logoutUser = useCallback(() => {
     setIsLogin(false);
+    navgate("/account");
     setUser(null);
     setToken(null);
     localStorage.removeItem("account-user");
     sessionStorage.removeItem("account-token");
-  }, []);
+  }, [navgate]);
   const handleRouteChange = useCallback(() => {
     if (!user && location.pathname !== "/account") {
       navgate("/account");
@@ -170,6 +172,7 @@ export const UserContextProvider = ({ children }) => {
         token,
         updateError,
         setToken,
+        setUser,
       }}
     >
       {children}

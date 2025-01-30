@@ -1,16 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./console.css";
 import Finances from "./categoryType";
 import Navsett from "./navsett";
 import AccountType from "./accountType";
 import { Route, Routes } from "react-router-dom";
 import UserSetting from "./UserSetting";
-import { UserContext } from "../context/userContext";
-function Console() {
-  const { user } = useContext(UserContext);
 
+import { Helmet } from "react-helmet-async";
+function Console() {
   return (
     <>
+      <Helmet>
+        <title>設定</title>
+      </Helmet>
       <div className="console">
         <div className="header">
           <h1>設定</h1>

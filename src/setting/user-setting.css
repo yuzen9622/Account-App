@@ -1,0 +1,66 @@
+.user-setting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.profile-box {
+
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 2px solid #FFA500;
+    margin-bottom: 5px;
+}
+
+.profile>button {
+    background-color: #fff;
+    border: 2px solid #FFA500;
+    color: #FFA500;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 5px 0;
+    margin: 5px 0;
+}
+
+.user-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.user-popbox {
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #FFA500;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.user-popbox button:has(i) {
+    border: none;
+    color: #FFA500;
+    background-color: transparent;
+
+}
+
+.user-popbox input {
+    border: none;
+    font-weight: 600;
+    width: 70%;
+    font-size: 18px;
+    outline: unset;
+    color: #FFA500;
+}

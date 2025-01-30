@@ -64,6 +64,7 @@ export default function DashRecord() {
           <button
             className="plus"
             title="plus"
+            style={{ marginTop: "20px" }}
             onClick={() => setPopOpen(true)}
           >
             <i className="fa-solid fa-plus"></i>

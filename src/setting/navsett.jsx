@@ -13,7 +13,6 @@ function Navsett() {
         <div className="btn">
           <Link to="/setting/category">類別</Link>
           <Link to="/setting/account">帳戶</Link>
-          <Link to="">貨幣</Link>
         </div>
         <div className="btn-p">
           <p>帳號設定</p>

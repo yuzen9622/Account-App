@@ -114,11 +114,11 @@ export default function AccountType() {
     <div className="Fixed-Finances ">
       <div className="top">
         <button onClick={() => navigate("/setting")}>
-          <i class="fa-solid fa-angle-left"></i>
+          <i className="fa-solid fa-angle-left"></i>
         </button>
         <h3>帳戶</h3>
         <button onClick={open}>
-          <i class="fa-solid fa-plus"></i>
+          <i className="fa-solid fa-plus"></i>
         </button>
       </div>
 
@@ -132,7 +132,6 @@ export default function AccountType() {
                   <p>初始:${datas.initalAmount}</p>
                   <div className="btn">
                     <button onClick={() => edit(datas)}>
-                      {" "}
                       <i className="fa-solid fa-pen-nib"></i>
                     </button>
                     <button
@@ -149,7 +148,7 @@ export default function AccountType() {
             <div className="care-type">
               <h3>新增</h3>
               <button onClick={open}>
-                <i class="fa-solid fa-plus"></i>
+                <i className="fa-solid fa-plus"></i>
               </button>
             </div>
           </div>

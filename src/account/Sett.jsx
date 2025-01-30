@@ -7,6 +7,7 @@ import { AccountContext } from "../context/accountContext";
 import AccountRecord from "./accountRecord";
 import TotalHeader from "./TotalHeader";
 import DateRecord from "./dateRecord";
+import { Helmet } from "react-helmet-async";
 function Sett() {
   const { records, clearQuery, setQueryParams, getRecord, accounts } =
     useContext(AccountContext);
@@ -67,6 +68,7 @@ function Sett() {
         }
       }
     });
+
     const groupedByDate = records?.reduce((result, item) => {
       const { date, amount, source, accountId, toAccountId } = item;
       if (accountId === _id || toAccountId === _id) {
@@ -95,6 +97,14 @@ function Sett() {
 
       return result;
     }, []);
+    accounts?.forEach((account) => {
+      if (account._id === _id) {
+        setTotalInfo((prev) => ({
+          ...prev,
+          total: prev.total + parseFloat(account.initalAmount),
+        }));
+      }
+    });
     groupedByDate.sort((a, b) => new Date(b.date) - new Date(a.date));
     setDateRecord(groupedByDate);
   };
@@ -147,11 +157,13 @@ function Sett() {
         record.amount -= parseFloat(amount);
       }
       if (source === "change") {
+        if (!result.find((item) => item._id === toAccountId)) {
+          result.push({ _id: toAccountId, amount: 0 });
+        }
         const account = result.find((item) => item._id === toAccountId);
         account.amount += parseFloat(amount);
         record.amount -= parseFloat(amount);
       }
-
       return result;
     }, []);
     accounts?.forEach((account) => {
@@ -168,7 +180,7 @@ function Sett() {
         income: prev.income + parseFloat(account.initalAmount),
       }));
     });
-    console.log(groupedByAccount);
+
     setAccountRecord(groupedByAccount);
   }, [records, accounts, dateReocrd]);
 
@@ -203,6 +215,9 @@ function Sett() {
 
   return (
     <div className="usersett">
+      <Helmet>
+        <title>帳戶</title>
+      </Helmet>
       <div className="title">
         <h1>帳戶</h1>
         <hr />

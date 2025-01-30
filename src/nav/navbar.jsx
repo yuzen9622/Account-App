@@ -7,7 +7,7 @@ import { AccountContext } from "../context/accountContext";
 
 const Navbar = () => {
   const { user } = useContext(UserContext);
-  const { message, setMessage } = useContext(AccountContext);
+  const { message, setMessage, setPopOpen } = useContext(AccountContext);
 
   return (
     <>
@@ -48,6 +48,12 @@ const Navbar = () => {
                   <i className="fa-solid fa-landmark"></i>
                   <p>帳戶</p>
                 </NavLink>
+              </li>
+              <li>
+                <button className="plus" onClick={() => setPopOpen(true)}>
+                  {" "}
+                  <i className="fa-solid fa-plus"></i>
+                </button>
               </li>
               <li>
                 <NavLink to="/chart">

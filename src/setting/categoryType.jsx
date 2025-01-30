@@ -10,6 +10,8 @@ function Finances() {
   const { token, user } = useContext(UserContext);
   const [source, setSource] = useState("expense");
   const [category, setCategory] = useState(null);
+  const [newCategory, setNewCategory] = useState(null);
+  const [isEdit, setIsEdit] = useState(false);
   const [type, setType] = useState(null);
 
   const navigete = useNavigate();
@@ -36,7 +38,9 @@ function Finances() {
         setMessage({ status: "success", text: "新增成功", open: true });
         close();
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const del = async (_id) => {
@@ -62,6 +66,42 @@ function Finances() {
     }
   };
 
+  const edit = async (data) => {
+    setNewCategory({
+      _id: data._id,
+      type: data.categoriesType,
+      source: data.source,
+    });
+    setIsEdit(!isEdit);
+  };
+  const update = async () => {
+    try {
+      const res = await fetch(`${url}/categories/update`, {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCategory),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setCategories((prev) => {
+          let newPrev = prev?.find((item) => item._id === newCategory._id);
+          newPrev.categoriesType = data.category.categoriesType;
+          return prev;
+        });
+        close();
+        setMessage({ status: "success", text: "修改成功", open: true });
+      } else {
+        setMessage({ status: "warning", text: "修改失敗", open: true });
+      }
+    } catch (error) {
+      console.log(error);
+      setMessage({ status: "error", text: "伺服器問題", open: true });
+    }
+  };
+
   const open = () => {
     let popbox = document.getElementsByClassName("add-Acc")[0];
     popbox.style.display = "flex";
@@ -70,17 +110,18 @@ function Finances() {
   const close = () => {
     let popbox = document.getElementsByClassName("add-Acc")[0];
     popbox.style.display = "none";
+    setIsEdit(false);
   };
 
   return (
     <div className="Fixed-Finances ">
       <div className="top">
         <button onClick={() => navigete("/setting")}>
-          <i class="fa-solid fa-angle-left"></i>
+          <i className="fa-solid fa-angle-left"></i>
         </button>
         <h3>類別</h3>
         <button onClick={open}>
-          <i class="fa-solid fa-plus"></i>
+          <i className="fa-solid fa-plus"></i>
         </button>
       </div>
 
@@ -114,26 +155,49 @@ function Finances() {
               return (
                 <div className="care-type" key={key}>
                   <h3>{datas.categoriesType}</h3>
-
-                  <button
-                    onClick={() => {
-                      del(datas._id);
-                    }}
-                  >
-                    <i className="fa-solid fa-trash"></i>
-                  </button>
+                  <div className="btn">
+                    <button onClick={() => edit(datas)}>
+                      <i className="fa-solid fa-pen-nib"></i>
+                    </button>
+                    <button
+                      onClick={() => {
+                        del(datas._id);
+                      }}
+                    >
+                      <i className="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
                 </div>
               );
             })}
             <div className="care-type">
               <h3>新增</h3>
               <button onClick={open}>
-                <i class="fa-solid fa-plus"></i>
+                <i className="fa-solid fa-plus"></i>
               </button>
             </div>
           </div>
         </>
+        {isEdit && (
+          <div className="update-Acc">
+            <p>編輯類別</p>
 
+            <input
+              type="text"
+              name=""
+              id="add-acc"
+              value={newCategory.type}
+              onChange={(e) =>
+                setNewCategory((prev) => ({ ...prev, type: e.target.value }))
+              }
+              placeholder={`編輯類別`}
+            />
+            <div className="add-btn">
+              <button onClick={close}>取消</button>
+              <button onClick={update}>新增</button>
+            </div>
+          </div>
+        )}
         <div className="add-Acc">
           <p>
             新增

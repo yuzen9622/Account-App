@@ -8,6 +8,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { AccountContext } from "../context/accountContext";
 import DashRecord from "./DashRecord";
 import Add from "../setting/add";
+import { Helmet } from "react-helmet-async";
 import moment from "moment";
 function Dash() {
   const {
@@ -62,12 +63,23 @@ function Dash() {
 
     // 設定選定日期並跳到本月
     setSelectedDate(today);
+
     calendarApi.gotoDate(today); // 跳到當前日期的月份
+    setTimeout(() => {
+      const todayCell = document.querySelector(
+        `[data-date="${moment().format("YYYY-MM-DD")}"]`
+      );
+      if (todayCell) {
+        todayCell.scrollIntoView({ block: "center" });
+      }
+    }, 0);
   };
 
   return (
     <div className="dash">
-      <Add />
+      <Helmet>
+        <title>記帳</title>
+      </Helmet>
 
       <div className="calendar">
         <FullCalendar
@@ -105,7 +117,6 @@ function Dash() {
           }}
           datesSet={(info) => {
             setCurrentMonth(info.view.calendar.getDate().getMonth() + 1);
-            console.log(info.view.calendar.getDate().getMonth() + 1);
             setQueryParams({
               startTime: info.startStr.split("+")[0],
               endTime: info.endStr.split("+")[0],

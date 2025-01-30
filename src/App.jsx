@@ -6,7 +6,7 @@ import { useContext } from "react";
 import Account from "./account/Account";
 import Chart from "./chart/Chart";
 import Console from "./setting/Console";
-
+import Add from "./setting/add";
 import { UserContext } from "./context/userContext";
 import { AccountContextProvider } from "./context/accountContext";
 
@@ -29,6 +29,7 @@ function App() {
           <Route path="/chart" element={<Chart />} />
           <Route path="/setting/*" element={<Console />} />
         </Routes>
+        <Add />
       </div>
     </AccountContextProvider>
   );
