@@ -25,3 +25,7 @@
 
 如果您有任何問題，請聯絡我：oscar48079@gmail.com
 
+## License
+This project is licensed under the Creative Commons Attribution-NoDerivatives 4.0 International License. You may use and share the project as long as you do not modify it, and you must give appropriate credit to the original author.
+
+See the [LICENSE](LICENSE) file for more details.
