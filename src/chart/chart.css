@@ -11,7 +11,8 @@
     border-bottom: 2px solid #FFA500;
 }
 
-.css-rbklcn-MuiResponsiveChart-container {
+.css-rbklcn-MuiResponsiveChart-container,
+.css-k3gmpv {
     max-width: 500px;
 }
 
