@@ -166,6 +166,7 @@ export default function AccountType() {
             <input
               type="number"
               id="number"
+              inputMode="numeric"
               value={newAccount.amount}
               onChange={(e) =>
                 setNewAccount((prev) => ({ ...prev, amount: e.target.value }))
