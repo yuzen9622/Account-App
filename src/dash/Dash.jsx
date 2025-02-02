@@ -1,26 +1,17 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-import "./Dash.css";
-import FullCalendar from "@fullcalendar/react";
-
-import locale from "@fullcalendar/core/locales/zh-tw";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
+import React, { useContext, useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { AccountContext } from "../context/accountContext";
 import DashRecord from "./DashRecord";
 import { Helmet } from "react-helmet-async";
 import moment from "moment";
+
+import "./Dash.css";
+
 function Dash() {
-  const {
-    setSelectedDate,
-    selectedDate,
-    records,
-    setCurrentMonth,
-    setQueryParams,
-  } = useContext(AccountContext);
+  const { setSelectedDate, selectedDate, records, setCurrentMonth } =
+    useContext(AccountContext);
   const [events, setEvents] = useState([]);
-  const calendarRef = useRef(null);
   useEffect(() => {
     if (!records) return;
 
@@ -58,39 +49,39 @@ function Dash() {
           : "#1976D2",
     }));
     console.log(eventsData);
-    const newRecords = {};
-
-    eventsData.forEach(({ start, source }) => {
-      const dateStr = new Date(start).toISOString().split("T")[0];
-
-      if (!newRecords[dateStr]) {
-        newRecords[dateStr] = new Set(); // 使用 Set 避免重複
-      }
-
-      newRecords[dateStr].add(source);
-    });
-
-    // 轉換成物件陣列格式
 
     setEvents(eventsData);
   }, [records]);
-  const handleTodayClick = () => {
-    const calendarApi = calendarRef.current.getApi();
-    const today = moment().add(-1, "days").format("YYYY-MM-DD");
-
-    // 設定選定日期並跳到本月
-    setSelectedDate(today);
-
-    calendarApi.gotoDate(today); // 跳到當前日期的月份
-    setTimeout(() => {
-      const todayCell = document.querySelector(
-        `[data-date="${moment().format("YYYY-MM-DD")}"]`
+  useEffect(() => {
+    const abbr = document.querySelectorAll("abbr[aria-label]");
+    abbr.forEach((el) => {
+      console.log(
+        moment().format("YYYY年M月D日"),
+        el.getAttribute("aria-label")
       );
-      if (todayCell) {
-        todayCell.scrollIntoView({ block: "center" });
+
+      if (el.getAttribute("aria-label") === moment().format("YYYY年M月D日")) {
+        el.textContent = "今天";
       }
-    }, 0);
-  };
+    });
+  }, []);
+  // const handleTodayClick = () => {
+  //   const calendarApi = calendarRef.current.getApi();
+  //   const today = moment().add(-1, "days").format("YYYY-MM-DD");
+
+  //   // 設定選定日期並跳到本月
+  //   setSelectedDate(today);
+
+  //   calendarApi.gotoDate(today); // 跳到當前日期的月份
+  //   setTimeout(() => {
+  //     const todayCell = document.querySelector(
+  //       `[data-date="${moment().format("YYYY-MM-DD")}"]`
+  //     );
+  //     if (todayCell) {
+  //       todayCell.scrollIntoView({ block: "center" });
+  //     }
+  //   }, 0);
+  // };
 
   return (
     <div className="dash">
@@ -104,9 +95,11 @@ function Dash() {
           value={selectedDate}
           onChange={(e) => setSelectedDate(e)}
           onActiveStartDateChange={(e) => {
-            setCurrentMonth(moment(e.value).format("YYYY-MM"));
-            console.log(e);
+            setCurrentMonth(moment(e.activeStartDate).format("YYYY-MM"));
           }}
+          navigationAriaLive="off"
+          prev2Label={null}
+          next2Label={null}
           onClickDay={(e) => setCurrentMonth(moment(e).format("YYYY-MM"))}
           onClickMonth={(e) => setCurrentMonth(moment(e).format("YYYY-MM"))}
           tileContent={({ date }) => {
@@ -124,7 +117,7 @@ function Dash() {
                       display: "flex",
                       justifyContent: "center",
                       gap: "5px",
-                      zIndex: "100",
+                      zIndex: "1",
                     }}
                   >
                     {events.find(
@@ -150,7 +143,7 @@ function Dash() {
                       <div
                         style={{
                           padding: "2.5px",
-                          backgroundColor: "#388E3C",
+                          backgroundColor: "rgb(56, 205, 9)",
                           borderRadius: "50px",
                         }}
                       />

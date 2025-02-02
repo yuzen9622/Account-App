@@ -37,9 +37,6 @@ export const AccountContextProvider = ({ children }) => {
   const [updateRecord, setUpdateRecord] = useState(null);
   const [recordInfo, setRecordInfo] = useState(renderRecord);
 
-  const today = `${new Date().getFullYear()}-${String(
-    new Date().getMonth() + 1
-  ).padStart(2, "0")}-${String(new Date().getDate() - 1).padStart(2, "0")}`;
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const clearQuery = useCallback(() => {

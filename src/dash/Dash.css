@@ -19,7 +19,7 @@
     width: 100% !important;
     max-height: 100%;
     color: #FFA500;
-    border: 2px solid #FFA500 !important;
+    border: none !important;
     border-radius: 5px;
 
 }
@@ -55,6 +55,7 @@
 
 .react-calendar__tile--active {
     background-color: #FFA500 !important;
+    color: #fff !important;
 }
 
 .react-calendar__tile:enabled:hover,
@@ -78,6 +79,8 @@
 
 
 }
+
+
 
 /* .fc .fc-col-header-cell {
     background-color: var(--dark-theme) !important;

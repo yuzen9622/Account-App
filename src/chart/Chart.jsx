@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { AccountContext } from "../context/accountContext";
 import Datetime from "react-datetime";
@@ -7,6 +7,7 @@ import moment from "moment";
 import { Helmet } from "react-helmet-async";
 import "./chart.css";
 import "../account/sett.css";
+import { BarChart } from "@mui/x-charts";
 function Chart() {
   const {
     records,
@@ -22,6 +23,8 @@ function Chart() {
   const [start, setStart] = useState(moment().format("YYYY-MM-DD"));
   const [end, setEnd] = useState(moment().add(1, "days").format("YYYY-MM-DD"));
   const [selectedType, setSelectedType] = useState("all");
+  const [sort, setSort] = useState(true);
+  const [chartType, setChartType] = useState("pie");
   const [type, setType] = useState({
     type: "account",
     source: "expense",
@@ -58,7 +61,7 @@ function Chart() {
     groupedByDate.sort((a, b) => new Date(b.date) - new Date(a.date));
     setDateRecord(groupedByDate);
   };
-  const fliterRecord = () => {
+  const fliterRecord = useCallback(() => {
     let grouped = records?.reduce((result, item) => {
       const { accountId, amount, source, categoryId } = item;
       let record;
@@ -98,13 +101,23 @@ function Chart() {
     const total = grouped?.reduce((sum, entry) => sum + entry.value, 0);
     grouped = grouped.map((entry) => ({
       ...entry,
-      value: `${((entry.value / total) * 100).toFixed(1)}`,
+      value: parseFloat(((entry.value / total) * 100).toFixed(1)),
     }));
-
     grouped.sort((a, b) => b.total - a.total);
-
     setChartData(grouped);
-  };
+  }, [records, accounts, categories, type]);
+
+  useEffect(() => {
+    if (sort) {
+      setChartData((prev) => {
+        return prev?.toSorted((a, b) => b.total - a.total);
+      });
+    } else {
+      setChartData((prev) => {
+        return prev?.toSorted((a, b) => a.total - b.total);
+      });
+    }
+  }, [sort]);
 
   useEffect(() => {
     if (!records || !accounts || !categories) return;
@@ -112,7 +125,7 @@ function Chart() {
     setDateRecord(null);
 
     fliterRecord();
-  }, [records, accounts, type, categories]);
+  }, [records, accounts, type, categories, fliterRecord]);
 
   useEffect(() => {
     setDateRecord(null);
@@ -253,7 +266,7 @@ function Chart() {
             </>
           )}
         </div>
-        <div className="selcet-type">
+        <div className="select-type">
           <select
             name=""
             id=""
@@ -275,9 +288,27 @@ function Chart() {
             <option value="expense">支出</option>
             <option value="income">收入</option>
           </select>
+          {sort ? (
+            <button onClick={() => setSort((prev) => !prev)}>
+              <i className="fa-solid fa-arrow-up-9-1"></i>
+            </button>
+          ) : (
+            <button onClick={() => setSort((prev) => !prev)}>
+              <i className="fa-solid fa-arrow-up-1-9"></i>
+            </button>
+          )}
+          {chartType === "pie" ? (
+            <button onClick={() => setChartType("bar")}>
+              <i className="fa-solid fa-chart-simple"></i>
+            </button>
+          ) : (
+            <button onClick={() => setChartType("pie")}>
+              <i className="fa-solid fa-chart-pie"></i>
+            </button>
+          )}
         </div>
 
-        {chartData && (
+        {chartData && chartType === "pie" && (
           <PieChart
             series={[
               {
@@ -307,6 +338,44 @@ function Chart() {
                 fill: "white",
               },
             }}
+            height={200}
+          />
+        )}
+        {chartData && chartType === "bar" && (
+          <BarChart
+            dataset={chartData}
+            series={[
+              {
+                dataKey: "value",
+                label: () => {
+                  chartData?.map((item) => {
+                    return item.label;
+                  });
+                },
+
+                highlightScope: { fade: "global", highlight: "item" },
+                valueFormatter: (item) => {
+                  return `${item}%`;
+                },
+              },
+            ]}
+            xAxis={[{ scaleType: "band", dataKey: "label" }]}
+            yAxis={[
+              {
+                valueFormatter: (value) => `${value.toFixed(1)}%`, // Y 軸顯示百分比
+              },
+            ]}
+            title={`依${type.source === "income" ? "收入" : "支出"}${
+              type.type === "account" ? "帳戶" : "類別"
+            }比`}
+            sx={{
+              [`& .${pieArcLabelClasses.root}`]: {
+                fontWeight: "bold",
+                fontFamily: "arial",
+                fill: "white",
+              },
+            }}
+            borderRadius={5}
             height={200}
           />
         )}

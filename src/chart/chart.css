@@ -41,6 +41,19 @@
 
 }
 
+.select-type button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.1em;
+    color: #333;
+    padding: 5px;
+
+}
+
+.select-type button:active {
+    color: #33333375;
+}
+
 .display-list {
     display: flex;
     flex-direction: column;
