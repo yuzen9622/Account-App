@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { Snackbar, Alert } from "@mui/material";
 import "./navbar.css";
 import { UserContext } from "../context/userContext";
 import { AccountContext } from "../context/accountContext";
 
 const Navbar = () => {
   const { user } = useContext(UserContext);
-  const { message, setMessage, setPopOpen } = useContext(AccountContext);
+  const { setPopOpen } = useContext(AccountContext);
 
   return (
     <>
@@ -16,24 +15,6 @@ const Navbar = () => {
           <div className="name">
             <h1>{user?.name}</h1>
           </div>
-          <Snackbar
-            open={message?.open}
-            autoHideDuration={3000}
-            onClose={(e, reson) => {
-              if (reson === "timeout") {
-                setMessage((prev) => ({ ...prev, open: false }));
-              }
-            }}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          >
-            <Alert
-              style={{ fontWeight: "600" }}
-              variant="filled"
-              severity={message?.status}
-            >
-              {message?.text}
-            </Alert>
-          </Snackbar>
 
           <>
             <nav>

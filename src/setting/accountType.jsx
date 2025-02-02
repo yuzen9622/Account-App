@@ -4,7 +4,7 @@ import { AccountContext } from "../context/accountContext";
 import { UserContext } from "../context/userContext";
 import { url } from "../service";
 export default function AccountType() {
-  const { token, user } = useContext(UserContext);
+  const { token, user, setMessage } = useContext(UserContext);
   const [newAccount, setNewAccount] = useState({
     _id: null,
     userId: user._id,
@@ -12,7 +12,7 @@ export default function AccountType() {
     type: "",
   });
 
-  const { accounts, setAccounts, setMessage } = useContext(AccountContext);
+  const { accounts, setAccounts } = useContext(AccountContext);
   const [isEdit, setIsEdit] = useState(false);
   const navigate = useNavigate();
 

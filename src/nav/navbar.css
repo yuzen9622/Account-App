@@ -124,6 +124,7 @@ nav .active {
     .nav {
         width: 100%;
         height: auto;
+
     }
 
     nav {
@@ -162,6 +163,10 @@ nav .active {
 }
 
 @media screen and (max-width:426px) {
+    nav {
+        padding-bottom: 20px;
+    }
+
     .dash td {
         font-size: 0.8rem;
     }
@@ -175,7 +180,5 @@ nav .active {
         height: 250px !important;
     }
 
-    .care-type h3 {
-        font-size: 0.8rem;
-    }
+
 }

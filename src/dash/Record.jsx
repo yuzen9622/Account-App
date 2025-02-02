@@ -6,15 +6,9 @@ import "moment/locale/zh-tw";
 import { UserContext } from "../context/userContext";
 moment.locale("zh-tw");
 export default function Record({ record, edit = true, _id }) {
-  const {
-    setMessage,
-    accounts,
-    categories,
-    setRecords,
-    setUpdateRecord,
-    setPopOpen,
-  } = useContext(AccountContext);
-  const { token } = useContext(UserContext);
+  const { accounts, categories, setRecords, setUpdateRecord, setPopOpen } =
+    useContext(AccountContext);
+  const { token, setMessage } = useContext(UserContext);
   const account = accounts?.find((item) => item._id === record.accountId);
   const toAccount = accounts?.find((item) => item._id === record.toAccountId);
   const category = categories?.find((item) => item._id === record.categoryId);

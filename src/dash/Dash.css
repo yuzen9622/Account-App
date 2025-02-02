@@ -15,6 +15,59 @@
     height: 50%;
 }
 
+.react-calendar {
+    width: 100% !important;
+    max-height: 100%;
+    color: #FFA500;
+    border: 2px solid #FFA500 !important;
+    border-radius: 5px;
+
+}
+
+.react-calendar__viewContainer {
+    overflow: hidden;
+}
+
+.react-calendar,
+.react-calendar {
+    overflow: auto;
+}
+
+.react-calendar__year-view__months {
+    overflow: hidden;
+}
+
+.react-calendar button {
+    font-weight: 600;
+    border-radius: 5px;
+    color: #4A4A4A;
+
+}
+
+.react-calendar__tile--now {
+    background-color: transparent !important;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+    font-weight: 400 !important;
+    color: #757575 !important;
+}
+
+.react-calendar__tile--active {
+    background-color: #FFA500 !important;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+    background-color: #e6e6e6 !important;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+    color: white;
+    background-color: #FFA500 !important;
+}
+
 .fc-day-today {
     background-color: transparent !important;
 

@@ -5,9 +5,10 @@ import FullCalendar from "@fullcalendar/react";
 import locale from "@fullcalendar/core/locales/zh-tw";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import { AccountContext } from "../context/accountContext";
 import DashRecord from "./DashRecord";
-import Add from "../setting/add";
 import { Helmet } from "react-helmet-async";
 import moment from "moment";
 function Dash() {
@@ -46,6 +47,7 @@ function Dash() {
       title: `${group.count > 1 ? `${group.count}筆` : "1筆"}｜$${
         group.totalAmount
       }`,
+      source: group.source,
       start: group.date,
       allDay: true,
       color:
@@ -55,6 +57,21 @@ function Dash() {
           ? "#D32F2F"
           : "#1976D2",
     }));
+    console.log(eventsData);
+    const newRecords = {};
+
+    eventsData.forEach(({ start, source }) => {
+      const dateStr = new Date(start).toISOString().split("T")[0];
+
+      if (!newRecords[dateStr]) {
+        newRecords[dateStr] = new Set(); // 使用 Set 避免重複
+      }
+
+      newRecords[dateStr].add(source);
+    });
+
+    // 轉換成物件陣列格式
+
     setEvents(eventsData);
   }, [records]);
   const handleTodayClick = () => {
@@ -82,7 +99,83 @@ function Dash() {
       </Helmet>
 
       <div className="calendar">
-        <FullCalendar
+        <Calendar
+          defaultValue={selectedDate}
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e)}
+          onActiveStartDateChange={(e) => {
+            setCurrentMonth(moment(e.value).format("YYYY-MM"));
+            console.log(e);
+          }}
+          onClickDay={(e) => setCurrentMonth(moment(e).format("YYYY-MM"))}
+          onClickMonth={(e) => setCurrentMonth(moment(e).format("YYYY-MM"))}
+          tileContent={({ date }) => {
+            return (
+              <>
+                <div
+                  style={{
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: "5px",
+                      zIndex: "100",
+                    }}
+                  >
+                    {events.find(
+                      (item) =>
+                        moment(item.start).format("YYYY-MM-DD") ===
+                          moment(date).format("YYYY-MM-DD") &&
+                        item.source === "expense"
+                    ) && (
+                      <div
+                        style={{
+                          padding: "2.5px",
+                          backgroundColor: "#D32F2F",
+                          borderRadius: "50px",
+                        }}
+                      />
+                    )}
+                    {events.find(
+                      (item) =>
+                        moment(item.start).format("YYYY-MM-DD") ===
+                          moment(date).format("YYYY-MM-DD") &&
+                        item.source === "income"
+                    ) && (
+                      <div
+                        style={{
+                          padding: "2.5px",
+                          backgroundColor: "#388E3C",
+                          borderRadius: "50px",
+                        }}
+                      />
+                    )}
+                    {events.find(
+                      (item) =>
+                        moment(item.start).format("YYYY-MM-DD") ===
+                          moment(date).format("YYYY-MM-DD") &&
+                        item.source === "change"
+                    ) && (
+                      <div
+                        style={{
+                          padding: "2.5px",
+                          backgroundColor: "#1976D2",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    )}
+                  </div>
+                </div>
+              </>
+            );
+          }}
+        />
+        {/* <FullCalendar
           ref={calendarRef}
           events={events}
           plugins={[dayGridPlugin, interactionPlugin]}
@@ -132,7 +225,7 @@ function Dash() {
           height={"100%"}
           selectable={true}
           stickyHeaderDates={true}
-        />
+        /> */}
       </div>
       <DashRecord />
     </div>

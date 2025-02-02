@@ -45,12 +45,12 @@ function Add() {
   }, [recordInfo.source, setRecordInfo, categories, updateRecord]);
   useEffect(() => {
     if (updateRecord) return;
-    let isoDate = new Date(selectedDate);
-    isoDate.setDate(isoDate.getDate() + 1);
-    if (isoDate > new Date()) {
+    // let isoDate = new Date(selectedDate);
+    // isoDate.setDate(isoDate.getDate() + 1);
+    if (selectedDate > new Date()) {
       setRecordInfo((prev) => ({ ...prev, date: new Date() }));
     } else {
-      setRecordInfo((prev) => ({ ...prev, date: isoDate }));
+      setRecordInfo((prev) => ({ ...prev, date: selectedDate }));
     }
   }, [selectedDate, setRecordInfo, popOpen, updateRecord]);
 

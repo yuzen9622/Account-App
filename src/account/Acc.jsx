@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./Acc.css";
 
 import { UserContext } from "../context/userContext";
@@ -10,54 +10,23 @@ function Acc() {
     siginUser,
     updateSiginInfo,
     siginInfo,
-    error,
-    updateError,
+
+    message,
   } = useContext(UserContext);
-  const [logmoment, setlog] = useState("登入來使用記帳");
 
   const change = (moment) => {
-    let log = document.getElementById("login");
-    let sig = document.getElementById("sign");
     if (moment === "login") {
-      log.classList.add("active");
-      sig.classList.remove("active");
       document.getElementsByClassName("login")[0].style.display = "flex";
       document.getElementsByClassName("sign")[0].style.display = "none";
-      setlog("登入來使用記帳");
-      updateError("");
     } else {
-      log.classList.remove("active");
-      sig.classList.add("active");
       document.getElementsByClassName("login")[0].style.display = "none";
       document.getElementsByClassName("sign")[0].style.display = "flex";
-      setlog("快來創建帳號");
-      updateError("");
     }
   };
 
   return (
     <>
       <div className="acc">
-        <h1>{logmoment}</h1>
-        <div className="change">
-          <button
-            id="login"
-            className="active"
-            onClick={() => {
-              change("login");
-            }}
-          >
-            登入
-          </button>
-          <button
-            id="sign"
-            onClick={() => {
-              change("sign");
-            }}
-          >
-            註冊
-          </button>
-        </div>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -90,8 +59,22 @@ function Acc() {
               placeholder="輸入密碼"
             />
           </div>
-          <p>{error}</p>
-          <button onClick={() => loginUser()}>登入</button>
+          <div style={{ display: "flex" }}>
+            <p>還沒有帳號嗎?</p>
+            <p
+              style={{ fontWeight: "600", cursor: "default" }}
+              onClick={() => change("sign")}
+            >
+              註冊
+            </p>
+          </div>
+
+          <button
+            disabled={message.text === "登入中..."}
+            onClick={() => loginUser()}
+          >
+            {message.text === "登入中..." ? "登入中..." : "登入"}
+          </button>
         </form>
         <form
           onSubmit={(e) => {
@@ -135,8 +118,19 @@ function Acc() {
               placeholder="創建密碼"
             />
           </div>
-          <p>{error}</p>
-          <button type="submit">註冊</button>
+          <div style={{ display: "flex" }}>
+            <p>已經有帳號?</p>
+            <p
+              style={{ fontWeight: "600", cursor: "default" }}
+              onClick={() => change("login")}
+            >
+              登入
+            </p>
+          </div>
+
+          <button disabled={message.text === "註冊中..."} type="submit">
+            {message.text === "註冊中..." ? "註冊中..." : "註冊"}
+          </button>
         </form>
       </div>
     </>

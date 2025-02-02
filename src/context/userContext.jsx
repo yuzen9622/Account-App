@@ -20,6 +20,11 @@ export const UserContextProvider = ({ children }) => {
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState({
+    status: "",
+    text: "",
+    open: false,
+  });
   const updateError = useCallback((error) => {
     setError(error);
   }, []);
@@ -87,6 +92,7 @@ export const UserContextProvider = ({ children }) => {
   }, [user]);
   const loginUser = useCallback(async () => {
     try {
+      setMessage({ status: "warning", text: "登入中...", open: true });
       const res = await fetch(`${url}/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -97,16 +103,18 @@ export const UserContextProvider = ({ children }) => {
         localStorage.setItem("account-user", JSON.stringify(datas));
         navgate("/dash/");
         setUser(datas);
+        setMessage({ status: "success", text: "登入成功", open: true });
       } else {
-        setError(datas.error);
+        setMessage({ status: "error", text: datas.error, open: true });
       }
     } catch (error) {
       console.log(error);
-      setError(JSON.stringify(error));
+      setMessage({ status: "error", text: "伺服器錯誤", open: true });
     }
   }, [loginInfo, navgate]);
   const siginUser = useCallback(async () => {
     try {
+      setMessage({ status: "warning", text: "註冊中...", open: true });
       const res = await fetch(`${url}/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -118,11 +126,13 @@ export const UserContextProvider = ({ children }) => {
 
         navgate("/dash/");
         setUser(datas);
+        setMessage({ status: "success", text: "註冊成功", open: true });
       } else {
-        throw datas.error;
+        setMessage({ status: "error", text: datas.error, open: true });
       }
     } catch (error) {
       console.log(error);
+      setMessage({ status: "error", text: "伺服器錯誤", open: true });
     }
   }, [siginInfo, navgate]);
 
@@ -133,6 +143,7 @@ export const UserContextProvider = ({ children }) => {
     setToken(null);
     localStorage.removeItem("account-user");
     sessionStorage.removeItem("account-token");
+    setMessage({ status: "success", text: "登出成功", open: true });
   }, [navgate]);
   const handleRouteChange = useCallback(() => {
     if (!user && location.pathname !== "/account") {
@@ -173,6 +184,8 @@ export const UserContextProvider = ({ children }) => {
         updateError,
         setToken,
         setUser,
+        message,
+        setMessage,
       }}
     >
       {children}

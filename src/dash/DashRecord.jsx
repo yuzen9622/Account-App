@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AccountContext } from "../context/accountContext";
 import Record from "./Record";
 import "./Dash.css";
+import moment from "moment";
 
 export default function DashRecord() {
   const {
@@ -12,9 +13,7 @@ export default function DashRecord() {
     currentMonth,
     selectedDate,
   } = useContext(AccountContext);
-  let isoDate = new Date(selectedDate);
-  isoDate.setDate(isoDate.getDate() + 1);
-  isoDate.setHours(0, 0, 0, 0);
+
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [total, setTotal] = useState(0);
@@ -24,7 +23,7 @@ export default function DashRecord() {
     let come = 0,
       out = 0;
     records.forEach((element) => {
-      let eleMonth = new Date(element.date).getMonth() + 1;
+      let eleMonth = moment(element.date).format("YYYY-MM");
 
       if (element.source === "income" && eleMonth === currentMonth) {
         come += element.amount;
@@ -60,7 +59,7 @@ export default function DashRecord() {
       <div className="record-container">
         {currentRecords &&
           currentRecords.map((item, key) => <Record key={key} record={item} />)}
-        {!popOpen && isoDate <= new Date() && (
+        {!popOpen && selectedDate <= new Date() && (
           <button
             className="plus"
             title="plus"

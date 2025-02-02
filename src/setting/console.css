@@ -22,6 +22,8 @@
 
 .btn-p {
     min-width: 50%;
+    width: 90%;
+    max-width: 600px;
 }
 
 .btn-p p {
@@ -33,7 +35,8 @@
 .btn {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 90%;
+    max-width: 600px;
 }
 
 .btn a {
@@ -43,7 +46,7 @@
     background-color: transparent;
     color: #FFA500;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1em;
     padding: 5px;
     font-weight: 600;
     border-bottom: 1px solid #FFA500;

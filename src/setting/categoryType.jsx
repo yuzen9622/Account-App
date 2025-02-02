@@ -5,10 +5,9 @@ import "./add.css";
 import { url } from "../service";
 import { AccountContext } from "../context/accountContext";
 import { UserContext } from "../context/userContext";
-import { dark } from "@mui/material/styles/createPalette";
 function Finances() {
-  const { categories, setCategories, setMessage } = useContext(AccountContext);
-  const { token, user } = useContext(UserContext);
+  const { categories, setCategories } = useContext(AccountContext);
+  const { token, user, setMessage } = useContext(UserContext);
   const [source, setSource] = useState("expense");
   const [category, setCategory] = useState(null);
   const [newCategory, setNewCategory] = useState(null);

@@ -3,10 +3,11 @@ import { UserContext } from "../context/userContext";
 import "./user-setting.css";
 import { useNavigate } from "react-router-dom";
 import { url } from "../service";
-import { AccountContext } from "../context/accountContext";
+
 export default function UserSetting() {
-  const { user, setUser, token, logoutUser } = useContext(UserContext);
-  const { setMessage } = useContext(AccountContext);
+  const { user, setUser, token, logoutUser, setMessage } =
+    useContext(UserContext);
+
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     _id: user?._id,

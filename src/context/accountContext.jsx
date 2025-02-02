@@ -12,7 +12,7 @@ import moment from "moment";
 export const AccountContext = createContext();
 
 export const AccountContextProvider = ({ children }) => {
-  const { token, user, setToken } = useContext(UserContext);
+  const { token, user, setToken, setMessage } = useContext(UserContext);
   const renderRecord = useMemo(
     () => ({
       _id: null,
@@ -33,18 +33,14 @@ export const AccountContextProvider = ({ children }) => {
   const [records, setRecords] = useState(null);
   const [popOpen, setPopOpen] = useState(null);
   const [queryParams, setQueryParams] = useState({});
-  const [currentMonth, setCurrentMonth] = useState(null);
+  const [currentMonth, setCurrentMonth] = useState(moment().format("YYYY-MM"));
   const [updateRecord, setUpdateRecord] = useState(null);
   const [recordInfo, setRecordInfo] = useState(renderRecord);
-  const [message, setMessage] = useState({
-    status: "",
-    text: "",
-    open: false,
-  });
+
   const today = `${new Date().getFullYear()}-${String(
     new Date().getMonth() + 1
   ).padStart(2, "0")}-${String(new Date().getDate() - 1).padStart(2, "0")}`;
-  const [selectedDate, setSelectedDate] = useState(today);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const clearQuery = useCallback(() => {
     setQueryParams({});
@@ -201,6 +197,7 @@ export const AccountContextProvider = ({ children }) => {
     recordInfo,
     getAccounts,
     renderRecord,
+    setMessage,
   ]);
 
   useEffect(() => {
@@ -244,9 +241,8 @@ export const AccountContextProvider = ({ children }) => {
         setQueryParams,
         setCategories,
         clearQuery,
-        message,
+
         setAccounts,
-        setMessage,
       }}
     >
       {children}
