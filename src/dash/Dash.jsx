@@ -48,18 +48,12 @@ function Dash() {
           ? "#D32F2F"
           : "#1976D2",
     }));
-    console.log(eventsData);
 
     setEvents(eventsData);
   }, [records]);
   useEffect(() => {
     const abbr = document.querySelectorAll("abbr[aria-label]");
     abbr.forEach((el) => {
-      console.log(
-        moment().format("YYYY年M月D日"),
-        el.getAttribute("aria-label")
-      );
-
       if (el.getAttribute("aria-label") === moment().format("YYYY年M月D日")) {
         el.textContent = "今天";
       }
@@ -93,7 +87,9 @@ function Dash() {
         <Calendar
           defaultValue={selectedDate}
           value={selectedDate}
-          onChange={(e) => setSelectedDate(e)}
+          onChange={(e) => {
+            setSelectedDate(e);
+          }}
           onActiveStartDateChange={(e) => {
             setCurrentMonth(moment(e.activeStartDate).format("YYYY-MM"));
           }}

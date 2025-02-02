@@ -131,12 +131,10 @@ export const AccountContextProvider = ({ children }) => {
       if (!user || !token) {
         return;
       }
-      let date = new Date(selectedDate);
-      date.setDate(date.getDate() + 1);
-      date = date.toISOString().split("T")[0];
-
       const datas = records?.filter(
-        (record) => moment(record.date).format("YYYY-MM-DD") === date
+        (record) =>
+          moment(record.date).format("YYYY-MM-DD") ===
+          moment(selectedDate).format("YYYY-MM-DD")
       );
       setCurrentRecords(datas);
     } catch (error) {
