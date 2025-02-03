@@ -3,6 +3,9 @@ import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { AccountContext } from "../context/accountContext";
 import Datetime from "react-datetime";
 import DateRecord from "../account/dateRecord";
+import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
+import PieChartRoundedIcon from "@mui/icons-material/PieChartRounded";
+import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import moment from "moment";
 import { Helmet } from "react-helmet-async";
 import "./chart.css";
@@ -288,22 +291,18 @@ function Chart() {
             <option value="expense">支出</option>
             <option value="income">收入</option>
           </select>
-          {sort ? (
-            <button onClick={() => setSort((prev) => !prev)}>
-              <i className="fa-solid fa-arrow-up-9-1"></i>
-            </button>
-          ) : (
-            <button onClick={() => setSort((prev) => !prev)}>
-              <i className="fa-solid fa-arrow-up-1-9"></i>
-            </button>
-          )}
+
+          <button onClick={() => setSort((prev) => !prev)}>
+            <SwapVertRoundedIcon color="inherit" />
+          </button>
+
           {chartType === "pie" ? (
             <button onClick={() => setChartType("bar")}>
-              <i className="fa-solid fa-chart-simple"></i>
+              <BarChartRoundedIcon color="inherit" />
             </button>
           ) : (
             <button onClick={() => setChartType("pie")}>
-              <i className="fa-solid fa-chart-pie"></i>
+              <PieChartRoundedIcon color="inherit" />
             </button>
           )}
         </div>

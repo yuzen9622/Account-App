@@ -206,13 +206,13 @@ function Add() {
         </select>
       </div>
       <div className="Finances-put">
-        <p>描述</p>
+        <p>備註</p>
         <input
           type="text"
           name=""
           id=""
           value={recordInfo.description}
-          placeholder="描述"
+          placeholder="備註"
           onChange={(e) =>
             setRecordInfo((prev) => ({ ...prev, description: e.target.value }))
           }

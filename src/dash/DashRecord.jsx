@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AccountContext } from "../context/accountContext";
 import Record from "./Record";
 import "./Dash.css";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import moment from "moment";
 
 export default function DashRecord() {
@@ -66,7 +67,7 @@ export default function DashRecord() {
             style={{ marginTop: "20px" }}
             onClick={() => setPopOpen(true)}
           >
-            <i className="fa-solid fa-plus"></i>
+            <AddRoundedIcon />
           </button>
         )}
       </div>

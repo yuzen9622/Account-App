@@ -3,7 +3,11 @@ import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import { UserContext } from "../context/userContext";
 import { AccountContext } from "../context/accountContext";
-
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import InsightsIcon from "@mui/icons-material/Insights";
+import SettingsIcon from "@mui/icons-material/Settings";
+import AddIcon from "@mui/icons-material/Add";
 const Navbar = () => {
   const { user } = useContext(UserContext);
   const { setPopOpen } = useContext(AccountContext);
@@ -20,31 +24,31 @@ const Navbar = () => {
             <nav>
               <li>
                 <NavLink to="/dash/">
-                  <i className="fa-solid fa-book"></i>
+                  <CalendarMonthIcon color="inherit" />
                   <p>記事本</p>
                 </NavLink>
-              </li>{" "}
+              </li>
               <li>
                 <NavLink to="/account">
-                  <i className="fa-solid fa-landmark"></i>
+                  <AccountBalanceIcon color="inherit" />
                   <p>帳戶</p>
                 </NavLink>
               </li>
               <li>
                 <button onClick={() => setPopOpen(true)}>
-                  <i className="fa-solid fa-plus"></i>
+                  <AddIcon />
                   <p>記一筆</p>
                 </button>
               </li>
               <li>
                 <NavLink to="/chart">
-                  <i className="fa-solid fa-chart-simple"></i>
+                  <InsightsIcon color="inherit" />
                   <p>圖表</p>
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/setting">
-                  <i className="fa-solid fa-gear"></i>
+                  <SettingsIcon color="inherit" />
                   <p>設定</p>
                 </NavLink>
               </li>

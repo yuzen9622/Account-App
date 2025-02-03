@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { AccountContext } from "../context/accountContext";
 import moment from "moment";
 import { url } from "../service";
+import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import "moment/locale/zh-tw";
 import { UserContext } from "../context/userContext";
 moment.locale("zh-tw");
@@ -98,10 +100,10 @@ export default function Record({ record, edit = true, _id }) {
                     setPopOpen(true);
                   }}
                 >
-                  <i className="fa-solid fa-pen-nib"></i>
+                  <BorderColorRoundedIcon fontSize="inherit" />
                 </button>
                 <button onClick={() => handleDelete(record._id)}>
-                  <i className="fa-solid fa-trash"></i>
+                  <DeleteForeverRoundedIcon fontSize="inherit" />
                 </button>
               </div>
             )}

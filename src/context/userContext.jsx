@@ -143,7 +143,6 @@ export const UserContextProvider = ({ children }) => {
     setToken(null);
     localStorage.removeItem("account-user");
     sessionStorage.removeItem("account-token");
-    setMessage({ status: "success", text: "登出成功", open: true });
   }, [navgate]);
   const handleRouteChange = useCallback(() => {
     if (!user && location.pathname !== "/account") {

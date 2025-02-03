@@ -38,7 +38,14 @@
     font-size: 18px;
     font-weight: 600;
     border-bottom: 2px solid #FFA500;
-    margin: 10px 5px;
+    margin: 0 5px;
+
+}
+
+.select-type {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
 
 }
 
@@ -47,7 +54,7 @@
     background-color: transparent;
     font-size: 1.1em;
     color: #333;
-    padding: 5px;
+
 
 }
 

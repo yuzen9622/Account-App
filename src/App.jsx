@@ -2,33 +2,26 @@ import "./App.css";
 import Navbar from "./nav/navbar";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Dash from "./dash/Dash";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Account from "./account/Account";
 import Chart from "./chart/Chart";
 import Console from "./setting/Console";
 import Add from "./setting/add";
 import Splash from "./splash/Splash";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import { Snackbar, Alert } from "@mui/material";
 import { UserContext } from "./context/userContext";
 import { AccountContextProvider } from "./context/accountContext";
 
 function App() {
   const { user, message, setMessage } = useContext(UserContext);
-  const [loading, setLoading] = useState(
-    sessionStorage.getItem("splash") ? false : true
-  );
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-      sessionStorage.setItem("splash", JSON.stringify(true));
-    }, 3000);
-  }, []);
 
   return (
     <AccountContextProvider>
       <div className="App">
-        {loading && <Splash />}
         <Navbar />
+        <Splash />
         <Snackbar
           open={message?.open}
           autoHideDuration={3000}
@@ -43,6 +36,20 @@ function App() {
             style={{ fontWeight: "600" }}
             variant="filled"
             severity={message?.status}
+            action={
+              message?.status === "success" && (
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setMessage((prev) => ({ ...prev, open: false }));
+                  }}
+                >
+                  <CloseIcon color="inherit" fontSize="inherit" />
+                </IconButton>
+              )
+            }
           >
             {message?.text}
           </Alert>
