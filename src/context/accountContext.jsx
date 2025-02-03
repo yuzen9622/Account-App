@@ -103,6 +103,7 @@ export const AccountContextProvider = ({ children }) => {
       if (!user || !token) {
         return;
       }
+
       const queryString = new URLSearchParams(queryParams).toString();
       const fetchUrl = `${url}/records${queryString ? `?${queryString}` : ""}`;
       const res = await fetch(fetchUrl, {

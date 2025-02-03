@@ -180,7 +180,7 @@ function Sett() {
         income: prev.income + parseFloat(account.initalAmount),
       }));
     });
-
+    groupedByAccount.sort((a, b) => b.amount - a.amount);
     setAccountRecord(groupedByAccount);
   }, [records, accounts, dateReocrd]);
 

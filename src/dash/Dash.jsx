@@ -9,8 +9,13 @@ import moment from "moment";
 import "./Dash.css";
 
 function Dash() {
-  const { setSelectedDate, selectedDate, records, setCurrentMonth } =
-    useContext(AccountContext);
+  const {
+    setSelectedDate,
+    selectedDate,
+    records,
+    setCurrentMonth,
+    currentMonth,
+  } = useContext(AccountContext);
   const [events, setEvents] = useState([]);
   useEffect(() => {
     if (!records) return;
@@ -58,7 +63,7 @@ function Dash() {
         el.textContent = "今天";
       }
     });
-  }, []);
+  }, [selectedDate, currentMonth]);
   // const handleTodayClick = () => {
   //   const calendarApi = calendarRef.current.getApi();
   //   const today = moment().add(-1, "days").format("YYYY-MM-DD");

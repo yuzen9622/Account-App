@@ -1,0 +1,62 @@
+.splash {
+    position: absolute;
+    width: 100%;
+    height: 100dvh;
+    z-index: 10;
+    background-color: #ECEFF1;
+
+}
+
+.splash-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ff8800;
+    font-weight: 600;
+}
+
+.splash-container {
+    animation: zoom .3s ease-in-out forwards;
+    animation-delay: 1.5s;
+}
+
+.splash-container p {
+    font-size: 25px;
+    margin-top: 50px;
+}
+
+.fade-out {
+
+    animation: fade-out .5s ease-in-out forwards;
+    animation-delay: 2s;
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
