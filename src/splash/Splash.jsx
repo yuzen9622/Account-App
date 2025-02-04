@@ -8,6 +8,7 @@ export default function Splash() {
   );
   useEffect(() => {
     if (!imageLoaded) return;
+
     setTimeout(() => {
       setLoading(false);
       sessionStorage.setItem("splash", JSON.stringify(true));
@@ -18,12 +19,14 @@ export default function Splash() {
     <>
       {loading && (
         <div className={`splash ${imageLoaded ? "fade-out" : ""}`}>
-          <div className="splash-container">
+          <div className={`${imageLoaded ? "scale-out" : ""} splash-container`}>
             <img
               src={icon}
               alt="icon"
               width={100}
-              onLoad={() => setImageLoaded(true)}
+              onLoad={() => {
+                requestAnimationFrame(() => setImageLoaded(true));
+              }}
             />
             <p>微調支出 財富無憂</p>
           </div>

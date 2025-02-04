@@ -1,17 +1,33 @@
 :root {
-  --dark-theme: #121212;
-  --light-theme: #fff;
+  --primary-color: #FFA500;
+  --second-color: #f6f6f6f2;
+  --text-color: #4A4A4A;
+  --background-color: #fff;
+  --second-text-color: #808080;
+  --active-color: #d8d8d8;
 }
+
+.dark {
+  --background-color: #14171a;
+  --second-color: rgba(18, 22, 19, 0.95);
+  --text-color: #fff;
+  --second-text-color: #c3c3c3;
+  --active-color: #424242;
+}
+
+
+
 
 .App {
   display: flex;
   height: 100%;
-
+  background-color: var(--background-color);
 }
 
 body {
   height: 100dvh;
   /* background-color: var(--dark-theme); */
+  background-color: var(--second-color);
 }
 
 /* .active {
@@ -38,6 +54,6 @@ body {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #FFA500;
+  background-color: var(--primary-color);
   width: 4px;
 }

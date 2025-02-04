@@ -9,10 +9,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    background-color: white;
+    background-color: var(--second-color);
     transform: translate(-50%, -50%);
     border-radius: 15px;
-    border: 2px solid #FFA500;
+    border: 2px solid var(--primary-color);
     padding: 10px;
     transition: all 0.5s;
     z-index: 10;
@@ -42,12 +42,12 @@ input[type=number] {
 
 .popbox-btn {
     border-radius: 5px;
-    background-color: white;
+    background-color: var(--second-color);
 }
 
 .popbox-btn button {
     border: none;
-    color: #FFA500;
+    color: var(--primary-color);
     background-color: transparent;
 }
 
@@ -58,15 +58,15 @@ input[type=number] {
     align-items: center;
     height: 30px;
     padding: 5px;
-    color: #FFA500;
-    border-bottom: 2px solid #FFA500;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
     max-width: 300px;
 
 }
 
 
 .Finances-put :is(input, option, select)::placeholder {
-    color: #FFA500;
+    color: var(--primary-color);
 }
 
 .form-control {
@@ -78,7 +78,8 @@ input[type=number] {
     text-align: center;
     border: none;
     outline: none;
-    color: #FFA500;
+    background-color: var(--second-color);
+    color: var(--primary-color);
     width: 50%;
     font-size: 16px;
     font-weight: 600;
@@ -89,7 +90,7 @@ input[type=number] {
 }
 
 .popbox-btn:nth-child(1) {
-    border: 1px solid #FFA500;
+    border: 1px solid var(--primary-color);
 
 }
 
@@ -100,8 +101,8 @@ input[type=number] {
 }
 
 .pop-active {
-    background-color: #FFA500 !important;
-    color: white !important;
+    background-color: var(--primary-color) !important;
+    color: var(--second-color) !important;
 }
 
 .pop-btn {
@@ -113,9 +114,9 @@ input[type=number] {
 }
 
 .pop-btn button:nth-child(1) {
-    border: 2px solid #FFA500;
-    background-color: white;
-    color: #FFA500;
+    border: 2px solid var(--primary-color);
+    background-color: var(--second-color);
+    color: var(--primary-color);
     outline: none;
     font-size: 18px;
     font-weight: 600;
@@ -126,9 +127,9 @@ input[type=number] {
 }
 
 .pop-btn button:nth-child(2) {
-    border: 2px solid #FFA500;
-    background-color: #FFA500;
-    color: white;
+    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--second-color);
     outline: none;
     font-size: 18px;
     font-weight: 600;
@@ -139,13 +140,13 @@ input[type=number] {
 }
 
 .pop-btn button:nth-child(2):hover {
-    color: #FFA500;
-    background-color: white;
-    border: 2px solid #FFA500;
+    color: var(--primary-color);
+    background-color: var(--second-color);
+    border: 2px solid var(--primary-color);
 }
 
 .pop-btn button:nth-child(1):hover {
-    color: white;
-    background-color: #FFA500;
+    color: var(--second-color);
+    background-color: var(--primary-color);
 
 }

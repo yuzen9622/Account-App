@@ -1,6 +1,6 @@
 .console {
     width: 100%;
-    color: #FFA500;
+    color: var(--primary-color);
     overflow-y: scroll;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .console hr {
-    border: 1px solid #FFA500;
+    border: 1px solid var(--primary-color);
 }
 
 .console-btn {
@@ -28,7 +28,7 @@
 
 .btn-p p {
     width: fit-content;
-    border-bottom: 1px solid #FFA500;
+    border-bottom: 1px solid var(--primary-color);
     font-size: 1.2rem;
 }
 
@@ -44,17 +44,17 @@
     border: none;
     text-align: center;
     background-color: transparent;
-    color: #FFA500;
+    color: var(--primary-color);
     text-decoration: none;
     font-size: 1em;
     padding: 5px;
     font-weight: 600;
-    border-bottom: 1px solid #FFA500;
+    border-bottom: 1px solid var(--primary-color);
     transition: all 0.5s;
 }
 
 .btn a:hover {
-    background-color: #FFA500;
+    background-color: var(--primary-color);
     border-radius: 25px;
-    color: white;
+    color: var(--second-color);
 }

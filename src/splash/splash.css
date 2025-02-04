@@ -3,7 +3,7 @@
     width: 100%;
     height: 100dvh;
     z-index: 10;
-    background-color: #ECEFF1;
+    background-color: var(--background-color);
 
 }
 
@@ -18,14 +18,16 @@
     font-weight: 600;
 }
 
-.splash-container {
-    animation: zoom .3s ease-in-out forwards;
-    animation-delay: 1.5s;
-}
+
 
 .splash-container p {
     font-size: 25px;
     margin-top: 50px;
+}
+
+.scale-out {
+    animation: zoom .3s ease-in-out forwards;
+    animation-delay: 1.5s;
 }
 
 .fade-out {

@@ -10,6 +10,14 @@ export const UserContextProvider = ({ children }) => {
       ? JSON.parse(localStorage.getItem("account-user"))
       : null
   );
+  const [userInfo, setUserInfo] = useState({
+    _id: user?._id,
+    name: user?.name,
+    email: user?.email,
+    password: "",
+  });
+  const [isOpen, setIsOpen] = useState(false);
+
   const [token, setToken] = useState(
     sessionStorage.getItem("account-token")
       ? JSON.parse(sessionStorage.getItem("account-token"))
@@ -45,7 +53,31 @@ export const UserContextProvider = ({ children }) => {
   const updateSiginInfo = useCallback((info) => {
     setSiginInfo(info);
   }, []);
-
+  const updateUser = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${url}/users/update`, {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setUser(data.user);
+        setMessage({ status: "success", text: "更改成功", open: true });
+        localStorage.setItem("account-user", JSON.stringify(data.user));
+        setIsOpen(!isOpen);
+      } else {
+        setMessage({ status: "warning", text: data.error, open: true });
+      }
+    } catch (error) {
+      console.log(error);
+      setMessage({ status: "error", text: "伺服器錯誤", open: true });
+    }
+  };
   const getToken = useCallback(async () => {
     try {
       if (!user) return;
@@ -185,6 +217,11 @@ export const UserContextProvider = ({ children }) => {
         setUser,
         message,
         setMessage,
+        userInfo,
+        setUserInfo,
+        updateUser,
+        setIsOpen,
+        isOpen,
       }}
     >
       {children}

@@ -13,13 +13,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Snackbar, Alert } from "@mui/material";
 import { UserContext } from "./context/userContext";
 import { AccountContextProvider } from "./context/accountContext";
+import { ThemeContext } from "./context/themeContext";
 
 function App() {
   const { user, message, setMessage } = useContext(UserContext);
-
+  const { theme } = useContext(ThemeContext);
   return (
     <AccountContextProvider>
-      <div className="App">
+      <div className={`App ${theme?.mode === "dark" ? "dark" : ""}`}>
         <Navbar />
         <Splash />
         <Snackbar
