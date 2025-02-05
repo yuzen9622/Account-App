@@ -27,40 +27,6 @@ function Sett() {
     change: 0,
     account: "all",
   });
-  const { driverStep, setDriverStep } = useContext(UserContext);
-  useEffect(() => {
-    if (driverStep.find((item) => item === "sett")) return;
-    const driverObj = driver({
-      nextBtnText: "下一步",
-      prevBtnText: "上一步",
-      doneBtnText: "好好體驗吧!",
-      steps: [
-        {
-          element: ".total",
-          popover: {
-            title: "帳戶總計",
-            description: "顯示所有帳戶的總資產和總支出",
-          },
-        },
-        {
-          element: ".date",
-          popover: {
-            title: "日期篩選",
-            description: "可以篩選年、月、日，也可以自訂日期範圍",
-          },
-        },
-        {
-          element: ".account-table",
-          popover: {
-            title: "帳戶清單",
-            description: "將各個帳戶分類並顯示當前總額 一目瞭然",
-          },
-        },
-      ],
-    });
-    setDriverStep((prev) => [...prev, "sett"]);
-    driverObj.drive();
-  }, [driverStep, setDriverStep]);
   const fliterRecordByAccountId = (_id) => {
     setAccountRecord(null);
     setTotalInfo((prev) => ({

@@ -47,7 +47,6 @@ export const UserContextProvider = ({ children }) => {
     email: "",
   });
   useEffect(() => {
-    console.log(driverStep);
     localStorage.setItem("hasDriver", JSON.stringify(driverStep));
   }, [driverStep]);
   const [error, setError] = useState("");

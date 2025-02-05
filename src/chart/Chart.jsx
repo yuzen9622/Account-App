@@ -36,55 +36,6 @@ function Chart() {
   });
   const [dateRecord, setDateRecord] = useState(null);
 
-  const { driverStep, setDriverStep } = useContext(UserContext);
-  useEffect(() => {
-    if (driverStep.find((item) => item === "chart")) return;
-    const driverObj = driver({
-      nextBtnText: "下一步",
-      prevBtnText: "上一步",
-      doneBtnText: "好好體驗吧!",
-      steps: [
-        {
-          element: ".date",
-          popover: {
-            title: "日期篩選",
-            description: "可以篩選日期去顯示圖表",
-          },
-        },
-        {
-          element: ".select-type",
-          popover: {
-            title: "類別篩選",
-            description: "可以依帳戶、類別，支出以及收入去篩選",
-          },
-        },
-        {
-          element: ".select-type button:nth-child(3) svg",
-          popover: {
-            title: "排序",
-            description: "依照金額去排序",
-          },
-        },
-        {
-          element: ".select-type button:nth-child(4) svg",
-          popover: {
-            title: "可更改成長條圖",
-            description: "不同類型圖表更好察覺收支",
-          },
-        },
-        {
-          element: ".display-list",
-          popover: {
-            title: "分類結果",
-            description: "將各個分類顯示 點擊後可以顯示明確記錄 一目瞭然",
-          },
-        },
-      ],
-    });
-    setDriverStep((prev) => [...prev, "chart"]);
-    driverObj.drive();
-  }, [driverStep, setDriverStep]);
-
   const fliterRecordDate = (_id) => {
     const groupedByDate = records?.reduce((result, item) => {
       const { date, amount, source, accountId, categoryId } = item;

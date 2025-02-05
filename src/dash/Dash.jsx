@@ -137,23 +137,6 @@ function Dash() {
       }
     });
   }, [selectedDate, currentMonth]);
-  // const handleTodayClick = () => {
-  //   const calendarApi = calendarRef.current.getApi();
-  //   const today = moment().add(-1, "days").format("YYYY-MM-DD");
-
-  //   // 設定選定日期並跳到本月
-  //   setSelectedDate(today);
-
-  //   calendarApi.gotoDate(today); // 跳到當前日期的月份
-  //   setTimeout(() => {
-  //     const todayCell = document.querySelector(
-  //       `[data-date="${moment().format("YYYY-MM-DD")}"]`
-  //     );
-  //     if (todayCell) {
-  //       todayCell.scrollIntoView({ block: "center" });
-  //     }
-  //   }, 0);
-  // };
 
   return (
     <div className="dash">
@@ -169,6 +152,7 @@ function Dash() {
             setSelectedDate(e);
           }}
           onActiveStartDateChange={(e) => {
+            setSelectedDate(moment(e.activeStartDate).format("YYYY-MM-DD"));
             setCurrentMonth(moment(e.activeStartDate).format("YYYY-MM"));
           }}
           navigationAriaLive="off"
@@ -242,57 +226,6 @@ function Dash() {
             );
           }}
         />
-        {/* <FullCalendar
-          ref={calendarRef}
-          events={events}
-          plugins={[dayGridPlugin, interactionPlugin]}
-          locale={locale}
-          customButtons={{
-            customToday: {
-              text: "今天",
-              click: handleTodayClick,
-            },
-          }}
-          initialView="dayGridMonth"
-          aspectRatio={0.5}
-          select={(info) => {
-            const localDate = info.start.toISOString().split("T")[0]; // 確保格式為 YYYY-MM-DD
-            setSelectedDate(localDate);
-          }}
-          eventClick={(info) => {
-            const localDate = info.event.start.toISOString().split("T")[0];
-            setSelectedDate(localDate);
-          }}
-          eventTimeFormat={{
-            hour: "2-digit",
-          }}
-          eventDisplay="block"
-          longPressDelay={30}
-          initialDate={selectedDate}
-          dayCellClassNames={(arg) => {
-            // 動態添加樣式
-            return arg.date.toISOString().split("T")[0] === selectedDate
-              ? "custom-selected-day"
-              : "";
-          }}
-          datesSet={(info) => {
-            setCurrentMonth(info.view.calendar.getDate().getMonth() + 1);
-            setQueryParams({
-              startTime: info.startStr.split("+")[0],
-              endTime: info.endStr.split("+")[0],
-            });
-          }}
-          headerToolbar={{
-            left: "prev,customToday,next",
-            center: "title",
-            right: "",
-          }}
-          dayMaxEvents={2}
-          contentHeight={300}
-          height={"100%"}
-          selectable={true}
-          stickyHeaderDates={true}
-        /> */}
       </div>
       <DashRecord />
     </div>
