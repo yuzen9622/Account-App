@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import Navbar from "./nav/navbar";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Dash from "./dash/Dash";
@@ -18,11 +19,13 @@ import { ThemeContext } from "./context/themeContext";
 function App() {
   const { user, message, setMessage } = useContext(UserContext);
   const { theme } = useContext(ThemeContext);
+  const [splashEnd, setSplashEnd] = useState(false);
+  if (!splashEnd) return <Splash setEnd={setSplashEnd} />;
   return (
     <AccountContextProvider>
       <div className={`App ${theme?.mode === "dark" ? "dark" : ""}`}>
         <Navbar />
-        <Splash />
+
         <Snackbar
           open={message?.open}
           autoHideDuration={3000}
@@ -55,6 +58,7 @@ function App() {
             {message?.text}
           </Alert>
         </Snackbar>
+
         <Routes>
           <Route
             path={"/"}

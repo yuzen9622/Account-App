@@ -12,8 +12,7 @@ li {
     flex-direction: column;
     width: 200px;
     align-items: center;
-    background-color: var(--second-color);
-    ;
+    background-color: var(--background-color);
     height: 100%;
     color: var(--primary-color);
 }

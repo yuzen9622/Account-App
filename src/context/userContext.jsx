@@ -33,6 +33,11 @@ export const UserContextProvider = ({ children }) => {
     text: "",
     open: false,
   });
+  const [driverStep, setDriverStep] = useState(
+    localStorage.getItem("hasDriver")
+      ? JSON.parse(localStorage.getItem("hasDriver"))
+      : []
+  );
   const updateError = useCallback((error) => {
     setError(error);
   }, []);
@@ -41,7 +46,10 @@ export const UserContextProvider = ({ children }) => {
     password: "",
     email: "",
   });
-
+  useEffect(() => {
+    console.log(driverStep);
+    localStorage.setItem("hasDriver", JSON.stringify(driverStep));
+  }, [driverStep]);
   const [error, setError] = useState("");
   const navgate = useNavigate();
   const location = useLocation();
@@ -222,6 +230,8 @@ export const UserContextProvider = ({ children }) => {
         updateUser,
         setIsOpen,
         isOpen,
+        setDriverStep,
+        driverStep,
       }}
     >
       {children}

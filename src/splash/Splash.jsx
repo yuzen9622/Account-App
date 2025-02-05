@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./splash.css";
 import icon from "./記帳-icon.png";
-export default function Splash() {
+export default function Splash({ setEnd }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [loading, setLoading] = useState(
     sessionStorage.getItem("splash") ? false : true
@@ -11,10 +11,13 @@ export default function Splash() {
 
     setTimeout(() => {
       setLoading(false);
+
       sessionStorage.setItem("splash", JSON.stringify(true));
     }, 2500);
   }, [imageLoaded]);
-  console.log(loading);
+  useEffect(() => {
+    setEnd(!loading);
+  }, [loading, setEnd]);
   return (
     <>
       {loading && (

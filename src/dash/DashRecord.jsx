@@ -40,7 +40,7 @@ export default function DashRecord() {
   }, [income, expense]);
 
   return (
-    <div className="records">
+    <div className="records" id="records">
       <h1 style={{ color: "var(--text-color)", fontWeight: 600 }}>本月收支</h1>
       <div className="current-total">
         <p>收入:{income}</p>

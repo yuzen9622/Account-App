@@ -167,6 +167,7 @@ export default function AccountType() {
               type="number"
               id="number"
               inputMode="numeric"
+              placeholder={"初始餘額"}
               value={newAccount.amount}
               onChange={(e) =>
                 setNewAccount((prev) => ({ ...prev, amount: e.target.value }))
@@ -195,6 +196,9 @@ export default function AccountType() {
           <input
             type="number"
             id="number"
+            defaultValue={0}
+            placeholder="初始餘額"
+            value={newAccount.amount}
             onChange={(e) =>
               setNewAccount((prev) => ({ ...prev, amount: e.target.value }))
             }

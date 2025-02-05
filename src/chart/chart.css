@@ -16,6 +16,10 @@
     max-width: 500px;
 }
 
+tspan {
+    fill: var(--text-color) !important;
+}
+
 .chart-container {
     margin-top: 20px;
     display: flex;

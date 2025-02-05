@@ -113,6 +113,7 @@
     border: 1px solid var(--primary-color);
     border-radius: 5px;
     background-color: var(--second-color);
+
 }
 
 .update-Acc {
@@ -176,6 +177,7 @@
     border: none;
     border-bottom: 1px solid var(--primary-color);
     outline: none;
+    color: var(--text-color);
     background-color: transparent;
 
 }

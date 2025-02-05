@@ -78,7 +78,7 @@ input[type=number] {
     text-align: center;
     border: none;
     outline: none;
-    background-color: var(--second-color);
+    background-color: transparent;
     color: var(--primary-color);
     width: 50%;
     font-size: 16px;

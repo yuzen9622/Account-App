@@ -38,6 +38,11 @@
     overflow: hidden;
 }
 
+.react-calendar__navigation button:enabled:focus,
+.react-calendar__navigation button:enabled:hover {
+    background-color: var(--active-color);
+}
+
 .react-calendar button {
     font-weight: 600;
     border-radius: 5px;
