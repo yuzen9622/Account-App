@@ -8,8 +8,7 @@ import AccountRecord from "./accountRecord";
 import TotalHeader from "./TotalHeader";
 import DateRecord from "./dateRecord";
 import { Helmet } from "react-helmet-async";
-import { driver } from "driver.js";
-import { UserContext } from "../context/userContext";
+
 function Sett() {
   const { records, clearQuery, setQueryParams, getRecord, accounts } =
     useContext(AccountContext);

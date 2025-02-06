@@ -53,12 +53,10 @@
 }
 
 @keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
+    0% {}
 
     100% {
-        opacity: 0;
+
         visibility: hidden;
     }
 }

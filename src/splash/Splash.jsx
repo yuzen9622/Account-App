@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./splash.css";
 import icon from "./記帳-icon.png";
+import { ThemeContext } from "../context/themeContext";
 export default function Splash({ setEnd }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [loading, setLoading] = useState(
     sessionStorage.getItem("splash") ? false : true
   );
+  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     if (!imageLoaded) return;
 
@@ -13,7 +15,7 @@ export default function Splash({ setEnd }) {
       setLoading(false);
 
       sessionStorage.setItem("splash", JSON.stringify(true));
-    }, 2500);
+    }, 2000);
   }, [imageLoaded]);
   useEffect(() => {
     setEnd(!loading);
@@ -21,7 +23,11 @@ export default function Splash({ setEnd }) {
   return (
     <>
       {loading && (
-        <div className={`splash ${imageLoaded ? "fade-out" : ""}`}>
+        <div
+          className={`splash ${imageLoaded ? "fade-out" : ""} ${
+            theme?.mode === "dark" ? "dark" : ""
+          }`}
+        >
           <div className={`${imageLoaded ? "scale-out" : ""} splash-container`}>
             <img
               src={icon}

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AccountContext } from "../context/accountContext";
-
+import AnimatedNumber from "./AnimatedTag";
 export default function TotalHeader({ totalInfo }) {
   const { accounts } = useContext(AccountContext);
 
@@ -10,7 +10,7 @@ export default function TotalHeader({ totalInfo }) {
       {totalInfo.account === "all" ? (
         <div className="total">
           <div className="all-price">
-            <h1>${totalInfo.total}</h1>
+            <AnimatedNumber number={totalInfo.total} Tag="h1" />
             <p>淨資產</p>
           </div>
           <div className="ac">
@@ -27,7 +27,7 @@ export default function TotalHeader({ totalInfo }) {
       ) : (
         <div className="total">
           <div className="all-price">
-            <h1>${totalInfo.total}</h1>
+            <AnimatedNumber number={totalInfo.total} Tag="h1" />
             <p>餘額</p>
           </div>
           <div className="ac">
