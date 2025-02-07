@@ -25,7 +25,7 @@ function Add() {
     if (!updateRecord) return;
     let record = { ...updateRecord };
     record.date = new Date(record.date);
-    console.log(record);
+
     setRecordInfo(record);
   }, [updateRecord, setRecordInfo]);
 

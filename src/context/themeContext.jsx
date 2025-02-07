@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { UserContext } from "./userContext";
 import { url } from "../service";
 export const ThemeContext = createContext();
@@ -9,22 +15,21 @@ export const ThemeContextProvider = ({ children }) => {
     mode: user?.theme?.mode || "#FFA500",
     system: user?.theme?.sysyem || "customize",
   });
-
+  const handleThemeChange = useCallback((mediaQuery) => {
+    setTheme((prev) => ({
+      ...prev,
+      mode: mediaQuery.matches ? "dark" : "light",
+    }));
+  }, []);
   useEffect(() => {
     if (theme.system === "customize") return;
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleThemeChange = () => {
-      setTheme((prev) => ({
-        ...prev,
-        mode: mediaQuery.matches ? "dark" : "light",
-      }));
-    };
-    console.log(mediaQuery);
-    handleThemeChange();
-
-    mediaQuery.addEventListener("change", handleThemeChange);
-    return () => mediaQuery.removeEventListener("change", handleThemeChange);
-  }, [theme]);
+    mediaQuery.addEventListener("change", () => handleThemeChange(mediaQuery));
+    return () =>
+      mediaQuery.removeEventListener("change", () =>
+        handleThemeChange(mediaQuery)
+      );
+  }, [theme, handleThemeChange]);
 
   useEffect(() => {
     if (!user) return;
@@ -49,7 +54,7 @@ export const ThemeContextProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ setTheme, theme }}>
+    <ThemeContext.Provider value={{ setTheme, theme, handleThemeChange }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -104,6 +104,11 @@ export const UserContextProvider = ({ children }) => {
       } else {
         setUser(null);
         localStorage.removeItem("account-user");
+        setMessage({
+          status: "error",
+          text: "token錯誤，請重新登入",
+          open: true,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -124,6 +129,11 @@ export const UserContextProvider = ({ children }) => {
         setUser(null);
         localStorage.removeItem("account-user");
         sessionStorage.removeItem("account-token");
+        setMessage({
+          status: "error",
+          text: "登入逾時，請重新登入",
+          open: true,
+        });
       }
     } catch (error) {
       console.log(error);

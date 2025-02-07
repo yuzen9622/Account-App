@@ -194,12 +194,12 @@ export default function UserSetting() {
             checked={theme?.mode === "dark"}
           />
           <FormControlLabel
-            onChange={() =>
+            onChange={() => {
               setTheme((prev) => ({
                 ...prev,
                 system: theme?.system === "customize" ? "inherit" : "customize",
-              }))
-            }
+              }));
+            }}
             checked={theme?.system === "inherit"}
             control={
               <Checkbox
