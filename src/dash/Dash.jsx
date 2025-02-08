@@ -17,6 +17,7 @@ function Dash() {
     records,
     setCurrentMonth,
     currentMonth,
+    clearQuery,
   } = useContext(AccountContext);
   const { driverStep, setDriverStep } = useContext(UserContext);
   const [events, setEvents] = useState([]);
@@ -137,7 +138,9 @@ function Dash() {
       }
     });
   }, [selectedDate, currentMonth]);
-
+  useEffect(() => {
+    clearQuery();
+  }, [clearQuery]);
   return (
     <div className="dash">
       <Helmet>

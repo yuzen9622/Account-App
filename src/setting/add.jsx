@@ -32,7 +32,7 @@ function Add() {
     setRecordInfo((prev) => ({
       ...prev,
       categoryId: "",
-      toAccountId: null,
+      toAccountId: "",
     }));
   }, [recordInfo.source, setRecordInfo]);
 
@@ -96,9 +96,12 @@ function Add() {
         <Datetime
           value={recordInfo.date}
           onChange={(e) => {
-            if (e._d > new Date()) return;
-            console.log(moment());
-            setRecordInfo((prev) => ({ ...prev, date: e._d }));
+            if (e._i > new Date()) return;
+
+            setRecordInfo((prev) => ({
+              ...prev,
+              date: e.format("YYYY/MM/DD"),
+            }));
           }}
           inputProps={{ placeholder: "選擇日期", readOnly: true }}
           maxDate={moment()}

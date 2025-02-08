@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AccountContext } from "../context/accountContext";
-import AnimatedNumber from "./AnimatedTag";
+import AnimatedNumber from "../components/AnimatedTag";
 export default function AccountRecord({ record, onclick }) {
   const { accounts } = useContext(AccountContext);
   const account = accounts?.find((item) => item._id === record?._id);

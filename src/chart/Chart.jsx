@@ -11,22 +11,12 @@ import { Helmet } from "react-helmet-async";
 import "./chart.css";
 import "../account/sett.css";
 import { BarChart } from "@mui/x-charts";
+import DateSelect from "../components/DateSelect";
 
 function Chart() {
-  const {
-    records,
-    accounts,
-    categories,
-    clearQuery,
-    setQueryParams,
-    getRecord,
-  } = useContext(AccountContext);
+  const { records, accounts, categories } = useContext(AccountContext);
   const [chartData, setChartData] = useState(null);
-  const [year, setYear] = useState(moment().format("YYYY"));
-  const [month, setMonth] = useState(moment().format("MM"));
-  const [start, setStart] = useState(moment().format("YYYY-MM-DD"));
-  const [end, setEnd] = useState(moment().add(1, "days").format("YYYY-MM-DD"));
-  const [selectedType, setSelectedType] = useState("all");
+
   const [sort, setSort] = useState(true);
   const [chartType, setChartType] = useState("pie");
   const [type, setType] = useState({
@@ -132,34 +122,6 @@ function Chart() {
     fliterRecord();
   }, [records, accounts, type, categories, fliterRecord]);
 
-  useEffect(() => {
-    setDateRecord(null);
-    switch (selectedType) {
-      case "all":
-        clearQuery(); // 清空所有查詢條件，查詢全部
-        break;
-      case "year":
-        setQueryParams({ year });
-        break;
-      case "month":
-        setQueryParams({ year, month });
-        break;
-      case "dateFrom":
-        setQueryParams({ start: start, end: end });
-        break;
-      default:
-        break;
-    }
-  }, [
-    selectedType,
-    getRecord,
-    end,
-    start,
-    year,
-    month,
-    setQueryParams,
-    clearQuery,
-  ]);
   return (
     <div className="chart">
       <Helmet>
@@ -167,110 +129,7 @@ function Chart() {
       </Helmet>
       <h1>圖表分析</h1>
       <div className="chart-container">
-        <div className="date">
-          <ul>
-            <li>
-              <button
-                className={selectedType === "all" ? "active" : ""}
-                onClick={() => {
-                  setSelectedType("all");
-                }}
-              >
-                全部
-              </button>
-            </li>
-            <li>
-              <button
-                className={selectedType === "year" ? "active" : ""}
-                onClick={() => {
-                  setSelectedType("year");
-                }}
-              >
-                年
-              </button>
-            </li>
-            <li>
-              <button
-                className={selectedType === "month" ? "active" : ""}
-                onClick={() => {
-                  setSelectedType("month");
-                }}
-              >
-                月
-              </button>
-            </li>
-            <li>
-              <button
-                className={selectedType === "dateFrom" ? "active" : ""}
-                onClick={() => {
-                  setSelectedType("dateFrom");
-                }}
-              >
-                自訂
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div className="date-select">
-          {selectedType === "year" && (
-            <Datetime
-              value={year}
-              closeOnSelect
-              dateFormat="YYYY"
-              inputProps={{ placeholder: "YYYY", readOnly: true }}
-              timeFormat={false}
-              isValidDate={function (current) {
-                return current.isBefore(new Date());
-              }}
-              onChange={(e) => {
-                setYear(e.format("YYYY"));
-              }}
-            />
-          )}
-
-          {selectedType === "month" && (
-            <Datetime
-              closeOnSelect
-              timeFormat={false}
-              dateFormat="YYYY-MM"
-              value={`${year}-${month}`}
-              isValidDate={function (current) {
-                return current.isBefore(new Date());
-              }}
-              inputProps={{ placeholder: "YYYY-MM", readOnly: true }}
-              onChange={(e) => {
-                setYear(e.format("YYYY"));
-                setMonth(e.format("MM"));
-              }}
-            />
-          )}
-
-          {selectedType === "dateFrom" && (
-            <>
-              <Datetime
-                closeOnSelect
-                value={start}
-                timeFormat={false}
-                isValidDate={function (current) {
-                  return current.isBefore(new Date(start));
-                }}
-                onChange={(e) => setStart(e.format("YYYY-MM-DD"))}
-                inputProps={{ placeholder: "起始日期", readOnly: true }}
-              />
-              {"~"}
-              <Datetime
-                closeOnSelect
-                value={end}
-                timeFormat={false}
-                isValidDate={function (current) {
-                  return current.isAfter(new Date(start));
-                }}
-                onChange={(e) => setEnd(e.format("YYYY-MM-DD"))}
-                inputProps={{ placeholder: "結束日期", readOnly: true }}
-              />
-            </>
-          )}
-        </div>
+        <DateSelect />
         <div className="select-type">
           <select
             name=""

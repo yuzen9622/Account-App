@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import "./sett.css";
 import Datetime from "react-datetime";
 import { useState, useEffect } from "react";
@@ -8,18 +8,14 @@ import AccountRecord from "./accountRecord";
 import TotalHeader from "./TotalHeader";
 import DateRecord from "./dateRecord";
 import { Helmet } from "react-helmet-async";
+import DateSelect from "../components/DateSelect";
 
 function Sett() {
-  const { records, clearQuery, setQueryParams, getRecord, accounts } =
-    useContext(AccountContext);
+  const { records, accounts } = useContext(AccountContext);
 
   const [accountRecord, setAccountRecord] = useState(null);
   const [dateReocrd, setDateRecord] = useState(null);
-  const [selectedType, setSelectedType] = useState("all");
-  const [year, setYear] = useState(moment().format("YYYY"));
-  const [month, setMonth] = useState(moment().format("MM"));
-  const [start, setStart] = useState(moment().format("YYYY-MM-DD"));
-  const [end, setEnd] = useState(moment().add(1, "days").format("YYYY-MM-DD"));
+  const [RecordAccountId, setRecordAccountId] = useState(null);
   const [totalInfo, setTotalInfo] = useState({
     income: 0,
     expense: 0,
@@ -27,89 +23,99 @@ function Sett() {
     change: 0,
     account: "all",
   });
-  const fliterRecordByAccountId = (_id) => {
-    setAccountRecord(null);
-    setTotalInfo((prev) => ({
-      ...prev,
-      account: _id,
-      total: 0,
-      income: 0,
-      expense: 0,
-    }));
-    records?.forEach((item) => {
-      const { source, amount, accountId, toAccountId } = item;
-      if (source === "income" && accountId === _id) {
-        setTotalInfo((prev) => ({
-          ...prev,
-          income: prev.income + amount,
-          total: prev.total + amount,
-        }));
-      } else if (source === "expense" && accountId === _id) {
-        setTotalInfo((prev) => ({
-          ...prev,
-          expense: prev.expense + amount,
-          total: prev.total - amount,
-        }));
-      } else if (
-        source === "change" &&
-        (accountId === _id || toAccountId === _id)
-      ) {
-        if (accountId === _id) {
+  const fliterRecordByAccountId = useCallback(
+    (_id) => {
+      if (!records || !accounts || !_id) return;
+      setAccountRecord(null);
+      setTotalInfo((prev) => ({
+        ...prev,
+        account: _id,
+        total: 0,
+        income: 0,
+        expense: 0,
+      }));
+      records?.forEach((item) => {
+        const { source, amount, accountId, toAccountId } = item;
+        if (source === "income" && accountId === _id) {
           setTotalInfo((prev) => ({
             ...prev,
-            change: prev.change - amount,
-            total: prev.total - amount,
-          }));
-        } else {
-          setTotalInfo((prev) => ({
-            ...prev,
-            change: prev.change + amount,
+            income: prev.income + amount,
             total: prev.total + amount,
           }));
-        }
-      }
-    });
-
-    const groupedByDate = records?.reduce((result, item) => {
-      const { date, amount, source, accountId, toAccountId } = item;
-      if (accountId === _id || toAccountId === _id) {
-        if (
-          !result.find(
-            (record) => record.date === moment(date).format("YYYY-MM-DD")
-          )
+        } else if (source === "expense" && accountId === _id) {
+          setTotalInfo((prev) => ({
+            ...prev,
+            expense: prev.expense + amount,
+            total: prev.total - amount,
+          }));
+        } else if (
+          source === "change" &&
+          (accountId === _id || toAccountId === _id)
         ) {
-          result.push({
-            date: moment(date).format("YYYY-MM-DD"),
-            _id: _id,
-            records: [],
-            total: 0,
-          });
+          if (accountId === _id) {
+            setTotalInfo((prev) => ({
+              ...prev,
+              change: prev.change - amount,
+              total: prev.total - amount,
+            }));
+          } else {
+            setTotalInfo((prev) => ({
+              ...prev,
+              change: prev.change + amount,
+              total: prev.total + amount,
+            }));
+          }
         }
-        let record = result.find(
-          (record) => record.date === moment(date).format("YYYY-MM-DD")
-        );
-        record.records.push(item);
-        if (source === "income" || toAccountId === _id) {
-          record.total += amount;
-        } else {
-          record.total -= amount;
+      });
+
+      const groupedByDate = records?.reduce((result, item) => {
+        const { date, amount, source, accountId, toAccountId } = item;
+        if (accountId === _id || toAccountId === _id) {
+          if (
+            !result.find(
+              (record) => record.date === moment(date).format("YYYY-MM-DD")
+            )
+          ) {
+            result.push({
+              date: moment(date).format("YYYY-MM-DD"),
+              _id: _id,
+              records: [],
+              total: 0,
+            });
+          }
+          let record = result.find(
+            (record) => record.date === moment(date).format("YYYY-MM-DD")
+          );
+          record.records.push(item);
+          if (source === "income" || toAccountId === _id) {
+            record.total += amount;
+          } else {
+            record.total -= amount;
+          }
         }
-      }
 
-      return result;
-    }, []);
-    accounts?.forEach((account) => {
-      if (account._id === _id) {
-        setTotalInfo((prev) => ({
-          ...prev,
-          total: prev.total + parseFloat(account.initalAmount),
-        }));
-      }
-    });
-    groupedByDate.sort((a, b) => new Date(b.date) - new Date(a.date));
-    setDateRecord(groupedByDate);
-  };
-
+        return result;
+      }, []);
+      accounts?.forEach((account) => {
+        if (account._id === _id) {
+          setTotalInfo((prev) => ({
+            ...prev,
+            total: prev.total + parseFloat(account?.initalAmount),
+          }));
+        }
+      });
+      groupedByDate.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setDateRecord(groupedByDate);
+    },
+    [accounts, records]
+  );
+  useEffect(() => {
+    if (!RecordAccountId) {
+      setDateRecord(null);
+      return;
+    }
+    fliterRecordByAccountId(RecordAccountId);
+  }, [records, RecordAccountId, fliterRecordByAccountId]);
   useEffect(() => {
     if (!records) return;
 
@@ -185,35 +191,6 @@ function Sett() {
     setAccountRecord(groupedByAccount);
   }, [records, accounts, dateReocrd]);
 
-  useEffect(() => {
-    setDateRecord(null);
-    switch (selectedType) {
-      case "all":
-        clearQuery();
-        break;
-      case "year":
-        setQueryParams({ year });
-        break;
-      case "month":
-        setQueryParams({ year, month });
-        break;
-      case "dateFrom":
-        setQueryParams({ start: start, end: end });
-        break;
-      default:
-        break;
-    }
-  }, [
-    selectedType,
-    getRecord,
-    end,
-    start,
-    year,
-    month,
-    setQueryParams,
-    clearQuery,
-  ]);
-
   return (
     <div className="usersett">
       <Helmet>
@@ -227,56 +204,13 @@ function Sett() {
       <div className="user-sett">
         <TotalHeader totalInfo={totalInfo} />
 
-        <div className="date">
-          <ul>
-            <li>
-              <button
-                className={selectedType === "all" ? "active" : ""}
-                onClick={() => {
-                  setSelectedType("all");
-                }}
-              >
-                全部
-              </button>
-            </li>
-            <li>
-              <button
-                className={selectedType === "year" ? "active" : ""}
-                onClick={() => {
-                  setSelectedType("year");
-                }}
-              >
-                年
-              </button>
-            </li>
-            <li>
-              <button
-                className={selectedType === "month" ? "active" : ""}
-                onClick={() => {
-                  setSelectedType("month");
-                }}
-              >
-                月
-              </button>
-            </li>
-            <li>
-              <button
-                className={selectedType === "dateFrom" ? "active" : ""}
-                onClick={() => {
-                  setSelectedType("dateFrom");
-                }}
-              >
-                自訂
-              </button>
-            </li>
-          </ul>
-        </div>
+        <DateSelect />
 
         <div className="account-tip" id="account-tip">
           {!accountRecord && dateReocrd && (
             <button
               onClick={() => {
-                setDateRecord(null);
+                setRecordAccountId(null);
               }}
             >
               <i className="fa-solid fa-chevron-left"></i>
@@ -285,72 +219,12 @@ function Sett() {
 
           <p style={dateReocrd ? { marginRight: "30px" } : {}}>帳戶清單</p>
         </div>
-        <div className="date-select">
-          {selectedType === "year" && (
-            <Datetime
-              value={year}
-              closeOnSelect
-              dateFormat="YYYY"
-              inputProps={{ placeholder: "YYYY" }}
-              timeFormat={false}
-              isValidDate={function (current) {
-                return current.isBefore(new Date());
-              }}
-              onChange={(e) => {
-                setYear(e.format("YYYY"));
-              }}
-            />
-          )}
-
-          {selectedType === "month" && (
-            <Datetime
-              closeOnSelect
-              timeFormat={false}
-              dateFormat="YYYY-MM"
-              value={`${year}-${month}`}
-              isValidDate={function (current) {
-                return current.isBefore(new Date());
-              }}
-              inputProps={{ placeholder: "YYYY-MM" }}
-              onChange={(e) => {
-                setYear(e.format("YYYY"));
-                setMonth(e.format("MM"));
-              }}
-            />
-          )}
-
-          {selectedType === "dateFrom" && (
-            <>
-              <Datetime
-                closeOnSelect
-                value={start}
-                timeFormat={false}
-                isValidDate={function (current) {
-                  return current.isBefore();
-                }}
-                onChange={(e) => setStart(e.format("YYYY-MM-DD"))}
-                inputProps={{ placeholder: "起始日期" }}
-              />
-              {"~"}
-              <Datetime
-                closeOnSelect
-                value={end}
-                timeFormat={false}
-                isValidDate={function (current) {
-                  return current.isAfter(new Date(start));
-                }}
-                onChange={(e) => setEnd(e.format("YYYY-MM-DD"))}
-                inputProps={{ placeholder: "結束日期" }}
-              />
-            </>
-          )}
-        </div>
 
         <div className="account-table" id="account-table">
           {!dateReocrd &&
             accountRecord?.map((item, key) => (
               <AccountRecord
-                onclick={() => fliterRecordByAccountId(item._id)}
+                onclick={() => setRecordAccountId(item._id)}
                 key={key}
                 record={item}
               />

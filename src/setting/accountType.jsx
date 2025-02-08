@@ -196,7 +196,6 @@ export default function AccountType() {
           <input
             type="number"
             id="number"
-            defaultValue={0}
             placeholder="初始餘額"
             value={newAccount.amount}
             onChange={(e) =>
@@ -210,6 +209,7 @@ export default function AccountType() {
             onChange={(e) =>
               setNewAccount((prev) => ({ ...prev, type: e.target.value }))
             }
+            value={newAccount.type}
             placeholder={`新增帳戶`}
           />
           <div className="add-btn">
