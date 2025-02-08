@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Account-App/static/css/main.0cb5c0f3.css",
-    "main.js": "/Account-App/static/js/main.8d966c20.js",
+    "main.css": "/Account-App/static/css/main.d211e342.css",
+    "main.js": "/Account-App/static/js/main.5b0c004c.js",
     "static/media/記帳-icon.png": "/Account-App/static/media/記帳-icon.ef3e2011f98eaf0c146f.png",
     "index.html": "/Account-App/index.html",
-    "main.0cb5c0f3.css.map": "/Account-App/static/css/main.0cb5c0f3.css.map",
-    "main.8d966c20.js.map": "/Account-App/static/js/main.8d966c20.js.map"
+    "main.d211e342.css.map": "/Account-App/static/css/main.d211e342.css.map",
+    "main.5b0c004c.js.map": "/Account-App/static/js/main.5b0c004c.js.map"
   },
   "entrypoints": [
-    "static/css/main.0cb5c0f3.css",
-    "static/js/main.8d966c20.js"
+    "static/css/main.d211e342.css",
+    "static/js/main.5b0c004c.js"
   ]
 }
