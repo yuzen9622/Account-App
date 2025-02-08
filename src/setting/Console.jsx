@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import UserSetting from "./UserSetting";
 
 import { Helmet } from "react-helmet-async";
+import DataExport from "./DataExport";
 function Console() {
   return (
     <>
@@ -23,6 +24,7 @@ function Console() {
           <Route path="/category" element={<Finances />} />
           <Route path="/auth" element={<UserSetting />} />
           <Route path="/account" element={<AccountType />} />
+          <Route path="/export" element={<DataExport />} />
         </Routes>
       </div>
     </>

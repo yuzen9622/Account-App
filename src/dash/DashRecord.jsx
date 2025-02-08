@@ -59,7 +59,7 @@ export default function DashRecord() {
       </div>
       <div className="record-container">
         {currentRecords &&
-          currentRecords.map((item, key) => <Record key={key} record={item} />)}
+          currentRecords.map((item) => <Record key={item._id} record={item} />)}
         {!popOpen && selectedDate <= new Date() && (
           <button
             className="plus"

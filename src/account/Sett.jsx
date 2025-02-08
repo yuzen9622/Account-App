@@ -12,9 +12,10 @@ import { Helmet } from "react-helmet-async";
 function Sett() {
   const { records, clearQuery, setQueryParams, getRecord, accounts } =
     useContext(AccountContext);
-  const [selectedType, setSelectedType] = useState("all");
+
   const [accountRecord, setAccountRecord] = useState(null);
   const [dateReocrd, setDateRecord] = useState(null);
+  const [selectedType, setSelectedType] = useState("all");
   const [year, setYear] = useState(moment().format("YYYY"));
   const [month, setMonth] = useState(moment().format("MM"));
   const [start, setStart] = useState(moment().format("YYYY-MM-DD"));
@@ -325,7 +326,7 @@ function Sett() {
                 value={start}
                 timeFormat={false}
                 isValidDate={function (current) {
-                  return current.isBefore(new Date(start));
+                  return current.isBefore();
                 }}
                 onChange={(e) => setStart(e.format("YYYY-MM-DD"))}
                 inputProps={{ placeholder: "起始日期" }}
