@@ -28,6 +28,13 @@ function Add() {
 
     setRecordInfo(record);
   }, [updateRecord, setRecordInfo]);
+  useEffect(() => {
+    setRecordInfo((prev) => ({
+      ...prev,
+      categoryId: "",
+      toAccountId: null,
+    }));
+  }, [recordInfo.source, setRecordInfo]);
 
   useEffect(() => {
     if (!updateRecord) {

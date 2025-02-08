@@ -100,20 +100,19 @@ export const UserContextProvider = ({ children }) => {
           userInfo.token = data.refreshToken;
           localStorage.setItem("account-user", JSON.stringify(userInfo));
         }
-        navgate("/dash/");
       } else {
         setUser(null);
         localStorage.removeItem("account-user");
         setMessage({
           status: "error",
-          text: "token錯誤，請重新登入",
+          text: "token錯誤:請重新登入",
           open: true,
         });
       }
     } catch (error) {
       console.log(error);
     }
-  }, [user, navgate]);
+  }, [user]);
   const getRefreshToken = useCallback(async () => {
     try {
       if (!user) return;

@@ -15,7 +15,8 @@ export const ThemeContextProvider = ({ children }) => {
     mode: user?.theme?.mode || "#FFA500",
     system: user?.theme?.sysyem || "customize",
   });
-  const handleThemeChange = useCallback((mediaQuery) => {
+  const handleThemeChange = useCallback(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     setTheme((prev) => ({
       ...prev,
       mode: mediaQuery.matches ? "dark" : "light",

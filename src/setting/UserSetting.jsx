@@ -18,7 +18,7 @@ export default function UserSetting() {
     userInfo,
     setUserInfo,
   } = useContext(UserContext);
-  const { setTheme, theme } = useContext(ThemeContext);
+  const { setTheme, theme, handleThemeChange } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const [passwordOpen, setPasswordOpen] = useState(false);
@@ -194,7 +194,8 @@ export default function UserSetting() {
             checked={theme?.mode === "dark"}
           />
           <FormControlLabel
-            onChange={() => {
+            onChange={(e) => {
+              handleThemeChange();
               setTheme((prev) => ({
                 ...prev,
                 system: theme?.system === "customize" ? "inherit" : "customize",
