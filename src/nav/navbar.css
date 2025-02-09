@@ -15,7 +15,7 @@ li {
     background-color: var(--background-color);
     height: 100%;
     color: var(--primary-color);
-    border-top: 2px solid var(--second-color);
+
 }
 
 nav {
@@ -123,6 +123,7 @@ nav .active {
     .nav {
         width: 100%;
         height: auto;
+        border-top: 2px solid var(--second-color);
 
     }
 

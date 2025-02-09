@@ -10,16 +10,23 @@ export default function TotalHeader({ totalInfo }) {
       {totalInfo.account === "all" ? (
         <div className="total">
           <div className="all-price">
-            <AnimatedNumber number={totalInfo.total} Tag="h1" />
+            <h1>
+              $<AnimatedNumber number={totalInfo.total} />
+            </h1>
+
             <p>淨資產</p>
           </div>
           <div className="ac">
             <div className="box">
-              <h3 style={{ color: "rgb(56, 205, 9)" }}>{totalInfo.income}</h3>
+              <h3 style={{ color: "rgb(56, 205, 9)" }}>
+                <AnimatedNumber number={totalInfo.income} />
+              </h3>
               <p>總資產</p>
             </div>
             <div className="box">
-              <h3 style={{ color: "rgb(241, 38, 11)" }}>{totalInfo.expense}</h3>
+              <h3 style={{ color: "rgb(241, 38, 11)" }}>
+                <AnimatedNumber number={totalInfo.expense} />
+              </h3>
               <p>總支出</p>
             </div>
           </div>
@@ -27,23 +34,30 @@ export default function TotalHeader({ totalInfo }) {
       ) : (
         <div className="total">
           <div className="all-price">
-            <AnimatedNumber number={totalInfo.total} Tag="h1" />
+            <h1>
+              <AnimatedNumber number={totalInfo.total} />
+            </h1>
+
             <p>餘額</p>
           </div>
           <div className="ac">
             <div className="box">
               <h3 style={{ color: "rgb(56, 205, 9)" }}>
-                {account.initalAmount}
+                <AnimatedNumber number={account.initalAmount} />
               </h3>
               <p>初始餘額</p>
             </div>
             <div className="box">
-              <h3 style={{ color: "rgb(56, 205, 9)" }}>{totalInfo.income}</h3>
+              <h3 style={{ color: "rgb(56, 205, 9)" }}>
+                <AnimatedNumber number={totalInfo.income} />
+              </h3>
               <p>收入</p>
             </div>
 
             <div className="box">
-              <h3 style={{ color: "rgb(241, 38, 11)" }}>{totalInfo.expense}</h3>
+              <h3 style={{ color: "rgb(241, 38, 11)" }}>
+                <AnimatedNumber number={totalInfo.expense} />
+              </h3>
               <p>支出</p>
             </div>
             <div className="box">
@@ -54,7 +68,7 @@ export default function TotalHeader({ totalInfo }) {
                     : { color: "rgb(241, 38, 11)" }
                 }
               >
-                {totalInfo.change}
+                <AnimatedNumber number={totalInfo.change} />
               </h3>
               <p>轉帳</p>
             </div>

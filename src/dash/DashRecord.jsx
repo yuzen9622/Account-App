@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AccountContext } from "../context/accountContext";
-import Record from "./Record";
+import Record from "../components/Record";
 import "./Dash.css";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import moment from "moment";
+import AnimatedNumber from "../components/AnimatedTag";
 
 export default function DashRecord() {
   const {
@@ -43,8 +44,13 @@ export default function DashRecord() {
     <div className="records" id="records">
       <h1 style={{ color: "var(--text-color)", fontWeight: 600 }}>本月收支</h1>
       <div className="current-total">
-        <p>收入:{income}</p>
-        <p>支出:{expense}</p>
+        <p>
+          收入:
+          <AnimatedNumber number={income} />
+        </p>
+        <p>
+          支出: <AnimatedNumber number={expense} />
+        </p>
         <p
           style={
             total > 0
@@ -54,7 +60,8 @@ export default function DashRecord() {
               : {}
           }
         >
-          總計:{total}
+          總計:
+          <AnimatedNumber number={total} />
         </p>
       </div>
       <div className="record-container">

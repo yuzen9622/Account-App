@@ -1,6 +1,7 @@
 import React from "react";
-import Record from "../dash/Record";
+import Record from "./Record";
 import moment from "moment";
+import FormatNumber from "./FormatNumber";
 moment.locale("zh-tw");
 export default function DateRecord({ record }) {
   const getWeek = (date) => {
@@ -31,7 +32,10 @@ export default function DateRecord({ record }) {
           {record.date}
           {getWeek(record.date)}
         </p>
-        <p>合計:${record.total}</p>
+        <p>
+          合計:$
+          <FormatNumber number={record.total} />
+        </p>
       </div>
 
       <div className="record-container">

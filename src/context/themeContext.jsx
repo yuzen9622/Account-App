@@ -6,7 +6,6 @@ import {
   useState,
 } from "react";
 import { UserContext } from "./userContext";
-import { url } from "../service";
 export const ThemeContext = createContext();
 export const ThemeContextProvider = ({ children }) => {
   const { user } = useContext(UserContext);
@@ -42,17 +41,17 @@ export const ThemeContextProvider = ({ children }) => {
 
     localStorage.setItem("account-user", JSON.stringify(user));
   }, [theme, user]);
-  const updateTheme = async () => {
-    try {
-      const res = await fetch(`${url}/users/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(theme),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const updateTheme = async () => {
+  //   try {
+  //     const res = await fetch(`${url}/users/register`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(theme),
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <ThemeContext.Provider value={{ setTheme, theme, handleThemeChange }}>

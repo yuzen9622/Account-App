@@ -6,6 +6,7 @@ import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import "moment/locale/zh-tw";
 import { UserContext } from "../context/userContext";
+import FormatNumber from "./FormatNumber";
 moment.locale("zh-tw");
 export default function Record({ record, edit = true, _id }) {
   const { accounts, categories, setRecords, setUpdateRecord, setPopOpen } =
@@ -84,7 +85,7 @@ export default function Record({ record, edit = true, _id }) {
               >
                 {record.source === "expense" && "-"}
 
-                {record.amount}
+                <FormatNumber number={record.amount} />
               </p>
               <p className="description">
                 {record.toAccountId && record.toAccountId === _id && "轉入"}

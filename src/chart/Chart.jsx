@@ -1,8 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { AccountContext } from "../context/accountContext";
-import Datetime from "react-datetime";
-import DateRecord from "../account/dateRecord";
+import DateRecord from "../components/dateRecord";
 import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 import PieChartRoundedIcon from "@mui/icons-material/PieChartRounded";
 import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
@@ -12,6 +11,8 @@ import "./chart.css";
 import "../account/sett.css";
 import { BarChart } from "@mui/x-charts";
 import DateSelect from "../components/DateSelect";
+import AnimatedNumber from "../components/AnimatedTag";
+import FormatNumber from "../components/FormatNumber";
 
 function Chart() {
   const { records, accounts, categories } = useContext(AccountContext);
@@ -244,9 +245,11 @@ function Chart() {
         <div className="display-list">
           <h3>
             合計:
-            {chartData?.reduce((a, b) => {
-              return a + b.total;
-            }, 0)}
+            <AnimatedNumber
+              number={chartData?.reduce((a, b) => {
+                return a + b.total;
+              }, 0)}
+            />
           </h3>
           <table>
             <thead>
@@ -263,7 +266,9 @@ function Chart() {
                   <tr key={key} onClick={() => fliterRecordDate(item.id)}>
                     <td>{key + 1}</td>
                     <td>{item.label}</td>
-                    <td>{item.total}</td>
+                    <td>
+                      <FormatNumber number={item.total} />
+                    </td>
                     <td>{item.value}%</td>
                   </tr>
                 ))}

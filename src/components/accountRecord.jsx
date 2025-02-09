@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AccountContext } from "../context/accountContext";
-import AnimatedNumber from "../components/AnimatedTag";
+import AnimatedNumber from "./AnimatedTag";
 export default function AccountRecord({ record, onclick }) {
   const { accounts } = useContext(AccountContext);
   const account = accounts?.find((item) => item._id === record?._id);
@@ -11,7 +11,7 @@ export default function AccountRecord({ record, onclick }) {
           <p>{account?.accountsType}</p>
         </div>
         <div className="amount-display">
-          <AnimatedNumber number={record.amount} Tag="p"></AnimatedNumber>
+          <AnimatedNumber number={record.amount} />
           <i className="fa-solid fa-chevron-right"></i>
         </div>
       </div>

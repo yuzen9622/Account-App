@@ -1,12 +1,11 @@
 import React, { useCallback, useContext } from "react";
 import "./sett.css";
-import Datetime from "react-datetime";
 import { useState, useEffect } from "react";
 import moment from "moment";
 import { AccountContext } from "../context/accountContext";
-import AccountRecord from "./accountRecord";
+import AccountRecord from "../components/accountRecord";
 import TotalHeader from "./TotalHeader";
-import DateRecord from "./dateRecord";
+import DateRecord from "../components/dateRecord";
 import { Helmet } from "react-helmet-async";
 import DateSelect from "../components/DateSelect";
 
@@ -27,43 +26,33 @@ function Sett() {
     (_id) => {
       if (!records || !accounts || !_id) return;
       setAccountRecord(null);
-      setTotalInfo((prev) => ({
-        ...prev,
-        account: _id,
-        total: 0,
+
+      const total = {
         income: 0,
         expense: 0,
-      }));
+        total: 0,
+        change: 0,
+        account: _id,
+      };
+
       records?.forEach((item) => {
         const { source, amount, accountId, toAccountId } = item;
         if (source === "income" && accountId === _id) {
-          setTotalInfo((prev) => ({
-            ...prev,
-            income: prev.income + amount,
-            total: prev.total + amount,
-          }));
+          total.income += amount;
+          total.total += amount;
         } else if (source === "expense" && accountId === _id) {
-          setTotalInfo((prev) => ({
-            ...prev,
-            expense: prev.expense + amount,
-            total: prev.total - amount,
-          }));
+          total.expense += amount;
+          total.total -= amount;
         } else if (
           source === "change" &&
           (accountId === _id || toAccountId === _id)
         ) {
           if (accountId === _id) {
-            setTotalInfo((prev) => ({
-              ...prev,
-              change: prev.change - amount,
-              total: prev.total - amount,
-            }));
+            total.change -= amount;
+            total.total -= amount;
           } else {
-            setTotalInfo((prev) => ({
-              ...prev,
-              change: prev.change + amount,
-              total: prev.total + amount,
-            }));
+            total.change += amount;
+            total.total += amount;
           }
         }
       });
@@ -98,12 +87,10 @@ function Sett() {
       }, []);
       accounts?.forEach((account) => {
         if (account._id === _id) {
-          setTotalInfo((prev) => ({
-            ...prev,
-            total: prev.total + parseFloat(account?.initalAmount),
-          }));
+          total.total += account?.initalAmount;
         }
       });
+      setTotalInfo(total);
       groupedByDate.sort((a, b) => new Date(b.date) - new Date(a.date));
       setDateRecord(groupedByDate);
     },
