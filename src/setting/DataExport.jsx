@@ -48,6 +48,7 @@ export default function DataExport() {
 
       return result;
     }, []);
+    formatRecord.sort((a, b) => new Date(b.日期) - new Date(a.日期));
     setExcelData(formatRecord);
   }, [records, accounts, categories]);
   useEffect(() => {

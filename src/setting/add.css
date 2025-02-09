@@ -41,11 +41,14 @@ input[type=number] {
 }
 
 .popbox-btn {
+    box-sizing: border-box;
+    height: 100%;
     border-radius: 5px;
     background-color: var(--second-color);
 }
 
 .popbox-btn button {
+    height: 100%;
     border: none;
     color: var(--primary-color);
     background-color: transparent;

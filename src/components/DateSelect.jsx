@@ -88,7 +88,7 @@ export default function DateSelect() {
             value={year}
             closeOnSelect
             dateFormat="YYYY"
-            inputProps={{ placeholder: "YYYY" }}
+            inputProps={{ placeholder: "YYYY", readOnly: true }}
             timeFormat={false}
             isValidDate={function (current) {
               return current.isBefore(new Date());
@@ -108,7 +108,7 @@ export default function DateSelect() {
             isValidDate={function (current) {
               return current.isBefore(new Date());
             }}
-            inputProps={{ placeholder: "YYYY-MM" }}
+            inputProps={{ placeholder: "YYYY-MM", readOnly: true }}
             onChange={(e) => {
               setYear(e.format("YYYY"));
               setMonth(e.format("MM"));
@@ -126,7 +126,7 @@ export default function DateSelect() {
                 return current.isBefore();
               }}
               onChange={(e) => setStart(e.format("YYYY/MM/DD"))}
-              inputProps={{ placeholder: "起始日期" }}
+              inputProps={{ placeholder: "起始日期", readOnly: true }}
             />
             {"~"}
             <Datetime
@@ -137,7 +137,7 @@ export default function DateSelect() {
                 return current.isAfter(new Date(start));
               }}
               onChange={(e) => setEnd(e.format("YYYY/MM/DD"))}
-              inputProps={{ placeholder: "結束日期" }}
+              inputProps={{ placeholder: "結束日期", readOnly: true }}
             />
           </>
         )}
