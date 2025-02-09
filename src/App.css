@@ -1,10 +1,13 @@
 :root {
   --primary-color: #FFA500;
-  --second-color: #f6f6f6f2;
+  --second-color: #F6F6F6F2;
   --text-color: #4A4A4A;
-  --background-color: #fff;
+  --background-color: #FFFFFF;
   --second-text-color: #808080;
-  --active-color: #d8d8d8;
+  --active-color: #D8D8D8;
+  --income-color: #38CD09;
+  --expense-color: #F1260B;
+  --change-color: #1976D2;
 }
 
 .dark {

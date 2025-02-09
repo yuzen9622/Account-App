@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./change.css";
-import "./add.css";
 import { url } from "../service";
 import { AccountContext } from "../context/accountContext";
 import { UserContext } from "../context/userContext";

@@ -1,11 +1,13 @@
 # Changelog
 
 ## [1.3.6] - 2025-02-09
+### ✨ 新增
+- components 新增FormatNumber、AccountRecord、Record、TotalHeader、DateRecord、Add
 ### 🛠️ 修正
 - 匯出檔案依日期排序
 ### 🔄 變更
 - Animation number 的動畫更改成number-flow
-
+- NavSett 的button樣式
 ## [1.3.5] - 2025-02-08
 ### 🛠️ 修正
 - 將重複組件封裝成component->AnimatedTag、DateSelect

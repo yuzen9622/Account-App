@@ -54,9 +54,9 @@ export default function DashRecord() {
         <p
           style={
             total > 0
-              ? { color: "#388E3C" }
+              ? { color: "var(--income-color)" }
               : total < 0
-              ? { color: "#D32F2F" }
+              ? { color: "var(--expense-color)" }
               : {}
           }
         >

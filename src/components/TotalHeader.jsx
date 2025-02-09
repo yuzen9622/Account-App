@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AccountContext } from "../context/accountContext";
-import AnimatedNumber from "../components/AnimatedTag";
+import AnimatedNumber from "./AnimatedTag";
 export default function TotalHeader({ totalInfo }) {
   const { accounts } = useContext(AccountContext);
 
@@ -18,13 +18,13 @@ export default function TotalHeader({ totalInfo }) {
           </div>
           <div className="ac">
             <div className="box">
-              <h3 style={{ color: "rgb(56, 205, 9)" }}>
+              <h3 style={{ color: "var(--income-color)" }}>
                 <AnimatedNumber number={totalInfo.income} />
               </h3>
               <p>總資產</p>
             </div>
             <div className="box">
-              <h3 style={{ color: "rgb(241, 38, 11)" }}>
+              <h3 style={{ color: "var(--expense-color)" }}>
                 <AnimatedNumber number={totalInfo.expense} />
               </h3>
               <p>總支出</p>
@@ -42,20 +42,20 @@ export default function TotalHeader({ totalInfo }) {
           </div>
           <div className="ac">
             <div className="box">
-              <h3 style={{ color: "rgb(56, 205, 9)" }}>
+              <h3 style={{ color: "var(--income-color)" }}>
                 <AnimatedNumber number={account.initalAmount} />
               </h3>
               <p>初始餘額</p>
             </div>
             <div className="box">
-              <h3 style={{ color: "rgb(56, 205, 9)" }}>
+              <h3 style={{ color: "var(--income-color)" }}>
                 <AnimatedNumber number={totalInfo.income} />
               </h3>
               <p>收入</p>
             </div>
 
             <div className="box">
-              <h3 style={{ color: "rgb(241, 38, 11)" }}>
+              <h3 style={{ color: "var(--expense-color)" }}>
                 <AnimatedNumber number={totalInfo.expense} />
               </h3>
               <p>支出</p>
@@ -64,8 +64,8 @@ export default function TotalHeader({ totalInfo }) {
               <h3
                 style={
                   totalInfo.change >= 0
-                    ? { color: "rgb(56, 205, 9)" }
-                    : { color: "rgb(241, 38, 11)" }
+                    ? { color: "var(--income-color)" }
+                    : { color: "var(--expense-color)" }
                 }
               >
                 <AnimatedNumber number={totalInfo.change} />

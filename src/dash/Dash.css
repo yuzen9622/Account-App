@@ -247,11 +247,11 @@
 }
 
 .current-total p:nth-child(1) {
-    color: #388E3C;
+    color: var(--income-color);
 }
 
 .current-total p:nth-child(2) {
-    color: #D32F2F;
+    color: var(--expense-color);
 }
 
 .plus {

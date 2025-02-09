@@ -1,8 +1,8 @@
 import React from "react";
 import "./console.css";
-import Finances from "./categoryType";
-import Navsett from "./navsett";
-import AccountType from "./accountType";
+import Finances from "./CategoryType";
+import Navsett from "./NavSett";
+import AccountType from "./AccountType";
 import { Route, Routes } from "react-router-dom";
 import UserSetting from "./UserSetting";
 

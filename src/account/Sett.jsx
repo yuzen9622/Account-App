@@ -3,9 +3,9 @@ import "./sett.css";
 import { useState, useEffect } from "react";
 import moment from "moment";
 import { AccountContext } from "../context/accountContext";
-import AccountRecord from "../components/accountRecord";
-import TotalHeader from "./TotalHeader";
-import DateRecord from "../components/dateRecord";
+import AccountRecord from "../components/AccountRecord";
+import TotalHeader from "../components/TotalHeader";
+import DateRecord from "../components/DateRecord";
 import { Helmet } from "react-helmet-async";
 import DateSelect from "../components/DateSelect";
 

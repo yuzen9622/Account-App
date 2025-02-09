@@ -7,7 +7,7 @@ import { useContext } from "react";
 import Account from "./account/Account";
 import Chart from "./chart/Chart";
 import Console from "./setting/Console";
-import Add from "./setting/add";
+import Add from "./components/Add";
 import Splash from "./splash/Splash";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";

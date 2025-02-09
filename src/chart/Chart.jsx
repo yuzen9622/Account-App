@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { AccountContext } from "../context/accountContext";
-import DateRecord from "../components/dateRecord";
+import DateRecord from "../components/DateRecord";
 import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 import PieChartRoundedIcon from "@mui/icons-material/PieChartRounded";
 import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";

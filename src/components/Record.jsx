@@ -60,7 +60,7 @@ export default function Record({ record, edit = true, _id }) {
               {record.toAccountId && (
                 <p>
                   {record.toAccountId && record.toAccountId !== _id && "轉入"}
-                  {record.toAccountId && record.toAccountId === _id && "轉出"}
+                  {record.toAccountId && record.toAccountId === _id && "轉出至"}
                   {record.toAccountId &&
                     record.toAccountId !== _id &&
                     toAccount?.accountsType}
@@ -77,10 +77,10 @@ export default function Record({ record, edit = true, _id }) {
               <p
                 style={
                   record.source === "income"
-                    ? { backgroundColor: "#388E3C", color: "#fff" }
+                    ? { backgroundColor: "var(--income-color)", color: "#fff" }
                     : record.source === "expense"
-                    ? { color: "#D32F2F" }
-                    : { backgroundColor: "#1976D2", color: "#fff" }
+                    ? { color: "var(--expense-color)" }
+                    : { backgroundColor: "var(--change-color)", color: "#fff" }
                 }
               >
                 {record.source === "expense" && "-"}
