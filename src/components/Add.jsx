@@ -15,19 +15,20 @@ function Add() {
     selectedDate,
     recordInfo,
     setRecordInfo,
+    updateRecordInfo,
     updateRecord,
     renderRecord,
-    setUpdateRecord,
+    setUpdateRecordInfo,
   } = useContext(AccountContext);
   const [sourceCategories, setSourceCategories] = useState(null);
 
   useEffect(() => {
-    if (!updateRecord) return;
-    let record = { ...updateRecord };
+    if (!updateRecordInfo) return;
+    let record = { ...updateRecordInfo };
     record.date = new Date(record.date);
 
     setRecordInfo(record);
-  }, [updateRecord, setRecordInfo]);
+  }, [updateRecordInfo, setRecordInfo]);
   useEffect(() => {
     setRecordInfo((prev) => ({
       ...prev,
@@ -37,7 +38,7 @@ function Add() {
   }, [recordInfo.source, setRecordInfo]);
 
   useEffect(() => {
-    if (!updateRecord) {
+    if (!updateRecordInfo) {
       setRecordInfo((prev) => ({
         ...prev,
         categoryId: "",
@@ -49,9 +50,9 @@ function Add() {
       (item) => item.source === recordInfo.source
     );
     setSourceCategories(fliterCateogries);
-  }, [recordInfo.source, setRecordInfo, categories, updateRecord]);
+  }, [recordInfo.source, setRecordInfo, categories, updateRecordInfo]);
   useEffect(() => {
-    if (updateRecord) return;
+    if (updateRecordInfo) return;
     // let isoDate = new Date(selectedDate);
     // isoDate.setDate(isoDate.getDate() + 1);
     if (selectedDate > new Date()) {
@@ -59,7 +60,7 @@ function Add() {
     } else {
       setRecordInfo((prev) => ({ ...prev, date: selectedDate }));
     }
-  }, [selectedDate, setRecordInfo, popOpen, updateRecord]);
+  }, [selectedDate, setRecordInfo, popOpen, updateRecordInfo]);
 
   return (
     <div
@@ -233,12 +234,22 @@ function Add() {
           onClick={() => {
             setPopOpen(false);
             setRecordInfo(renderRecord);
-            setUpdateRecord(null);
+            setUpdateRecordInfo(null);
           }}
         >
           取消
         </button>
-        <button onClick={() => addNewRecord()}>確認</button>
+        <button
+          onClick={() => {
+            if (!updateRecordInfo) {
+              addNewRecord();
+            } else {
+              updateRecord();
+            }
+          }}
+        >
+          確認
+        </button>
       </div>
     </div>
   );

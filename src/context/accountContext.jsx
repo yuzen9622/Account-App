@@ -34,7 +34,7 @@ export const AccountContextProvider = ({ children }) => {
   const [popOpen, setPopOpen] = useState(null);
   const [queryParams, setQueryParams] = useState({});
   const [currentMonth, setCurrentMonth] = useState(moment().format("YYYY-MM"));
-  const [updateRecord, setUpdateRecord] = useState(null);
+  const [updateRecordInfo, setUpdateRecordInfo] = useState(null);
   const [recordInfo, setRecordInfo] = useState(renderRecord);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -164,7 +164,7 @@ export const AccountContextProvider = ({ children }) => {
       if (data.ok) {
         getRecords();
         setRecordInfo(renderRecord);
-        setUpdateRecord(null);
+        setUpdateRecordInfo(null);
         getAccounts();
         setPopOpen(false);
         setMessage({
@@ -194,6 +194,59 @@ export const AccountContextProvider = ({ children }) => {
     getAccounts,
     renderRecord,
     setMessage,
+  ]);
+
+  const updateRecord = useCallback(async () => {
+    try {
+      if (!user || !token) {
+        return;
+      }
+      const res = await fetch(`${url}/records/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(recordInfo),
+      });
+      const data = await res.json();
+      if (data.newToken) {
+        setToken(data.newToken);
+        sessionStorage.setItem("account-token", JSON.stringify(data.newToken));
+      }
+      if (data.ok) {
+        getRecords();
+        setRecordInfo(renderRecord);
+        setUpdateRecordInfo(null);
+        getAccounts();
+        setPopOpen(false);
+        setMessage({
+          status: "success",
+          text: data.message,
+          open: true,
+        });
+      } else {
+        if (data.error === "jwt expired") {
+          sessionStorage.removeItem("account-token");
+        }
+        setMessage({
+          status: "warning",
+          text: data.error,
+          open: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [
+    getAccounts,
+    getRecords,
+    recordInfo,
+    renderRecord,
+    setMessage,
+    setToken,
+    token,
+    user,
   ]);
 
   useEffect(() => {
@@ -228,8 +281,8 @@ export const AccountContextProvider = ({ children }) => {
         addNewRecord,
         setCurrentMonth,
         currentMonth,
-        setUpdateRecord,
-        updateRecord,
+        setUpdateRecordInfo,
+        updateRecordInfo,
         recordInfo,
         setRecordInfo,
         renderRecord,
@@ -237,7 +290,7 @@ export const AccountContextProvider = ({ children }) => {
         setQueryParams,
         setCategories,
         clearQuery,
-
+        updateRecord,
         setAccounts,
       }}
     >

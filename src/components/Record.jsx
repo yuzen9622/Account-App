@@ -9,7 +9,7 @@ import { UserContext } from "../context/userContext";
 import FormatNumber from "./FormatNumber";
 moment.locale("zh-tw");
 export default function Record({ record, edit = true, _id }) {
-  const { accounts, categories, setRecords, setUpdateRecord, setPopOpen } =
+  const { accounts, categories, setRecords, setUpdateRecordInfo, setPopOpen } =
     useContext(AccountContext);
   const { token, setMessage } = useContext(UserContext);
   const account = accounts?.find((item) => item._id === record.accountId);
@@ -97,7 +97,7 @@ export default function Record({ record, edit = true, _id }) {
               <div className="record-setting">
                 <button
                   onClick={() => {
-                    setUpdateRecord(record);
+                    setUpdateRecordInfo(record);
                     setPopOpen(true);
                   }}
                 >
