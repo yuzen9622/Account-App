@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { AccountContext } from "../context/accountContext";
 import { UserContext } from "../context/userContext";
 import { url } from "../service";
+import AddCardIcon from "@mui/icons-material/AddCard";
+import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 export default function AccountType() {
   const { token, user, setMessage } = useContext(UserContext);
   const [newAccount, setNewAccount] = useState({
@@ -124,7 +127,7 @@ export default function AccountType() {
         </button>
         <h3>帳戶</h3>
         <button onClick={open}>
-          <i className="fa-solid fa-plus"></i>
+          <AddCardIcon />
         </button>
       </div>
 
@@ -138,14 +141,14 @@ export default function AccountType() {
                   <p>初始:${datas.initalAmount}</p>
                   <div className="btn">
                     <button onClick={() => edit(datas)}>
-                      <i className="fa-solid fa-pen-nib"></i>
+                      <BorderColorRoundedIcon style={{ fontSize: "20px" }} />
                     </button>
                     <button
                       onClick={() => {
                         del(datas._id);
                       }}
                     >
-                      <i className="fa-solid fa-trash"></i>
+                      <DeleteForeverRoundedIcon style={{ fontSize: "20px" }} />
                     </button>
                   </div>
                 </div>
@@ -154,7 +157,7 @@ export default function AccountType() {
             <div className="care-type">
               <h3>新增</h3>
               <button onClick={open}>
-                <i className="fa-solid fa-plus"></i>
+                <AddCardIcon />
               </button>
             </div>
           </div>

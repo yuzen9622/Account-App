@@ -44,10 +44,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--primary-color);
-    color: var(--second-color);
+    background-color: var(--second-color);
+    color: var(--primary-color);
     font-size: 1em;
     padding: 5px;
+    border: 2px solid var(--primary-color);
 }
 
 .care-type .btn {
@@ -60,16 +61,20 @@
     width: 100%;
     border: none;
     margin: 5px;
-    padding: 5px 0;
+    font-size: 16px;
     background-color: transparent;
-    color: var(--second-color);
-    border: 1px solid var(--second-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 3px 0;
+    justify-content: center;
 }
 
 .care-type button:hover {
-    background-color: var(--second-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--background-color);
 }
 
 .top button {

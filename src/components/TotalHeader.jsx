@@ -35,7 +35,7 @@ export default function TotalHeader({ totalInfo }) {
         <div className="total">
           <div className="all-price">
             <h1>
-              <AnimatedNumber number={totalInfo.total} />
+              $<AnimatedNumber number={totalInfo.total} />
             </h1>
 
             <p>餘額</p>

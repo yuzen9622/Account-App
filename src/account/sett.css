@@ -131,7 +131,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    box-sizing: border-box;
     transition: all 0.5s;
     animation: appear 0.8s;
 }
@@ -157,15 +157,17 @@
     border: none;
     color: var(--primary-color);
     border-bottom: 1px solid var(--second-text-color);
+    overflow: hidden;
 }
 
 .account-table {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
-    overflow: auto;
+    height: auto;
+    overflow: hidden;
 }
 
 .data {

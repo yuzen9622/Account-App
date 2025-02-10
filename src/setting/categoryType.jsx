@@ -4,6 +4,8 @@ import "./change.css";
 import { url } from "../service";
 import { AccountContext } from "../context/accountContext";
 import { UserContext } from "../context/userContext";
+import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 function Finances() {
   const { categories, setCategories } = useContext(AccountContext);
   const { token, user, setMessage } = useContext(UserContext);
@@ -162,14 +164,14 @@ function Finances() {
                   <h3>{datas.categoriesType}</h3>
                   <div className="btn">
                     <button onClick={() => edit(datas)}>
-                      <i className="fa-solid fa-pen-nib"></i>
+                      <BorderColorRoundedIcon style={{ fontSize: "20px" }} />
                     </button>
                     <button
                       onClick={() => {
                         del(datas._id);
                       }}
                     >
-                      <i className="fa-solid fa-trash"></i>
+                      <DeleteForeverRoundedIcon style={{ fontSize: "20px" }} />
                     </button>
                   </div>
                 </div>
