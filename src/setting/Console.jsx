@@ -5,7 +5,6 @@ import Navsett from "./NavSett";
 import AccountType from "./AccountType";
 import { Route, Routes } from "react-router-dom";
 import UserSetting from "./UserSetting";
-
 import { Helmet } from "react-helmet-async";
 import DataExport from "./DataExport";
 function Console() {

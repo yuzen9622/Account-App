@@ -2,15 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./change.css";
 import { url } from "../service";
+import { CategroyPopbox } from "../components/TypeEdit";
 import { AccountContext } from "../context/accountContext";
 import { UserContext } from "../context/userContext";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 function Finances() {
   const { categories, setCategories } = useContext(AccountContext);
-  const { token, user, setMessage } = useContext(UserContext);
+  const { token, setMessage } = useContext(UserContext);
   const [source, setSource] = useState("expense");
-  const [category, setCategory] = useState(null);
   const [newCategory, setNewCategory] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [type, setType] = useState(null);
@@ -23,29 +23,6 @@ function Finances() {
 
     setType(filtercategories);
   }, [categories, source]);
-  async function add() {
-    try {
-      const res = await fetch(`${url}/categories/add`, {
-        method: "post",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: user._id, type: category, source }),
-      });
-      const data = await res.json();
-      if (data.ok) {
-        setCategories((prev) => [...prev, data.category]);
-        setMessage({ status: "success", text: "新增成功", open: true });
-        close();
-      } else {
-        setMessage({ status: "success", text: data.error, open: true });
-      }
-    } catch (error) {
-      console.log(error);
-      setMessage({ status: "error", text: "伺服器錯誤", open: true });
-    }
-  }
 
   const del = async (_id) => {
     try {
@@ -74,50 +51,13 @@ function Finances() {
   };
 
   const edit = async (data) => {
-    setNewCategory({
-      _id: data._id,
-      type: data.categoriesType,
-      source: data.source,
-    });
+    setNewCategory(data);
     setIsEdit(!isEdit);
-  };
-  const update = async () => {
-    try {
-      const res = await fetch(`${url}/categories/update`, {
-        method: "post",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newCategory),
-      });
-      const data = await res.json();
-      if (data.ok) {
-        setCategories((prev) => {
-          let newPrev = prev?.find((item) => item._id === newCategory._id);
-          newPrev.categoriesType = data.category.categoriesType;
-          return prev;
-        });
-        close();
-        setMessage({ status: "success", text: "修改成功", open: true });
-      } else {
-        setMessage({ status: "warning", text: "修改失敗", open: true });
-      }
-    } catch (error) {
-      console.log(error);
-      setMessage({ status: "error", text: "伺服器錯誤", open: true });
-    }
   };
 
   const open = () => {
-    let popbox = document.getElementsByClassName("add-Acc")[0];
-    popbox.style.display = "flex";
-  };
-
-  const close = () => {
-    let popbox = document.getElementsByClassName("add-Acc")[0];
-    popbox.style.display = "none";
-    setIsEdit(false);
+    setNewCategory(null);
+    setIsEdit(!isEdit);
   };
 
   return (
@@ -186,53 +126,11 @@ function Finances() {
           </div>
         </>
         {isEdit && (
-          <div className="update-Acc">
-            <p>編輯類別</p>
-
-            <input
-              type="text"
-              name=""
-              id="add-acc"
-              value={newCategory.type}
-              onChange={(e) =>
-                setNewCategory((prev) => ({ ...prev, type: e.target.value }))
-              }
-              placeholder={`編輯類別`}
-            />
-            <div className="add-btn">
-              <button onClick={close}>取消</button>
-              <button onClick={update}>新增</button>
-            </div>
-          </div>
-        )}
-        <div className="add-Acc">
-          <p>
-            新增
-            {source === "expense"
-              ? "支出"
-              : source === "income"
-              ? "收入"
-              : "轉帳"}
-            類別
-          </p>
-          <input
-            type="text"
-            name=""
-            id="add-acc"
-            onChange={(e) => setCategory(e.target.value)}
-            placeholder={`新增${
-              source === "expense"
-                ? "支出"
-                : source === "income"
-                ? "收入"
-                : "轉帳"
-            }類別`}
+          <CategroyPopbox
+            editInfo={newCategory}
+            onclose={() => setIsEdit(false)}
           />
-          <div className="add-btn">
-            <button onClick={close}>取消</button>
-            <button onClick={add}>新增</button>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

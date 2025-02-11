@@ -63,7 +63,7 @@ input[type=number] {
     padding: 5px;
     color: var(--primary-color);
     border-bottom: 2px solid var(--primary-color);
-    max-width: 300px;
+
 
 }
 

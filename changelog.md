@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.7] - 2025-02-11
+### 🔄 變更
+- 更新帳戶以及類別彈跳框以及自動扣款介面
+- 將initalAmount改成initialAmount
+
+
 ## [1.3.6] - 2025-02-09
 ### ✨ 新增
 - components 新增FormatNumber、AccountRecord、Record、TotalHeader、DateRecord、Add

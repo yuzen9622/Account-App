@@ -6,78 +6,14 @@ import { url } from "../service";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import { AccountPopbox } from "../components/TypeEdit";
 export default function AccountType() {
   const { token, user, setMessage } = useContext(UserContext);
-  const [newAccount, setNewAccount] = useState({
-    _id: null,
-    userId: user._id,
-    amount: 0,
-    type: "",
-  });
+  const [newAccount, setNewAccount] = useState(null);
 
   const { accounts, setAccounts } = useContext(AccountContext);
   const [isEdit, setIsEdit] = useState(false);
   const navigate = useNavigate();
-
-  const add = async () => {
-    try {
-      const res = await fetch(`${url}/accounts/add`, {
-        method: "post",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newAccount),
-      });
-
-      const data = await res.json();
-
-      if (data.ok) {
-        setAccounts((prev) => [...prev, data.account]);
-        setMessage({ status: "success", text: "新增成功", open: true });
-
-        close();
-      } else {
-        setMessage({ status: "warning", text: data.error, open: true });
-      }
-      setNewAccount({ userId: user._id, amount: 0, type: "" });
-    } catch (error) {
-      console.log(error);
-      setMessage({ status: "error", text: "伺服器錯誤", open: true });
-    }
-  };
-  const update = async () => {
-    try {
-      const res = await fetch(`${url}/accounts/update`, {
-        method: "post",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newAccount),
-      });
-      const data = await res.json();
-      if (data.ok) {
-        setAccounts((prev) => {
-          let newPrev = prev?.map((item) => {
-            if (item._id === newAccount._id) {
-              return data.account;
-            }
-            return item;
-          });
-          console.log(newPrev);
-          return newPrev;
-        });
-        setMessage({ status: "success", text: "編輯成功", open: true });
-        close();
-      } else {
-        setMessage({ status: "warning", text: data.error, open: true });
-      }
-    } catch (error) {
-      setMessage({ status: "error", text: "編輯失敗", open: true });
-      console.log(error);
-    }
-  };
 
   const del = async (_id) => {
     try {
@@ -101,24 +37,15 @@ export default function AccountType() {
     }
   };
   const edit = (info) => {
-    setNewAccount({
-      _id: info._id,
-      userId: user._id,
-      amount: info.initalAmount,
-      type: info.accountsType,
-    });
+    setNewAccount(info);
     setIsEdit(true);
   };
 
   const open = () => {
-    let popbox = document.getElementsByClassName("add-Acc")[0];
-    popbox.style.display = "flex";
+    setNewAccount(null);
+    setIsEdit(true);
   };
-  const close = () => {
-    let popbox = document.getElementsByClassName("add-Acc")[0];
-    popbox.style.display = "none";
-    setIsEdit(false);
-  };
+
   return (
     <div className="Fixed-Finances ">
       <div className="top">
@@ -136,9 +63,9 @@ export default function AccountType() {
           <div className="caregories">
             {accounts?.map((datas, key) => {
               return (
-                <div className="care-type" key={key}>
+                <div className="care-type" key={datas._id}>
                   <h3>{datas.accountsType}</h3>
-                  <p>初始:${datas.initalAmount}</p>
+                  <p>初始:${datas.initialAmount}</p>
                   <div className="btn">
                     <button onClick={() => edit(datas)}>
                       <BorderColorRoundedIcon style={{ fontSize: "20px" }} />
@@ -163,63 +90,11 @@ export default function AccountType() {
           </div>
         </>
         {isEdit && (
-          <div className="update-Acc">
-            <p>編輯帳戶</p>
-            <label htmlFor="number">初始餘額</label>
-            <input
-              type="number"
-              id="number"
-              inputMode="numeric"
-              placeholder={"初始餘額"}
-              value={newAccount.amount}
-              onChange={(e) =>
-                setNewAccount((prev) => ({ ...prev, amount: e.target.value }))
-              }
-            />
-            <input
-              type="text"
-              name=""
-              id="add-acc"
-              value={newAccount.type}
-              onChange={(e) =>
-                setNewAccount((prev) => ({ ...prev, type: e.target.value }))
-              }
-              placeholder={`編輯帳戶`}
-            />
-            <div className="add-btn">
-              <button onClick={close}>取消</button>
-              <button onClick={update}>新增</button>
-            </div>
-          </div>
+          <AccountPopbox
+            editInfo={newAccount}
+            onclose={() => setIsEdit(false)}
+          />
         )}
-
-        <div className="add-Acc">
-          <p>新增帳戶</p>
-          <label htmlFor="number">初始餘額</label>
-          <input
-            type="number"
-            id="number"
-            placeholder="初始餘額"
-            value={newAccount.amount}
-            onChange={(e) =>
-              setNewAccount((prev) => ({ ...prev, amount: e.target.value }))
-            }
-          />
-          <input
-            type="text"
-            name=""
-            id="add-acc"
-            onChange={(e) =>
-              setNewAccount((prev) => ({ ...prev, type: e.target.value }))
-            }
-            value={newAccount.type}
-            placeholder={`新增帳戶`}
-          />
-          <div className="add-btn">
-            <button onClick={close}>取消</button>
-            <button onClick={add}>新增</button>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -87,7 +87,7 @@ function Sett() {
       }, []);
       accounts?.forEach((account) => {
         if (account._id === _id) {
-          total.total += account?.initalAmount;
+          total.total += account?.initialAmount;
         }
       });
       setTotalInfo(total);
@@ -167,11 +167,11 @@ function Sett() {
       let findAccount = groupedByAccount.find(
         (item) => item._id === account._id
       );
-      findAccount.amount += parseFloat(account.initalAmount);
+      findAccount.amount += parseFloat(account.initialAmount);
       setTotalInfo((prev) => ({
         ...prev,
-        total: prev.total + parseFloat(account.initalAmount),
-        income: prev.income + parseFloat(account.initalAmount),
+        total: prev.total + parseFloat(account.initialAmount),
+        income: prev.income + parseFloat(account.initialAmount),
       }));
     });
     groupedByAccount.sort((a, b) => b.amount - a.amount);
