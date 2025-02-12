@@ -86,8 +86,8 @@ function Sett() {
         return result;
       }, []);
       accounts?.forEach((account) => {
-        if (account._id === _id) {
-          total.total += account?.initialAmount;
+        if (account._id === _id && account.initialAmount) {
+          total.total += account.initialAmount;
         }
       });
       setTotalInfo(total);
@@ -103,6 +103,7 @@ function Sett() {
     }
     fliterRecordByAccountId(RecordAccountId);
   }, [records, RecordAccountId, fliterRecordByAccountId]);
+
   useEffect(() => {
     if (!records) return;
 
@@ -143,6 +144,7 @@ function Sett() {
       ) {
         result.push({ _id: toAccountId, amount: 0 });
       }
+
       const record = result.find((item) => item._id === accountId);
       if (source === "income") {
         record.amount += parseFloat(amount);
@@ -167,14 +169,23 @@ function Sett() {
       let findAccount = groupedByAccount.find(
         (item) => item._id === account._id
       );
-      findAccount.amount += parseFloat(account.initialAmount);
-      setTotalInfo((prev) => ({
-        ...prev,
-        total: prev.total + parseFloat(account.initialAmount),
-        income: prev.income + parseFloat(account.initialAmount),
-      }));
+      if (groupedByAccount.find((item) => item._id === account._id)) {
+        let item = groupedByAccount.find(
+          (record) => record._id === account._id
+        );
+        item.date = account.updatedAt;
+      }
+      if (account.initialAmount) {
+        findAccount.amount += parseFloat(account?.initialAmount);
+        setTotalInfo((prev) => ({
+          ...prev,
+          total: prev.total + parseFloat(account?.initialAmount),
+          income: prev.income + parseFloat(account?.initialAmount),
+        }));
+      }
     });
-    groupedByAccount.sort((a, b) => b.amount - a.amount);
+    console.log(groupedByAccount);
+    groupedByAccount.sort((a, b) => new Date(b.date) - new Date(a.date));
     setAccountRecord(groupedByAccount);
   }, [records, accounts, dateReocrd]);
 

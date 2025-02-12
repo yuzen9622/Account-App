@@ -66,6 +66,7 @@ export const AccountContextProvider = ({ children }) => {
         console.log(datas.error);
         if (datas.error === "jwt expired") {
           sessionStorage.removeItem("account-token");
+          setToken(null);
         }
       }
     } catch (error) {
@@ -92,6 +93,7 @@ export const AccountContextProvider = ({ children }) => {
         console.log(datas.error);
         if (datas.error === "jwt expired") {
           sessionStorage.removeItem("account-token");
+          setToken(null);
         }
       }
     } catch (error) {
@@ -120,12 +122,14 @@ export const AccountContextProvider = ({ children }) => {
         console.log(datas.error);
         if (datas.error === "jwt expired") {
           sessionStorage.removeItem("account-token");
+          setToken(null);
         }
+        setMessage({ status: "warning", text: datas.error, open: true });
       }
     } catch (error) {
       console.log(error);
     }
-  }, [user, token, queryParams, setToken]);
+  }, [user, token, queryParams, setToken, setMessage]);
 
   const getCurrentRecords = useCallback(async () => {
     try {
