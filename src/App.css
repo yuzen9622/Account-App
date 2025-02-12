@@ -1,7 +1,7 @@
 :root {
   --primary-color: #FFA500;
-  --second-color: #F6F6F6F2;
-  --text-color: #4A4A4A;
+  --second-color: #f3f3f3;
+  --text-color: #242424;
   --background-color: #FFFFFF;
   --second-text-color: #808080;
   --active-color: #D8D8D8;
@@ -11,11 +11,13 @@
 }
 
 .dark {
-  --background-color: #14171a;
-  --second-color: rgba(18, 22, 19, 0.95);
-  --text-color: #fff;
+  --primary-color: #FFA500;
+  --background-color: #18181B;
+  --second-color: #121613;
+  --text-color: #ffffffd8;
   --second-text-color: #c3c3c3;
   --active-color: #424242;
+
 }
 
 

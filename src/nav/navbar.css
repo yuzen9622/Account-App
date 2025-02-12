@@ -59,15 +59,19 @@ nav li {
 }
 
 nav a {
+    box-sizing: border-box;
     display: flex;
+    position: relative;
     justify-content: space-around;
     align-items: center;
     text-decoration: none;
     color: var(--primary-color);
     font-size: 20px;
     font-weight: 600;
-    margin-top: 20px;
+    border-radius: 5px;
     padding: 10px;
+    margin-bottom: 10px;
+
     width: 90%;
     text-align: center;
     transition: all 0.5s;
@@ -78,30 +82,59 @@ nav button {
     justify-content: space-around;
     align-items: center;
     text-decoration: none;
-    color: var(--primary-color);
+    color: var(--background-color);
     font-size: 20px;
     font-weight: 600;
     border: none;
-    background-color: transparent;
+    background-color: var(--primary-color);
     padding: 10px;
-    width: 100%;
+    border-radius: 5px;
+    width: 90%;
+    margin-bottom: 10px;
     transition: all .5s;
 }
 
-nav :is(a, button):hover {
+nav button:is(:active, ) {
+    background-color: var(--active-color);
+    color: var(--primary-color);
+
+}
+
+nav a:is(:hover, :active) {
+    background-color: var(--active-color);
+    border-radius: 5px;
+    color: var(--primary-color);
+
+}
+
+nav a::before {
+    content: "";
+    position: absolute;
+    width: 3px;
     background-color: var(--primary-color);
-    border-radius: 15px;
-    color: var(--second-color);
+    height: 100%;
+    bottom: 0;
+    left: -10px;
+    border-radius: 5px;
+    transform: scaleY(0);
+    transition: all .3s;
 
 }
 
 nav .active {
+    position: relative;
+    border-radius: 5px;
 
-    background-color: var(--primary-color);
-    border-radius: 15px;
-    color: var(--second-color);
+
 
 }
+
+nav .active::before {
+
+    transform: scaleY(1);
+}
+
+
 
 
 /*RWD*/
@@ -133,10 +166,29 @@ nav .active {
         padding: 5px;
     }
 
-    nav a {
-        width: auto;
-        margin: 0;
+    nav :is(a, button) {
+        width: 100%;
 
+
+    }
+
+    nav a::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        background-color: var(--primary-color);
+        height: 3px;
+        bottom: -10px;
+        left: 0;
+        border-radius: 5px;
+        transform: scaleX(0);
+        transition: all .3s;
+
+    }
+
+    nav .active::before {
+
+        transform: scaleX(1);
     }
 
     .name {

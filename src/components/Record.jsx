@@ -83,7 +83,7 @@ export default function Record({ record, edit = true, _id }) {
                     : { backgroundColor: "var(--change-color)", color: "#fff" }
                 }
               >
-                {record.source === "expense" && "-"}
+                {record.source === "expense" && record.amount !== 0 && "-"}
 
                 <FormatNumber number={record.amount} />
               </p>

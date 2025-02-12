@@ -3,7 +3,7 @@
     width: 100%;
 
     text-align: center;
-    color: var(--primary-color);
+    color: var(--text-color);
     overflow-y: hidden;
     height: 100%;
     transition: all 0.5s;
@@ -18,7 +18,7 @@
 .react-calendar {
     width: 100% !important;
     max-height: 100%;
-    color: var(--primary-color);
+    color: var(--text-color);
     background-color: var(--background-color);
     border: none !important;
     border-radius: 5px;
