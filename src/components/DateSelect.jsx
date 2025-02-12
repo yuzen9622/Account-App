@@ -37,7 +37,7 @@ export default function DateSelect() {
     clearQuery,
   ]);
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <div className="date">
         <ul>
           <li>
