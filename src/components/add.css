@@ -9,7 +9,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    background-color: var(--second-color);
+    background-color: var(--background-color);
     transform: translate(-50%, -50%);
     border-radius: 15px;
     border: 2px solid var(--primary-color);
@@ -44,7 +44,9 @@ input[type=number] {
     box-sizing: border-box;
     height: 100%;
     border-radius: 5px;
-    background-color: var(--second-color);
+    background-color: var(--background-color);
+    color: var(--background-color);
+
 }
 
 .popbox-btn button {
@@ -105,7 +107,7 @@ input[type=number] {
 
 .pop-active {
     background-color: var(--primary-color) !important;
-    color: var(--second-color) !important;
+    color: var(--background-color) !important;
 }
 
 .pop-btn {
@@ -118,7 +120,7 @@ input[type=number] {
 
 .pop-btn button:nth-child(1) {
     border: 2px solid var(--primary-color);
-    background-color: var(--second-color);
+    background-color: var(--background-color);
     color: var(--primary-color);
     outline: none;
     font-size: 18px;
@@ -144,7 +146,7 @@ input[type=number] {
 
 .pop-btn button:nth-child(2):hover {
     color: var(--primary-color);
-    background-color: var(--second-color);
+    background-color: var(--background-color);
     border: 2px solid var(--primary-color);
 }
 

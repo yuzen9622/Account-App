@@ -36,8 +36,13 @@ export const AccountContextProvider = ({ children }) => {
   const [currentMonth, setCurrentMonth] = useState(moment().format("YYYY-MM"));
   const [updateRecordInfo, setUpdateRecordInfo] = useState(null);
   const [recordInfo, setRecordInfo] = useState(renderRecord);
-
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  useEffect(() => {
+    setCategories(null);
+    setAccounts(null);
+    setRecords(null);
+  }, [user]);
 
   const clearQuery = useCallback(() => {
     setQueryParams({});

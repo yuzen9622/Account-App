@@ -48,7 +48,8 @@
     color: var(--primary-color);
     font-size: 1em;
     padding: 5px;
-    border: 2px solid var(--primary-color);
+    box-shadow: 0px 0px 5px var(--second-color);
+    border: 2px solid var(--second-color);
 }
 
 .care-type .btn {

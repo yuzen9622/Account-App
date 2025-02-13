@@ -50,8 +50,9 @@ export default function Record({ record, edit = true, _id }) {
     }
   };
   return (
-    <div className="record-list">
-      {account && category && (
+    account &&
+    category && (
+      <div className="record-list">
         <>
           <div className="category">
             <p>{category.categoriesType}</p>
@@ -110,7 +111,7 @@ export default function Record({ record, edit = true, _id }) {
             )}
           </div>
         </>
-      )}
-    </div>
+      </div>
+    )
   );
 }
