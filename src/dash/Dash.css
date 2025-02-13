@@ -260,7 +260,7 @@
     align-items: center;
     justify-content: center;
     height: 40px;
-    color: var(--second-color);
+    color: var(--background-color);
     border: 2px solid var(--primary-color);
     background-color: var(--primary-color);
     border-radius: 50%;

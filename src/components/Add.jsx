@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import "./add.css";
 import Datetime from "react-datetime";
+import { useNavigate } from "react-router-dom";
 import "react-datetime/css/react-datetime.css";
 import { AccountContext } from "../context/accountContext";
 import moment from "moment";
@@ -21,7 +22,7 @@ function Add() {
     setUpdateRecordInfo,
   } = useContext(AccountContext);
   const [sourceCategories, setSourceCategories] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (!updateRecordInfo) return;
     let record = { ...updateRecordInfo };
@@ -67,32 +68,53 @@ function Add() {
       className="Finances-popbox"
       style={popOpen ? { display: "flex" } : { display: "none" }}
     >
-      <div className="popbox-btn">
+      <div className="container">
         <button
-          onClick={() =>
-            setRecordInfo((prev) => ({ ...prev, source: "expense" }))
-          }
-          className={recordInfo.source === "expense" ? "pop-active" : "out"}
+          onClick={() => {
+            navigate("/setting/account");
+            setPopOpen(false);
+          }}
+          className={"in"}
         >
-          支出
+          編輯帳戶
         </button>
+        <div className="popbox-btn">
+          <button
+            onClick={() =>
+              setRecordInfo((prev) => ({ ...prev, source: "expense" }))
+            }
+            className={recordInfo.source === "expense" ? "pop-active" : "out"}
+          >
+            支出
+          </button>
+          <button
+            onClick={() =>
+              setRecordInfo((prev) => ({ ...prev, source: "income" }))
+            }
+            className={recordInfo.source === "income" ? "pop-active" : "in"}
+          >
+            收入
+          </button>
+          <button
+            onClick={() =>
+              setRecordInfo((prev) => ({ ...prev, source: "change" }))
+            }
+            className={recordInfo.source === "change" ? "pop-active" : "in"}
+          >
+            轉帳
+          </button>
+        </div>
         <button
-          onClick={() =>
-            setRecordInfo((prev) => ({ ...prev, source: "income" }))
-          }
-          className={recordInfo.source === "income" ? "pop-active" : "in"}
+          onClick={() => {
+            navigate("/setting/category");
+            setPopOpen(false);
+          }}
+          className={"in"}
         >
-          收入
-        </button>
-        <button
-          onClick={() =>
-            setRecordInfo((prev) => ({ ...prev, source: "change" }))
-          }
-          className={recordInfo.source === "change" ? "pop-active" : "in"}
-        >
-          轉帳
+          編輯類別
         </button>
       </div>
+
       <div className="Finances-put">
         <Datetime
           value={recordInfo.date}

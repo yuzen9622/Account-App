@@ -6,6 +6,7 @@ import { AccountContext } from "../context/accountContext";
 import AccountRecord from "../components/AccountRecord";
 import TotalHeader from "../components/TotalHeader";
 import DateRecord from "../components/DateRecord";
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Helmet } from "react-helmet-async";
 import DateSelect from "../components/DateSelect";
 
@@ -184,7 +185,7 @@ function Sett() {
         }));
       }
     });
-    console.log(groupedByAccount);
+
     groupedByAccount.sort((a, b) => new Date(b.date) - new Date(a.date));
     setAccountRecord(groupedByAccount);
   }, [records, accounts, dateReocrd]);
@@ -211,7 +212,7 @@ function Sett() {
                 setRecordAccountId(null);
               }}
             >
-              <i className="fa-solid fa-chevron-left"></i>
+              <ChevronLeftRoundedIcon style={{ fontSize: "28px" }} />
             </button>
           )}
 

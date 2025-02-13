@@ -7,6 +7,7 @@ import { AccountContext } from "../context/accountContext";
 import { UserContext } from "../context/userContext";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 function Finances() {
   const { categories, setCategories } = useContext(AccountContext);
   const { token, setMessage } = useContext(UserContext);
@@ -64,7 +65,7 @@ function Finances() {
     <div className="Fixed-Finances ">
       <div className="top">
         <button onClick={() => navigete("/setting")}>
-          <i className="fa-solid fa-angle-left"></i>
+          <ChevronLeftRoundedIcon style={{ fontSize: "28px" }} />
         </button>
         <h3>類別</h3>
         <button onClick={open}>

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AccountContext } from "../context/accountContext";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import AnimatedNumber from "./AnimatedTag";
 export default function AccountRecord({ record, onclick }) {
   const { accounts } = useContext(AccountContext);
@@ -11,8 +12,8 @@ export default function AccountRecord({ record, onclick }) {
           <p>{account?.accountsType}</p>
         </div>
         <div className="amount-display">
-          <AnimatedNumber number={record.amount} />
-          <i className="fa-solid fa-chevron-right"></i>
+          $<AnimatedNumber number={record.amount} />
+          <ChevronRightRoundedIcon style={{ fontSize: "28px" }} />
         </div>
       </div>
     </button>

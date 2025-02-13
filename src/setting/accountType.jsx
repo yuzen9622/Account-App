@@ -6,9 +6,10 @@ import { url } from "../service";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { AccountPopbox } from "../components/TypeEdit";
 export default function AccountType() {
-  const { token, user, setMessage } = useContext(UserContext);
+  const { token, setMessage } = useContext(UserContext);
   const [newAccount, setNewAccount] = useState(null);
 
   const { accounts, setAccounts } = useContext(AccountContext);
@@ -50,7 +51,7 @@ export default function AccountType() {
     <div className="Fixed-Finances ">
       <div className="top">
         <button onClick={() => navigate("/setting")}>
-          <i className="fa-solid fa-angle-left"></i>
+          <ChevronLeftRoundedIcon style={{ fontSize: "28px" }} />
         </button>
         <h3>帳戶</h3>
         <button onClick={open}>

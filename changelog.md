@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0] - 2025-02-13
+### 🔄 變更
+- 更改ui顏色設計
+- 將fontawsome的chavron icon更換成MUI的chavron icon
+### 🛠️ 修正
+- 性能優化
 
 ## [1.3.9] - 2025-02-13
 ### 🔄 變更

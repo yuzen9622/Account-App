@@ -52,7 +52,7 @@
 
 .login button:hover,
 .sign button:hover {
-    background-color: var(--second-color);
+    background-color: var(--background-color);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
 }

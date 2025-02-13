@@ -42,6 +42,7 @@ input[type=number] {
 
 .popbox-btn {
     box-sizing: border-box;
+    display: flex;
     height: 100%;
     border-radius: 5px;
     background-color: var(--background-color);
@@ -49,7 +50,32 @@ input[type=number] {
 
 }
 
+.container {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+
+
+}
+
+.container button {
+    box-sizing: border-box;
+    height: 100%;
+    border: none;
+    color: var(--primary-color);
+    background-color: transparent;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
 .popbox-btn button {
+    text-decoration: none;
+    font-weight: 400;
+    flex-grow: 1;
+    box-sizing: border-box;
     height: 100%;
     border: none;
     color: var(--primary-color);
@@ -94,12 +120,12 @@ input[type=number] {
     justify-content: center;
 }
 
-.popbox-btn:nth-child(1) {
+.popbox-btn {
     border: 1px solid var(--primary-color);
 
 }
 
-.popbox-btn:nth-child(1) button {
+.popbox-btn button {
     border-radius: 3px;
     padding: 5px 10px;
     transition: all 0.3s;
@@ -134,7 +160,7 @@ input[type=number] {
 .pop-btn button:nth-child(2) {
     border: 2px solid var(--primary-color);
     background-color: var(--primary-color);
-    color: var(--second-color);
+    color: var(--background-color);
     outline: none;
     font-size: 18px;
     font-weight: 600;
