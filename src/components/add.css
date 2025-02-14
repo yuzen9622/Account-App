@@ -59,6 +59,7 @@ input[type=number] {
     padding: 5px;
 
 
+
 }
 
 .container button {
@@ -69,6 +70,7 @@ input[type=number] {
     background-color: transparent;
     text-decoration: underline;
     font-weight: 600;
+    font-size: 15px;
 }
 
 .popbox-btn button {

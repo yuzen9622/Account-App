@@ -213,7 +213,6 @@ function Add() {
         <select
           name=""
           value={recordInfo.categoryId}
-          id=""
           onChange={(e) =>
             setRecordInfo((prev) => ({ ...prev, categoryId: e.target.value }))
           }

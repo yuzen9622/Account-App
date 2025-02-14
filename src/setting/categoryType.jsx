@@ -53,12 +53,12 @@ function Finances() {
 
   const edit = async (data) => {
     setNewCategory(data);
-    setIsEdit(!isEdit);
+    setIsEdit(true);
   };
 
   const open = () => {
     setNewCategory(null);
-    setIsEdit(!isEdit);
+    setIsEdit(true);
   };
 
   return (
