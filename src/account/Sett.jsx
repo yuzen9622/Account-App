@@ -3,7 +3,7 @@ import "./sett.css";
 import { useState, useEffect } from "react";
 import moment from "moment";
 import { AccountContext } from "../context/accountContext";
-import AccountRecord from "../components/AccountRecord";
+import AccountRecord from "../components/accountRecord";
 import TotalHeader from "../components/TotalHeader";
 import DateRecord from "../components/dateRecord";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
