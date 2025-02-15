@@ -5,7 +5,7 @@ import moment from "moment";
 import { AccountContext } from "../context/accountContext";
 import AccountRecord from "../components/AccountRecord";
 import TotalHeader from "../components/TotalHeader";
-import DateRecord from "../components/DateRecord";
+import DateRecord from "../components/dateRecord";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Helmet } from "react-helmet-async";
 import DateSelect from "../components/DateSelect";
