@@ -1,8 +1,8 @@
 import React from "react";
 import "./console.css";
-import Finances from "./CategoryType";
+import Finances from "./categoryType";
 import Navsett from "./NavSett";
-import AccountType from "./AccountType";
+import AccountType from "./accountType";
 import { Route, Routes } from "react-router-dom";
 import UserSetting from "./UserSetting";
 import { Helmet } from "react-helmet-async";
