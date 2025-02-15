@@ -20,9 +20,9 @@ function App() {
   const { user, message, setMessage } = useContext(UserContext);
   const { theme } = useContext(ThemeContext);
   const [splashEnd, setSplashEnd] = useState(false);
-  if (!splashEnd) return <Splash setEnd={setSplashEnd} />;
   return (
     <AccountContextProvider>
+      {!splashEnd && <Splash setEnd={setSplashEnd} />}
       <div className={`App ${theme?.mode === "dark" ? "dark" : ""}`}>
         <Navbar />
 

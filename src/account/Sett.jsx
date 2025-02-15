@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet-async";
 import DateSelect from "../components/DateSelect";
 
 function Sett() {
-  const { records, accounts } = useContext(AccountContext);
+  const { records, accounts, filterRecords } = useContext(AccountContext);
 
   const [accountRecord, setAccountRecord] = useState(null);
   const [dateReocrd, setDateRecord] = useState(null);
@@ -25,7 +25,7 @@ function Sett() {
   });
   const fliterRecordByAccountId = useCallback(
     (_id) => {
-      if (!records || !accounts || !_id) return;
+      if (!filterRecords || !accounts || !_id) return;
       setAccountRecord(null);
 
       const total = {
@@ -36,30 +36,32 @@ function Sett() {
         account: _id,
       };
 
-      records?.forEach((item) => {
+      filterRecords?.forEach((item) => {
         const { source, amount, accountId, toAccountId } = item;
+        let numberAmount = parseFloat(amount);
         if (source === "income" && accountId === _id) {
-          total.income += amount;
-          total.total += amount;
+          total.income += numberAmount;
+          total.total += numberAmount;
         } else if (source === "expense" && accountId === _id) {
-          total.expense += amount;
-          total.total -= amount;
+          total.expense += numberAmount;
+          total.total -= numberAmount;
         } else if (
           source === "change" &&
           (accountId === _id || toAccountId === _id)
         ) {
           if (accountId === _id) {
-            total.change -= amount;
-            total.total -= amount;
+            total.change -= numberAmount;
+            total.total -= numberAmount;
           } else {
-            total.change += amount;
-            total.total += amount;
+            total.change += numberAmount;
+            total.total += numberAmount;
           }
         }
       });
 
-      const groupedByDate = records?.reduce((result, item) => {
+      const groupedByDate = filterRecords?.reduce((result, item) => {
         const { date, amount, source, accountId, toAccountId } = item;
+        let numberAmount = parseFloat(amount);
         if (accountId === _id || toAccountId === _id) {
           if (
             !result.find(
@@ -78,9 +80,9 @@ function Sett() {
           );
           record.records.push(item);
           if (source === "income" || toAccountId === _id) {
-            record.total += amount;
+            record.total += numberAmount;
           } else {
-            record.total -= amount;
+            record.total -= numberAmount;
           }
         }
 
@@ -95,7 +97,7 @@ function Sett() {
       groupedByDate.sort((a, b) => new Date(b.date) - new Date(a.date));
       setDateRecord(groupedByDate);
     },
-    [accounts, records]
+    [accounts, filterRecords]
   );
   useEffect(() => {
     if (!RecordAccountId) {
@@ -106,7 +108,7 @@ function Sett() {
   }, [records, RecordAccountId, fliterRecordByAccountId]);
 
   useEffect(() => {
-    if (!records) return;
+    if (!filterRecords) return;
 
     if (dateReocrd) {
       return;
@@ -119,24 +121,26 @@ function Sett() {
       change: 0,
       account: "all",
     });
-    records?.forEach((item) => {
+    filterRecords?.forEach((item) => {
       const { source, amount } = item;
+      let numberAmount = parseFloat(amount);
       if (source === "income") {
         setTotalInfo((prev) => ({
           ...prev,
-          income: prev.income + amount,
-          total: prev.total + amount,
+          income: prev.income + numberAmount,
+          total: prev.total + numberAmount,
         }));
       } else if (source === "expense") {
         setTotalInfo((prev) => ({
           ...prev,
-          expense: prev.expense + amount,
-          total: prev.total - amount,
+          expense: prev.expense + numberAmount,
+          total: prev.total - numberAmount,
         }));
       }
     });
-    const groupedByAccount = records.reduce((result, item) => {
+    const groupedByAccount = filterRecords.reduce((result, item) => {
       const { accountId, amount, source, toAccountId } = item;
+      let numberAmount = parseFloat(amount);
       if (!result.find((record) => record._id === accountId)) {
         result.push({ _id: accountId, amount: 0 });
       } else if (
@@ -148,18 +152,18 @@ function Sett() {
 
       const record = result.find((item) => item._id === accountId);
       if (source === "income") {
-        record.amount += parseFloat(amount);
+        record.amount += numberAmount;
       }
       if (source === "expense") {
-        record.amount -= parseFloat(amount);
+        record.amount -= numberAmount;
       }
       if (source === "change") {
         if (!result.find((item) => item._id === toAccountId)) {
           result.push({ _id: toAccountId, amount: 0 });
         }
         const account = result.find((item) => item._id === toAccountId);
-        account.amount += parseFloat(amount);
-        record.amount -= parseFloat(amount);
+        account.amount += numberAmount;
+        record.amount -= numberAmount;
       }
       return result;
     }, []);
@@ -188,7 +192,7 @@ function Sett() {
 
     groupedByAccount.sort((a, b) => new Date(b.date) - new Date(a.date));
     setAccountRecord(groupedByAccount);
-  }, [records, accounts, dateReocrd]);
+  }, [filterRecords, accounts, dateReocrd]);
 
   return (
     <div className="usersett">

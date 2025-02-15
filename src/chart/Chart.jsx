@@ -15,7 +15,7 @@ import AnimatedNumber from "../components/AnimatedTag";
 import FormatNumber from "../components/FormatNumber";
 
 function Chart() {
-  const { records, accounts, categories } = useContext(AccountContext);
+  const { accounts, categories, filterRecords } = useContext(AccountContext);
   const [chartData, setChartData] = useState(null);
 
   const [sort, setSort] = useState(true);
@@ -26,9 +26,10 @@ function Chart() {
   });
   const [dateRecord, setDateRecord] = useState(null);
 
-  const fliterRecordDate = (_id) => {
-    const groupedByDate = records?.reduce((result, item) => {
+  const filterRecordDate = (_id) => {
+    const groupedByDate = filterRecords?.reduce((result, item) => {
       const { date, amount, source, accountId, categoryId } = item;
+      let numberAmount = parseFloat(amount);
       if ((accountId === _id || categoryId === _id) && source === type.source) {
         if (
           !result.find(
@@ -46,9 +47,9 @@ function Chart() {
         );
         record.records.push(item);
         if (source === "income") {
-          record.total += amount;
+          record.total += numberAmount;
         } else {
-          record.total -= amount;
+          record.total -= numberAmount;
         }
       }
 
@@ -57,10 +58,11 @@ function Chart() {
     groupedByDate.sort((a, b) => new Date(b.date) - new Date(a.date));
     setDateRecord(groupedByDate);
   };
-  const fliterRecord = useCallback(() => {
-    let grouped = records?.reduce((result, item) => {
+  const filterRecord = useCallback(() => {
+    let grouped = filterRecords?.reduce((result, item) => {
       const { accountId, amount, source, categoryId } = item;
       let record;
+      let numberAmount = parseFloat(amount);
       if (type.type === "account" && source === type.source) {
         const account = accounts.find((account) => account._id === accountId);
 
@@ -73,8 +75,8 @@ function Chart() {
           });
         }
         record = result.find((item) => item.id === accountId);
-        record.value += amount;
-        record.total += amount;
+        record.value += numberAmount;
+        record.total += numberAmount;
       } else if (type.type === "category" && source === type.source) {
         const category = categories?.find(
           (category) => category._id === categoryId
@@ -88,8 +90,8 @@ function Chart() {
           });
         }
         record = result.find((item) => item.id === categoryId);
-        record.value += amount;
-        record.total += amount;
+        record.value += numberAmount;
+        record.total += numberAmount;
       }
 
       return result;
@@ -101,7 +103,7 @@ function Chart() {
     }));
     grouped.sort((a, b) => b.total - a.total);
     setChartData(grouped);
-  }, [records, accounts, categories, type]);
+  }, [filterRecords, accounts, categories, type]);
 
   useEffect(() => {
     if (sort) {
@@ -116,12 +118,12 @@ function Chart() {
   }, [sort]);
 
   useEffect(() => {
-    if (!records || !accounts || !categories) return;
+    if (!filterRecords || !accounts || !categories) return;
     setChartData([]);
     setDateRecord(null);
 
-    fliterRecord();
-  }, [records, accounts, type, categories, fliterRecord]);
+    filterRecord();
+  }, [filterRecords, accounts, type, categories, filterRecord]);
 
   return (
     <div className="chart">
@@ -263,7 +265,7 @@ function Chart() {
             <tbody>
               {chartData &&
                 chartData.map((item, key) => (
-                  <tr key={key} onClick={() => fliterRecordDate(item.id)}>
+                  <tr key={key} onClick={() => filterRecordDate(item.id)}>
                     <td>{key + 1}</td>
                     <td>{item.label}</td>
                     <td>

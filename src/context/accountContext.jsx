@@ -31,6 +31,7 @@ export const AccountContextProvider = ({ children }) => {
   const [accounts, setAccounts] = useState(null);
   const [currentRecords, setCurrentRecords] = useState(null);
   const [records, setRecords] = useState(null);
+  const [filterRecords, setFilterRecords] = useState(null);
   const [popOpen, setPopOpen] = useState(null);
   const [queryParams, setQueryParams] = useState({});
   const [currentMonth, setCurrentMonth] = useState(moment().format("YYYY-MM"));
@@ -111,8 +112,7 @@ export const AccountContextProvider = ({ children }) => {
         return;
       }
 
-      const queryString = new URLSearchParams(queryParams).toString();
-      const fetchUrl = `${url}/records${queryString ? `?${queryString}` : ""}`;
+      const fetchUrl = `${url}/records/`;
       const res = await fetch(fetchUrl, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -134,7 +134,29 @@ export const AccountContextProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [user, token, queryParams, setToken, setMessage]);
+  }, [user, token, setToken, setMessage]);
+  const filterRecord = useCallback(() => {
+    if (!records) return [];
+
+    let result = records.filter((record) => {
+      const recordDate = moment(record.date);
+      const yearMatch = queryParams.year
+        ? recordDate.year() === parseInt(queryParams.year)
+        : true;
+      const monthMatch = queryParams.month
+        ? recordDate.month() + 1 === parseInt(queryParams.month)
+        : true;
+      const startMatch = queryParams.start
+        ? recordDate.isSameOrAfter(moment(queryParams.start))
+        : true;
+      const endMatch = queryParams.end
+        ? recordDate.isSameOrBefore(moment(queryParams.end))
+        : true;
+
+      return yearMatch && monthMatch && startMatch && endMatch;
+    });
+    setFilterRecords(result);
+  }, [records, queryParams]);
 
   const getCurrentRecords = useCallback(async () => {
     try {
@@ -171,7 +193,7 @@ export const AccountContextProvider = ({ children }) => {
         sessionStorage.setItem("account-token", JSON.stringify(data.newToken));
       }
       if (data.ok) {
-        getRecords();
+        setRecords((prev) => [...prev, data.record]);
         setRecordInfo(renderRecord);
         setUpdateRecordInfo(null);
         getAccounts();
@@ -197,7 +219,6 @@ export const AccountContextProvider = ({ children }) => {
   }, [
     token,
     user,
-    getRecords,
     setToken,
     recordInfo,
     getAccounts,
@@ -224,7 +245,11 @@ export const AccountContextProvider = ({ children }) => {
         sessionStorage.setItem("account-token", JSON.stringify(data.newToken));
       }
       if (data.ok) {
-        getRecords();
+        setRecords((prev) => {
+          return prev.map((item) =>
+            item._id === recordInfo._id ? recordInfo : item
+          );
+        });
         setRecordInfo(renderRecord);
         setUpdateRecordInfo(null);
         getAccounts();
@@ -249,7 +274,7 @@ export const AccountContextProvider = ({ children }) => {
     }
   }, [
     getAccounts,
-    getRecords,
+
     recordInfo,
     renderRecord,
     setMessage,
@@ -267,12 +292,18 @@ export const AccountContextProvider = ({ children }) => {
     if (!user || !token) return;
 
     getRecords();
-  }, [user, getRecords, token, queryParams]);
+  }, [user, getRecords, token]);
+
+  useEffect(() => {
+    filterRecord();
+  }, [queryParams, filterRecord, records]);
+
   useEffect(() => {
     if (!user || !token) return;
     getAccounts();
     getCategory();
   }, [getAccounts, user, token, getCategory]);
+
   return (
     <AccountContext.Provider
       value={{
@@ -301,6 +332,7 @@ export const AccountContextProvider = ({ children }) => {
         clearQuery,
         updateRecord,
         setAccounts,
+        filterRecords,
       }}
     >
       {children}

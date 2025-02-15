@@ -26,11 +26,11 @@ export default function DashRecord() {
       out = 0;
     records.forEach((element) => {
       let eleMonth = moment(element.date).format("YYYY-MM");
-
+      let amount = parseFloat(element.amount);
       if (element.source === "income" && eleMonth === currentMonth) {
-        come += element.amount;
+        come += amount;
       } else if (element.source === "expense" && eleMonth === currentMonth) {
-        out += element.amount;
+        out += amount;
       }
     });
     setExpense(out);
