@@ -38,12 +38,12 @@ export default function DataExport() {
 
       result.push({
         日期: formatDate,
-        類別: category.categoriesType,
+        類別: category?.categoriesType || description,
         金額: amount,
         收支: formatSource,
         帳戶: account.accountsType,
         轉帳帳戶: toAccount?.accountsType || null,
-        備註: description,
+        備註: category?.categoriesType ? description : null,
       });
 
       return result;

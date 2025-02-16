@@ -289,20 +289,13 @@ export const AccountContextProvider = ({ children }) => {
   }, [selectedDate, user, records, getCurrentRecords, token]);
 
   useEffect(() => {
-    if (!user || !token) return;
-
-    getRecords();
-  }, [user, getRecords, token]);
-
-  useEffect(() => {
     filterRecord();
   }, [queryParams, filterRecord, records]);
 
   useEffect(() => {
     if (!user || !token) return;
-    getAccounts();
-    getCategory();
-  }, [getAccounts, user, token, getCategory]);
+    Promise.all([getRecords(), getAccounts(), getCategory()]);
+  }, [getAccounts, user, token, getCategory, getRecords]);
 
   return (
     <AccountContext.Provider

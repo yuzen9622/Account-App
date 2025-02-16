@@ -4,6 +4,7 @@ import moment from "moment";
 import { url } from "../service";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import "moment/locale/zh-tw";
 import { UserContext } from "../context/userContext";
 import FormatNumber from "./FormatNumber";
@@ -50,26 +51,17 @@ export default function Record({ record, edit = true, _id }) {
     }
   };
   return (
-    account &&
-    category && (
+    account && (
       <div className="record-list">
         <>
           <div className="category">
-            <p>{category.categoriesType}</p>
+            <p>{category?.categoriesType || record.description}</p>
             <div className="description">
-              {record.description && <p>{record.description}</p>}
-              {record.toAccountId && (
-                <p>
-                  {record.toAccountId && record.toAccountId !== _id && "轉入"}
-                  {record.toAccountId && record.toAccountId === _id && "轉出至"}
-                  {record.toAccountId &&
-                    record.toAccountId !== _id &&
-                    toAccount?.accountsType}
-                  {record.toAccountId &&
-                    record.toAccountId === _id &&
-                    account?.accountsType}
-                </p>
-              )}
+              <p>
+                {record.description &&
+                  category?.categoriesType &&
+                  record.description}
+              </p>
             </div>
           </div>
 
@@ -88,8 +80,17 @@ export default function Record({ record, edit = true, _id }) {
                 <FormatNumber number={record.amount} />
               </p>
               <p className="description">
-                {record.toAccountId && record.toAccountId === _id && "轉入"}
-                {record.toAccountId && record.toAccountId !== _id && "轉出"}
+                {record.toAccountId && (
+                  <>
+                    {account.accountsType}
+                    <EastRoundedIcon
+                      fontSize="inherit"
+                      style={{ fontSize: "18px" }}
+                    />
+                    {toAccount.accountsType}
+                  </>
+                )}
+
                 {!record.toAccountId && account?.accountsType}
               </p>
             </div>

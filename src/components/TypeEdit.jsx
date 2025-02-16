@@ -110,6 +110,7 @@ export function AccountPopbox({ onclose, editInfo }) {
       console.log(error);
     }
   };
+  console.log(newAccount);
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   return (
     <div className="popbox">
@@ -151,6 +152,9 @@ export function AccountPopbox({ onclose, editInfo }) {
         <select
           value={newAccount.toAccountId}
           disabled={!newAccount?.autoDebit}
+          onChange={(e) =>
+            setNewAccount((prev) => ({ ...prev, toAccountId: e.target.value }))
+          }
         >
           <option selected hidden value="">
             --帳戶--
@@ -165,7 +169,13 @@ export function AccountPopbox({ onclose, editInfo }) {
       </div>
       <div className="Finances-put">
         <p>扣款日期</p>
-        <select disabled={!newAccount?.autoDebit}>
+        <select
+          disabled={!newAccount?.autoDebit}
+          value={newAccount.autoDebitDay}
+          onChange={(e) =>
+            setNewAccount((prev) => ({ ...prev, autoDebitDay: e.target.value }))
+          }
+        >
           <option value="">選擇日</option>
           {days.map((day) => (
             <option key={day} value={day}>

@@ -142,12 +142,12 @@ function Sett() {
       const { accountId, amount, source, toAccountId } = item;
       let numberAmount = parseFloat(amount);
       if (!result.find((record) => record._id === accountId)) {
-        result.push({ _id: accountId, amount: 0 });
+        result.push({ _id: accountId, amount: 0, recordLength: 0 });
       } else if (
         toAccountId &&
         !result.find((record) => record._id === toAccountId)
       ) {
-        result.push({ _id: toAccountId, amount: 0 });
+        result.push({ _id: toAccountId, amount: 0, recordLength: 0 });
       }
 
       const record = result.find((item) => item._id === accountId);
@@ -161,10 +161,13 @@ function Sett() {
         if (!result.find((item) => item._id === toAccountId)) {
           result.push({ _id: toAccountId, amount: 0 });
         }
+
         const account = result.find((item) => item._id === toAccountId);
         account.amount += numberAmount;
         record.amount -= numberAmount;
+        account.recordLength += 1;
       }
+      record.recordLength += 1;
       return result;
     }, []);
     accounts?.forEach((account) => {
@@ -190,7 +193,9 @@ function Sett() {
       }
     });
 
-    groupedByAccount.sort((a, b) => new Date(b.date) - new Date(a.date));
+    groupedByAccount.sort(
+      (a, b) => new Date(b.recordLength) - new Date(a.recordLength)
+    );
     setAccountRecord(groupedByAccount);
   }, [filterRecords, accounts, dateReocrd]);
 

@@ -227,6 +227,10 @@
 
 }
 
+.description {
+    display: flex;
+}
+
 .amount .description,
 .description p {
     padding: 0px;

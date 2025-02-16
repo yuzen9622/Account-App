@@ -3,7 +3,7 @@ import Datetime from "react-datetime";
 import moment from "moment";
 import { AccountContext } from "../context/accountContext";
 export default function DateSelect() {
-  const [selectedType, setSelectedType] = useState("all");
+  const [selectedType, setSelectedType] = useState("month");
   const [year, setYear] = useState(moment().format("YYYY"));
   const [month, setMonth] = useState(moment().format("MM"));
   const [start, setStart] = useState(moment().format("YYYY/MM/DD"));
@@ -42,12 +42,12 @@ export default function DateSelect() {
         <ul>
           <li>
             <button
-              className={selectedType === "all" ? "active" : ""}
+              className={selectedType === "month" ? "active" : ""}
               onClick={() => {
-                setSelectedType("all");
+                setSelectedType("month");
               }}
             >
-              全部
+              月
             </button>
           </li>
           <li>
@@ -62,12 +62,12 @@ export default function DateSelect() {
           </li>
           <li>
             <button
-              className={selectedType === "month" ? "active" : ""}
+              className={selectedType === "all" ? "active" : ""}
               onClick={() => {
-                setSelectedType("month");
+                setSelectedType("all");
               }}
             >
-              月
+              全部
             </button>
           </li>
           <li>

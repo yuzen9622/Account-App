@@ -42,7 +42,13 @@ export default function TotalHeader({ totalInfo }) {
           </div>
           <div className="ac">
             <div className="box">
-              <h3 style={{ color: "var(--income-color)" }}>
+              <h3
+                style={
+                  account.initialAmount >= 0
+                    ? { color: "var(--income-color)" }
+                    : { color: "var(--expense-color)" }
+                }
+              >
                 <AnimatedNumber number={account.initialAmount} />
               </h3>
               <p>初始餘額</p>
