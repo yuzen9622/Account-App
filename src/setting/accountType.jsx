@@ -8,6 +8,7 @@ import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { AccountPopbox } from "../components/TypeEdit";
+
 export default function AccountType() {
   const { token, setMessage } = useContext(UserContext);
   const [newAccount, setNewAccount] = useState(null);

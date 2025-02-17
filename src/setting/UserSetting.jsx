@@ -3,6 +3,9 @@ import { UserContext } from "../context/userContext";
 import "./user-setting.css";
 import { useNavigate } from "react-router-dom";
 import { url } from "../service";
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { ThemeContext } from "../context/themeContext";
 import { Radio, Switch, FormControlLabel, Checkbox } from "@mui/material";
 
@@ -107,11 +110,11 @@ export default function UserSetting() {
 
       <div className="top">
         <button onClick={() => navigate("/setting")}>
-          <i className="fa-solid fa-angle-left"></i>
+          <ChevronLeftRoundedIcon style={{ fontSize: "28px" }} />
         </button>
         <h3>基本資料</h3>
         <button onClick={() => setIsOpen(!isOpen)}>
-          <i className="fa-solid fa-pen-nib"></i>
+          <BorderColorRoundedIcon style={{ fontSize: "20px" }} />
         </button>
       </div>
       <div className="profile">
@@ -208,13 +211,13 @@ export default function UserSetting() {
           />
         </div>
         <button onClick={() => setIsOpen(!isOpen)}>
-          <i className="fa-solid fa-pen-nib"></i> 更改帳號
+          <BorderColorRoundedIcon style={{ fontSize: "20px" }} /> 更改帳號
         </button>
         <button
           onClick={destory}
           style={{ borderColor: "rgb(211, 47, 47)", color: "rgb(211, 47, 47)" }}
         >
-          <i className="fa-solid fa-trash-can"></i> 註銷帳號
+          <DeleteForeverRoundedIcon style={{ fontSize: "20px" }} /> 註銷帳號
         </button>
       </div>
     </div>

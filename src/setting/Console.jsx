@@ -1,8 +1,8 @@
 import React from "react";
 import "./console.css";
-import Finances from "./categoryType";
 import Navsett from "./navsett";
 import AccountType from "./accountType";
+import CategoryType from "./categoryType";
 import { Route, Routes } from "react-router-dom";
 import UserSetting from "./UserSetting";
 import { Helmet } from "react-helmet-async";
@@ -20,7 +20,7 @@ function Console() {
         </div>
         <Routes>
           <Route path="/" element={<Navsett />} />
-          <Route path="/category" element={<Finances />} />
+          <Route path="/category" element={<CategoryType />} />
           <Route path="/auth" element={<UserSetting />} />
           <Route path="/account" element={<AccountType />} />
           <Route path="/export" element={<DataExport />} />

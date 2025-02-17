@@ -276,6 +276,6 @@
 
 .plus:hover {
     border: 2px solid var(--primary-color);
-    background-color: var(--second-color);
+    background-color: var(--background-color);
     color: var(--primary-color);
 }

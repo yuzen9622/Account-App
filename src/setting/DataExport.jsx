@@ -3,6 +3,7 @@ import "./export.css";
 import { CSVLink } from "react-csv";
 import { useNavigate } from "react-router-dom";
 import DownloadIcon from "@mui/icons-material/Download";
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { AccountContext } from "../context/accountContext";
 import DateSelect from "../components/DateSelect";
 import moment from "moment";
@@ -87,7 +88,7 @@ export default function DataExport() {
     <div className="export">
       <div className="top">
         <button onClick={() => navigate("/setting")}>
-          <i className="fa-solid fa-angle-left"></i>
+          <ChevronLeftRoundedIcon style={{ fontSize: "28px" }} />
         </button>
         <h3>資料匯出</h3>
         <CSVLink

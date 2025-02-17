@@ -7,8 +7,9 @@ import { AccountContext } from "../context/accountContext";
 import { UserContext } from "../context/userContext";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
-function Finances() {
+function CategoryType() {
   const { categories, setCategories } = useContext(AccountContext);
   const { token, setMessage } = useContext(UserContext);
   const [source, setSource] = useState("expense");
@@ -69,7 +70,7 @@ function Finances() {
         </button>
         <h3>類別</h3>
         <button onClick={open}>
-          <i className="fa-solid fa-plus"></i>
+          <AddRoundedIcon style={{ fontSize: "28px" }} />
         </button>
       </div>
 
@@ -121,7 +122,7 @@ function Finances() {
             <div className="care-type">
               <h3>新增</h3>
               <button onClick={open}>
-                <i className="fa-solid fa-plus"></i>
+                <AddRoundedIcon style={{ fontSize: "28px" }} />
               </button>
             </div>
           </div>
@@ -137,4 +138,4 @@ function Finances() {
   );
 }
 
-export default Finances;
+export default CategoryType;

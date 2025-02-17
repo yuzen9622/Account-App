@@ -12,7 +12,7 @@ export const ThemeContextProvider = ({ children }) => {
   const [theme, setTheme] = useState({
     primaryColor: user?.theme?.primaryColor || "#FFA500",
     mode: user?.theme?.mode || "#FFA500",
-    system: user?.theme?.sysyem || "customize",
+    system: user?.theme?.system || "inherit",
   });
   const handleThemeChange = useCallback(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -21,6 +21,12 @@ export const ThemeContextProvider = ({ children }) => {
       mode: mediaQuery.matches ? "dark" : "light",
     }));
   }, []);
+
+  useEffect(() => {
+    if (user?.theme?.system === "customize") return;
+    handleThemeChange();
+  }, [handleThemeChange, user]);
+
   useEffect(() => {
     if (theme.system === "customize") return;
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
