@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "./static/css/main.a8841405.css",
-    "main.js": "./static/js/main.3b441ecf.js",
+    "main.css": "./static/css/main.183907ca.css",
+    "main.js": "./static/js/main.aa3d8d15.js",
     "static/media/記帳-icon.png": "./static/media/記帳-icon.ef3e2011f98eaf0c146f.png",
     "index.html": "./index.html",
-    "main.a8841405.css.map": "./static/css/main.a8841405.css.map",
-    "main.3b441ecf.js.map": "./static/js/main.3b441ecf.js.map"
+    "main.183907ca.css.map": "./static/css/main.183907ca.css.map",
+    "main.aa3d8d15.js.map": "./static/js/main.aa3d8d15.js.map"
   },
   "entrypoints": [
-    "static/css/main.a8841405.css",
-    "static/js/main.3b441ecf.js"
+    "static/css/main.183907ca.css",
+    "static/js/main.aa3d8d15.js"
   ]
 }
