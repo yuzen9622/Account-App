@@ -62,7 +62,7 @@ export default function AccountType() {
       <div className="Finances">
         <>
           <div className="caregories">
-            {accounts?.map((datas, key) => {
+            {accounts?.map((datas) => {
               return (
                 <div className="care-type" key={datas._id}>
                   <h3>{datas.accountsType}</h3>

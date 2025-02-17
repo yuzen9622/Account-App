@@ -38,6 +38,7 @@ export const AccountContextProvider = ({ children }) => {
   const [updateRecordInfo, setUpdateRecordInfo] = useState(null);
   const [recordInfo, setRecordInfo] = useState(renderRecord);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
     setCategories(null);
@@ -176,9 +177,11 @@ export const AccountContextProvider = ({ children }) => {
 
   const addNewRecord = useCallback(async () => {
     try {
-      if (!user || !token) {
+      if (!user || !token || isPending) {
         return;
       }
+      setIsPending(true);
+      setPopOpen(false);
       const res = await fetch(`${url}/records/add`, {
         method: "POST",
         headers: {
@@ -196,8 +199,6 @@ export const AccountContextProvider = ({ children }) => {
         setRecords((prev) => [...prev, data.record]);
         setRecordInfo(renderRecord);
         setUpdateRecordInfo(null);
-        getAccounts();
-        setPopOpen(false);
         setMessage({
           status: "success",
           text: data.message,
@@ -207,6 +208,7 @@ export const AccountContextProvider = ({ children }) => {
         if (data.error === "jwt expired") {
           sessionStorage.removeItem("account-token");
         }
+        setPopOpen(true);
         setMessage({
           status: "warning",
           text: data.error,
@@ -215,16 +217,10 @@ export const AccountContextProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsPending(false);
     }
-  }, [
-    token,
-    user,
-    setToken,
-    recordInfo,
-    getAccounts,
-    renderRecord,
-    setMessage,
-  ]);
+  }, [token, user, setToken, recordInfo, renderRecord, isPending, setMessage]);
 
   const updateRecord = useCallback(async () => {
     try {
@@ -326,6 +322,7 @@ export const AccountContextProvider = ({ children }) => {
         updateRecord,
         setAccounts,
         filterRecords,
+        isPending,
       }}
     >
       {children}

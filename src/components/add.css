@@ -179,7 +179,7 @@ input[type=number] {
 }
 
 .pop-btn button:nth-child(1):hover {
-    color: var(--second-color);
+    color: var(--background-color);
     background-color: var(--primary-color);
 
 }

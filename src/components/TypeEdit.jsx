@@ -137,7 +137,7 @@ export function AccountPopbox({ onclose, editInfo }) {
           value={newAccount.initialAmount}
         />
       </div>
-      {/* <div className="Finances-put">
+      <div className="Finances-put">
         <p>自動扣款</p>
         <Switch
           name="autoDebit"
@@ -183,7 +183,7 @@ export function AccountPopbox({ onclose, editInfo }) {
             </option>
           ))}
         </select>
-      </div> */}
+      </div>
       <div className="pop-btn">
         <button
           onClick={() => {

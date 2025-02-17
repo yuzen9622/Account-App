@@ -1,23 +1,21 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import "./export.css";
-import * as XLSX from "xlsx";
-import { saveAs } from "file-saver";
+import { CSVLink } from "react-csv";
 import { useNavigate } from "react-router-dom";
 import DownloadIcon from "@mui/icons-material/Download";
 import { AccountContext } from "../context/accountContext";
 import DateSelect from "../components/DateSelect";
 import moment from "moment";
-import { UserContext } from "../context/userContext";
+
 export default function DataExport() {
   const navigate = useNavigate();
 
-  const { records, accounts, categories } = useContext(AccountContext);
-  const { setMessage } = useContext(UserContext);
-  const [excelData, setExcelData] = useState(null);
+  const { filterRecords, accounts, categories } = useContext(AccountContext);
+  const [excelData, setExcelData] = useState([]);
 
   const recordToExcel = useCallback(() => {
-    if (!records || !accounts || !categories) return;
-    const formatRecord = records.reduce((result, item) => {
+    if (!filterRecords || !accounts || !categories) return;
+    const formatRecord = filterRecords.reduce((result, item) => {
       const {
         accountId,
         categoryId,
@@ -50,45 +48,19 @@ export default function DataExport() {
     }, []);
     formatRecord.sort((a, b) => new Date(b.日期) - new Date(a.日期));
     setExcelData(formatRecord);
-  }, [records, accounts, categories]);
+  }, [filterRecords, accounts, categories]);
+
   useEffect(() => {
-    if (!records) return;
+    if (!filterRecords) return;
     recordToExcel();
-  }, [records, recordToExcel]);
-
-  const exportToExcel = (data, fileName = "data.xlsx") => {
-    if (!data) {
-      setMessage({ status: "warning", text: "暫無資料", open: true });
-      return;
-    }
-    // 將 JSON 資料轉換為 worksheet
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    // 建立一個新的 workbook 並把 worksheet 加入
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-
-    // 將 workbook 轉換為二進位資料
-    const excelBuffer = XLSX.write(workbook, {
-      bookType: "xlsx",
-      type: "array",
-    });
-
-    // 產生 Blob 物件並設定 MIME type 為 Excel
-    const blob = new Blob([excelBuffer], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
-    });
-    fileName = moment().format("YYYY-MM-DD") + "_計帳紀錄";
-    // 利用 file-saver 下載檔案
-    saveAs(blob, fileName);
-    setMessage({ status: "success", text: "下載成功", open: true });
-  };
+  }, [filterRecords, recordToExcel]);
 
   const ExcelPreview = ({ data }) => {
     if (!data || data.length === 0) return null;
     const headers = Object.keys(data[0]);
 
     return (
-      <table border="1" cellPadding="5" cellSpacing="0">
+      <table cellPadding="5" cellSpacing="0">
         <thead>
           <tr>
             {headers.map((header, index) => (
@@ -118,21 +90,27 @@ export default function DataExport() {
           <i className="fa-solid fa-angle-left"></i>
         </button>
         <h3>資料匯出</h3>
-        <button onClick={() => exportToExcel(excelData)}>
-          <DownloadIcon style={{ fontSize: "20px" }} />
-        </button>
+        <CSVLink
+          filename={moment().format("YYYY-MM-DD") + "_計帳紀錄"}
+          data={excelData}
+        >
+          <DownloadIcon />
+        </CSVLink>
       </div>
       <DateSelect />
       <h1>預覽</h1>
       <div className="export-preview">
         <ExcelPreview data={excelData} />
       </div>
-      <div className="btn">
-        <button onClick={() => exportToExcel(excelData)}>
-          下載Excl檔案
-          <DownloadIcon />
-        </button>
-      </div>
+
+      <CSVLink
+        filename={moment().format("YYYY-MM-DD") + "_計帳紀錄"}
+        data={excelData}
+        className="button"
+      >
+        下載CSV檔案
+        <DownloadIcon />
+      </CSVLink>
     </div>
   );
 }

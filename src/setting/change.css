@@ -65,7 +65,7 @@
     font-size: 16px;
     background-color: transparent;
     color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -74,11 +74,12 @@
 }
 
 .care-type button:hover {
-    background-color: var(--primary-color);
-    color: var(--background-color);
+    background-color: var(--second-color);
+
 }
 
-.top button {
+.top button,
+.top a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,9 +94,10 @@
     transition: all 0.5s;
 }
 
-.top button:hover {
+.top button:hover,
+.top a:hover {
     background-color: var(--primary-color);
-    color: var(--second-color);
+    color: var(--background-color);
 }
 
 .Finances .popbox-btn {

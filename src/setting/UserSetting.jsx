@@ -121,15 +121,6 @@ export default function UserSetting() {
         <div className="profile-box">
           <p>帳號:{user?.email}</p>
         </div>
-        <button onClick={() => setIsOpen(!isOpen)}>
-          <i className="fa-solid fa-pen-nib"></i> 更改帳號
-        </button>
-        <button
-          onClick={destory}
-          style={{ borderColor: "rgb(211, 47, 47)", color: "rgb(211, 47, 47)" }}
-        >
-          <i className="fa-solid fa-trash-can"></i> 註銷帳號
-        </button>
         <div className="profile-box">
           <p>主題</p>
           <Radio
@@ -216,6 +207,15 @@ export default function UserSetting() {
             label="系統樣式"
           />
         </div>
+        <button onClick={() => setIsOpen(!isOpen)}>
+          <i className="fa-solid fa-pen-nib"></i> 更改帳號
+        </button>
+        <button
+          onClick={destory}
+          style={{ borderColor: "rgb(211, 47, 47)", color: "rgb(211, 47, 47)" }}
+        >
+          <i className="fa-solid fa-trash-can"></i> 註銷帳號
+        </button>
       </div>
     </div>
   );

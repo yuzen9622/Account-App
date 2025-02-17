@@ -19,6 +19,7 @@ function Add() {
     updateRecordInfo,
     updateRecord,
     renderRecord,
+    isPending,
     setUpdateRecordInfo,
   } = useContext(AccountContext);
   const [sourceCategories, setSourceCategories] = useState(null);
@@ -268,6 +269,7 @@ function Add() {
               updateRecord();
             }
           }}
+          disabled={isPending}
         >
           確認
         </button>

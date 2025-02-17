@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AccountContext } from "../context/accountContext";
 import moment from "moment";
 import { url } from "../service";
@@ -13,12 +13,14 @@ export default function Record({ record, edit = true, _id }) {
   const { accounts, categories, setRecords, setUpdateRecordInfo, setPopOpen } =
     useContext(AccountContext);
   const { token, setMessage } = useContext(UserContext);
+  const [isPending, setIsPending] = useState(false);
   const account = accounts?.find((item) => item._id === record.accountId);
   const toAccount = accounts?.find((item) => item._id === record.toAccountId);
   const category = categories?.find((item) => item._id === record.categoryId);
   const handleDelete = async (_id) => {
     try {
-      if (!_id) return;
+      setIsPending(true);
+      if (!_id || isPending) return;
       let iscancel = window.confirm("確定刪除?");
       if (!iscancel) return;
       const res = await fetch(`${url}/records/delete/${_id}`, {
@@ -48,6 +50,8 @@ export default function Record({ record, edit = true, _id }) {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsPending(false);
     }
   };
   return (
@@ -97,6 +101,7 @@ export default function Record({ record, edit = true, _id }) {
             {edit && (
               <div className="record-setting">
                 <button
+                  disabled={isPending}
                   onClick={() => {
                     setUpdateRecordInfo(record);
                     setPopOpen(true);
@@ -104,7 +109,10 @@ export default function Record({ record, edit = true, _id }) {
                 >
                   <BorderColorRoundedIcon fontSize="inherit" />
                 </button>
-                <button onClick={() => handleDelete(record._id)}>
+                <button
+                  disabled={isPending}
+                  onClick={() => handleDelete(record._id)}
+                >
                   <DeleteForeverRoundedIcon fontSize="inherit" />
                 </button>
               </div>
