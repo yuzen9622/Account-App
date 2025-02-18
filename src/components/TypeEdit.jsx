@@ -251,9 +251,13 @@ export function CategroyPopbox({ onclose, editInfo }) {
       const data = await res.json();
       if (data.ok) {
         setCategories((prev) => {
-          let newPrev = prev?.find((item) => item._id === newCategory._id);
-          newPrev.categoriesType = data.category.categoriesType;
-          return prev;
+          let newPrev = prev?.map((item) => {
+            if (item._id === newCategory._id) {
+              return data.category;
+            }
+            return item;
+          });
+          return newPrev;
         });
         onclose();
         setMessage({ status: "success", text: "修改成功", open: true });

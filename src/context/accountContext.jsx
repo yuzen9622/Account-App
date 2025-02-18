@@ -44,6 +44,7 @@ export const AccountContextProvider = ({ children }) => {
     setCategories(null);
     setAccounts(null);
     setRecords(null);
+    setSelectedDate(new Date());
   }, [user]);
 
   const clearQuery = useCallback(() => {
@@ -197,6 +198,9 @@ export const AccountContextProvider = ({ children }) => {
       }
       if (data.ok) {
         setRecords((prev) => [...prev, data.record]);
+        getAccounts();
+        getCategory();
+        getRecords();
         setRecordInfo(renderRecord);
         setUpdateRecordInfo(null);
         setMessage({
@@ -220,7 +224,18 @@ export const AccountContextProvider = ({ children }) => {
     } finally {
       setIsPending(false);
     }
-  }, [token, user, setToken, recordInfo, renderRecord, isPending, setMessage]);
+  }, [
+    token,
+    user,
+    setToken,
+    recordInfo,
+    renderRecord,
+    isPending,
+    setMessage,
+    getAccounts,
+    getCategory,
+    getRecords,
+  ]);
 
   const updateRecord = useCallback(async () => {
     try {
