@@ -73,10 +73,7 @@
     justify-content: center;
 }
 
-.care-type button:hover {
-    background-color: var(--second-color);
 
-}
 
 .top button,
 .top a {
@@ -94,8 +91,26 @@
     transition: all 0.5s;
 }
 
-.top button:hover,
-.top a:hover {
+@media (any-hover:hover) {
+    .care-type button:hover {
+        background-color: var(--second-color);
+
+    }
+
+    .top button:hover,
+    .top a:hover {
+        background-color: var(--primary-color);
+        color: var(--background-color);
+    }
+}
+
+.care-type button:active {
+    background-color: var(--second-color);
+
+}
+
+.top button:active,
+.top a:active {
     background-color: var(--primary-color);
     color: var(--background-color);
 }

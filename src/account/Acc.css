@@ -37,8 +37,8 @@
     justify-content: center;
 }
 
-.acc .login input,
-.acc .sign input {
+.acc .login .user,
+.acc .sign .user {
     width: 80%;
     border: none;
     margin: 5px;
@@ -54,12 +54,30 @@
 
 }
 
+.acc input {
+    width: 100%;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    letter-spacing: 1px;
+    background-color: transparent;
+    color: var(--text-color);
+}
+
 .acc input::placeholder {
     color: var(--second-text-color);
 }
 
-.login button,
-.sign button {
+.show-pass {
+    padding: 0 5px;
+    color: var(--text-color);
+    background-color: transparent;
+    border: none;
+}
+
+.login button:not(.show-pass),
+.sign button:not(.show-pass) {
     width: 80%;
     border: none;
     padding: 5px 0;
@@ -77,14 +95,15 @@
     width: 100%;
     text-align: center;
     color: var(--text-color);
+    padding: 10px 0;
 
 
 }
 
 .label p {
     font-family: Arial, Helvetica, sans-serif;
-    color: var(--second-text-color) !important;
-
+    color: var(--second-color) !important;
+    font-size: 12px;
     padding: 5px;
     background-color: var(--background-color);
     z-index: 1;
@@ -98,7 +117,7 @@
     z-index: 0;
 
     width: 31%;
-    height: 2px;
+    height: 1.5px;
     border-radius: 15px;
     background-color: var(--border-color);
 }
@@ -111,7 +130,7 @@
     z-index: 0;
 
     width: 31%;
-    height: 2px;
+    height: 1.5px;
     border-radius: 15px;
     background-color: var(--border-color);
 }
@@ -132,16 +151,32 @@
     transition: all .3s;
 }
 
-.google-login-btn:hover {
+.google-login-btn:active {
     background-color: var(--background-color);
     color: var(--text-color);
 }
 
-.login button:hover,
-.sign button:hover {
+.login button:not(.show-pass):active,
+.sign button:not(.show-pass):active {
     background-color: var(--background-color);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
+}
+
+
+@media (any-hover: hover) {
+    .google-login-btn:hover {
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .login button:not(.show-pass):hover,
+    .sign button:not(.show-pass):hover {
+        background-color: var(--background-color);
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+    }
+
 }
 
 .acc label {
@@ -166,4 +201,5 @@
 
 .acc p {
     color: var(--text-color);
+
 }

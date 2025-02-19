@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createContext, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { url } from "../service";
-import { useGoogleLogin } from "@react-oauth/google";
+
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
@@ -140,7 +140,7 @@ export const UserContextProvider = ({ children }) => {
       console.log(error);
     }
   }, [user]);
- 
+
   const loginUser = useCallback(async () => {
     try {
       setMessage({ status: "warning", text: "登入中...", open: true });
@@ -243,7 +243,6 @@ export const UserContextProvider = ({ children }) => {
         isOpen,
         setDriverStep,
         driverStep,
-      
       }}
     >
       {children}

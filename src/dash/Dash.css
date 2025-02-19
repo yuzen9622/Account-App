@@ -38,8 +38,18 @@
     overflow: hidden;
 }
 
-.react-calendar__navigation button:enabled:focus,
-.react-calendar__navigation button:enabled:hover {
+.react-calendar__navigation button:enabled:focus {
+    background-color: transparent;
+}
+
+@media (any-hover: hover) {
+    .react-calendar__navigation button:enabled:hover {
+        background-color: var(--active-color);
+    }
+
+}
+
+.react-calendar__navigation button:enabled:active {
     background-color: var(--active-color);
 }
 
@@ -64,8 +74,7 @@
     color: #fff !important;
 }
 
-.react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus {
+.react-calendar__tile:enabled:hover {
     background-color: var(--active-color) !important;
 }
 

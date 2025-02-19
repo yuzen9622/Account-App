@@ -94,16 +94,25 @@ nav button {
     transition: all .5s;
 }
 
-nav button:is(:active, ) {
+nav button:is(:active) {
     background-color: var(--active-color);
     color: var(--primary-color);
 
 }
 
-nav a:is(:hover, :active) {
-    background-color: var(--active-color);
-    border-radius: 5px;
-    color: var(--primary-color);
+
+
+@media (any-hover: hover) {
+    nav a:hover {
+        background-color: var(--active-color);
+        border-radius: 5px;
+        color: var(--primary-color);
+    }
+
+    nav button:hover {
+        background-color: var(--active-color);
+        color: var(--primary-color);
+    }
 
 }
 
